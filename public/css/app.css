@@ -2077,7 +2077,11 @@ body.has-sidebar.bplo-portal .layout {
     .bplo-portal .toolbar .form-group:last-child .btn { flex: 1; }
     .bplo-portal .table-wrap { max-width: 100%; -webkit-overflow-scrolling: touch; }
     .bplo-portal table.data { min-width: 560px; }
-    .bplo-portal .payment-entry { padding: 14px; }
+    .bplo-portal table.data td a { overflow-wrap: anywhere; word-break: break-word; }
+    .bplo-portal table.data select,
+    .bplo-portal table.data input[type=text] { min-width: 150px; }
+    .bplo-portal .payment-entry { padding: 14px; max-width: 100%; overflow: hidden; }
+    .bplo-portal .payment-entry a { overflow-wrap: anywhere; word-break: break-word; max-width: 100%; }
     .bplo-guest-header { min-height: 64px; padding: 10px 14px; gap: 10px; }
     .bplo-guest-brand { min-width: 0; font-size: 0.82rem; }
     .bplo-guest-brand small { font-size: 0.62rem; }
