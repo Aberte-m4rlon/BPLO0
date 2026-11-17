@@ -3,13 +3,15 @@
 @section('title', 'Inspector Portal')
 
 @section('content')
-    <div class="page-header inspector-page-header">
-        <div>
-            <p class="inspector-eyebrow">Municipal Personnel Workspace</p>
-            <h1>Inspector Portal</h1>
-            <p class="muted mb-0">Scan permit QR codes and monitor permit validity using records issued by BPLO.</p>
+    <div class="page-header bplo-page-header bplo-dashboard-hero">
+        <div class="bplo-hero-copy">
+            <span class="bplo-hero-pill">INSPECTOR WORKSPACE</span>
+            <h1>Good day, <span class="bplo-hero-highlight">{{ auth()->user()->name }}</span>!</h1>
+            <p>Scan permit QR codes and monitor permit validity using records issued by BPLO.</p>
         </div>
-        <a href="{{ route('inspector.permits.index') }}" class="btn">Permit Monitoring</a>
+        <div class="bplo-header-actions">
+            <a href="{{ route('inspector.permits.index') }}" class="btn bplo-hero-secondary">Permit Monitoring</a>
+        </div>
     </div>
 
     <div class="stat-grid">

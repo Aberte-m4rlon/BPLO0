@@ -17,7 +17,14 @@
                 </div>
                 <div class="form-group">
                     <label for="password">New Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="password-field-wrap">
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" class="password-toggle-btn" data-target="password" aria-label="Show password" aria-pressed="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
                     @error('password') <div class="field-error">{{ $message }}</div> @enderror
                 </div>
                 <div class="form-group">

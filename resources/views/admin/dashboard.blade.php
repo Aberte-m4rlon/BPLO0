@@ -3,8 +3,16 @@
 @section('title', 'Admin Dashboard')
 
 @section('content')
-    <div class="page-header">
-        <h1>Admin Dashboard</h1>
+    <div class="page-header bplo-page-header bplo-dashboard-hero">
+        <div class="bplo-hero-copy">
+            <span class="bplo-hero-pill">ADMINISTRATION WORKSPACE</span>
+            <h1>Good day, <span class="bplo-hero-highlight">{{ auth()->user()->name }}</span>!</h1>
+            <p>Monitor system users, permit activity, fees, and municipal audit logs.</p>
+        </div>
+        <div class="bplo-header-actions">
+            <a href="{{ url('/admin/users') }}" class="btn bplo-hero-primary">Manage Users</a>
+            <a href="{{ url('/admin/audit-logs') }}" class="btn bplo-hero-secondary">Audit Logs</a>
+        </div>
     </div>
 
     <div class="stat-grid">

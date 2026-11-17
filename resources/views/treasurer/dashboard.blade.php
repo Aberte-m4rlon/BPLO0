@@ -3,9 +3,15 @@
 @section('title', 'Treasurer Dashboard')
 
 @section('content')
-    <div class="page-header">
-        <h1>Treasurer Dashboard</h1>
-        <a href="{{ url('/treasurer/payments') }}" class="btn">All Payments</a>
+    <div class="page-header bplo-page-header bplo-dashboard-hero">
+        <div class="bplo-hero-copy">
+            <span class="bplo-hero-pill">TREASURY WORKSPACE</span>
+            <h1>Good day, <span class="bplo-hero-highlight">{{ auth()->user()->name }}</span>!</h1>
+            <p>Verify business permit fee payments and track municipal collections.</p>
+        </div>
+        <div class="bplo-header-actions">
+            <a href="{{ url('/treasurer/payments') }}" class="btn bplo-hero-secondary">All Payments</a>
+        </div>
     </div>
 
     <div class="stat-grid">
