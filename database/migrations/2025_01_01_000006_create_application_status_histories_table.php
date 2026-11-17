@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('application_status_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('application_id')->constrained()->cascadeOnDelete()->index();
             $table->string('from_status')->nullable();
             $table->string('to_status');
-            $table->foreignId('actor_id')->nullable()->constrained('users');
+            $table->foreignId('actor_id')->nullable()->constrained('users')->index();
             $table->string('actor_role')->nullable();
             $table->text('note')->nullable();
             $table->timestamp('created_at')->useCurrent();

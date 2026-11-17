@@ -5,44 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', config('permit.municipality').' — Business Permit System')</title>
-    <meta name="theme-color" content="#2684D9">
-    <link rel="preload" as="image" href="{{ asset('images/bplo-blue-background.png') }}" fetchpriority="high">
+    <meta name="theme-color" content="#112E81">
     <link href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}" rel="stylesheet">
 </head>
-<body class="bplo-portal bplo-guest">
-    @php
-        $isStaffAuth = request()->is('login', 'forgot-password', 'reset-password*');
-    @endphp
-    <header class="bplo-guest-header">
-        <a href="{{ url('/') }}" class="bplo-guest-brand">
-            <span class="sidebar-brand-mark">BP</span>
-            <span>{{ config('permit.municipality') }}<small>Business Permits and Licensing Office</small></span>
-        </a>
-        <span class="bplo-guest-secure"><span aria-hidden="true"></span> {{ $isStaffAuth ? 'Secure staff portal' : 'Official municipal portal' }}</span>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <a href="{{ url('/') }}" class="brand">{{ config('permit.municipality') }}</a>
+            <nav>
+                <a href="{{ url('/') }}">Home</a>
+                <a href="{{ url('/track') }}">Track</a>
+                @auth
+                    <a href="{{ url(auth()->user()->homePath()) }}">My Dashboard</a>
+                @else
+                    <a href="{{ url('/login') }}">Login</a>
+                @endauth
+                <x-theme-switcher />
+            </nav>
+        </div>
     </header>
 
     <main class="page">
-        <div class="container bplo-guest-content">
+        <div class="container">
             <x-flash-messages />
             @yield('content')
         </div>
     </main>
 
-    <footer class="bplo-guest-footer">
-        &copy; {{ date('Y') }} {{ config('permit.municipality') }}, {{ config('permit.province') }}
-        <span>{{ $isStaffAuth ? 'Official BPLO personnel access' : 'Automated Business Permit & Verification System' }}</span>
+    <footer class="footer">
+        <div class="container">
+            &copy; {{ date('Y') }} {{ config('permit.municipality') }}, {{ config('permit.province') }}.
+        </div>
     </footer>
-    <script>
-        document.querySelectorAll('.password-toggle-btn').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var input = document.getElementById(btn.getAttribute('data-target'));
-                if (!input) return;
-                var show = input.type === 'password';
-                input.type = show ? 'text' : 'password';
-                btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
-                btn.setAttribute('aria-pressed', String(show));
-            });
-        });
-    </script>
 </body>
 </html>

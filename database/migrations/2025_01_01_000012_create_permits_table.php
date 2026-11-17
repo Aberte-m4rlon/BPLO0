@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('permits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->unique()->constrained()->cascadeOnDelete();
+            $table->foreignId('application_id')->unique()->constrained()->cascadeOnDelete()->index();
             $table->string('permit_number')->unique()->index();
             $table->string('verification_token', 64)->unique()->index();
             $table->string('business_name');

@@ -32,7 +32,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => env('BPLO_PRIVATE_STORAGE') ?: storage_path('app/private'),
+            'root' => storage_path('app/private'),
             'serve' => true,
             'throw' => false,
             'report' => false,

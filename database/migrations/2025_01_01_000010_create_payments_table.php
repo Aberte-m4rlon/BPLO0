@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('application_id')->constrained()->cascadeOnDelete()->index();
             $table->string('tracking_number')->index();
             $table->decimal('amount', 12, 2);
             $table->json('breakdown_json');

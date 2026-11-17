@@ -14,8 +14,6 @@
 /.vscode
 /.zed
 /auth.json
-/live_check.php
-/render_edit.php
 /node_modules
 /public/build
 /public/fonts-manifest.dev.json

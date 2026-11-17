@@ -3,12 +3,8 @@
 @section('title', 'Released Permits')
 
 @section('content')
-    <div class="page-header inspector-page-header">
-        <div>
-            <p class="inspector-eyebrow">Municipal Personnel Workspace</p>
-            <h1>Permit Monitoring</h1>
-            <p class="muted mb-0">Search permits issued by BPLO and review their current validity.</p>
-        </div>
+    <div class="page-header">
+        <h1>Released Permits</h1>
         <a href="{{ url('/inspector/dashboard') }}" class="btn btn-secondary">Dashboard</a>
     </div>
 
@@ -18,15 +14,6 @@
                 <label for="q">Search</label>
                 <input type="text" id="q" name="q" value="{{ request('q') }}" placeholder="Permit no. / business / address">
             </div>
-                <div class="form-group">
-                    <label for="condition">Permit condition</label>
-                    <select id="condition" name="condition">
-                        <option value="">All permits</option>
-                        <option value="VALID" @selected($condition === 'VALID')>Active</option>
-                        <option value="EXPIRED" @selected($condition === 'EXPIRED')>Expired</option>
-                        <option value="REVOKED" @selected($condition === 'REVOKED')>Revoked</option>
-                    </select>
-                </div>
             <div class="form-group">
                 <button type="submit" class="btn">Apply</button>
                 <a href="{{ url('/inspector/permits') }}" class="btn btn-secondary">Reset</a>

@@ -11,9 +11,6 @@ class PermitController extends Controller
 {
     public function index(Request $request): View
     {
-        $conditions = ['VALID', 'EXPIRED', 'REVOKED'];
-        $condition = in_array($request->query('condition'), $conditions, true) ? $request->query('condition') : null;
-
         $permits = Permit::query()
             ->when($request->filled('q'), function ($query) use ($request): void {
                 $term = '%'.$request->query('q').'%';
@@ -23,25 +20,12 @@ class PermitController extends Controller
                         ->orWhere('business_address', 'like', $term);
                 });
             })
-            ->when($condition === 'VALID', function ($query): void {
-                $query->where('status', Permit::STATUS_ACTIVE)
-                    ->where(function ($q): void {
-                        $q->whereNull('valid_until')->orWhereDate('valid_until', '>=', today());
-                    });
-            })
-            ->when($condition === 'EXPIRED', function ($query): void {
-                $query->where('status', Permit::STATUS_ACTIVE)
-                    ->whereNotNull('valid_until')
-                    ->whereDate('valid_until', '<', today());
-            })
-            ->when($condition === 'REVOKED', fn ($query) => $query->where('status', Permit::STATUS_REVOKED))
             ->latest('issued_at')
             ->paginate(15)
             ->withQueryString();
 
         return view('inspector.index', [
             'permits' => $permits,
-            'condition' => $condition,
         ]);
     }
 

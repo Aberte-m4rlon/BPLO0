@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fee_rates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fee_type_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('fee_type_id')->constrained()->cascadeOnDelete()->index();
             $table->string('label');
             $table->decimal('amount', 12, 2);
             $table->string('calc_type')->default('fixed');

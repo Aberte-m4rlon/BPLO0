@@ -4,19 +4,11 @@
 
 @section('content')
     <div class="page-header">
-        <div>
-            <p class="bplo-eyebrow">APPLICATION MANAGEMENT</p>
-            <h1>Application review</h1>
-            <p class="muted mb-0">Search submissions, review documents, and update application status.</p>
-        </div>
-        <a href="{{ url('/bplo/dashboard') }}" class="btn btn-secondary">← Dashboard</a>
+        <h1>Applications</h1>
+        <a href="{{ url('/bplo/dashboard') }}" class="btn btn-secondary">Dashboard</a>
     </div>
 
     <div class="card">
-        <div class="bplo-card-intro">
-            <div><h2 class="section">Submitted applications</h2><p class="muted mb-0">Filter and open an application to review its details.</p></div>
-            <span class="bplo-result-count">{{ $applications->total() }} {{ \Illuminate\Support\Str::plural('record', $applications->total()) }}</span>
-        </div>
         <form method="GET" action="{{ url('/bplo/applications') }}" class="toolbar">
             <div class="form-group">
                 <label for="q">Search</label>
