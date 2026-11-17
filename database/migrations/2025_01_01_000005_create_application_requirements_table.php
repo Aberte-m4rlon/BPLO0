@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('application_requirements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->cascadeOnDelete()->index();
-            $table->foreignId('requirement_type_id')->constrained()->index();
+            $table->foreignId('application_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('requirement_type_id')->constrained();
             $table->string('original_filename')->nullable();
             $table->string('stored_path')->nullable();
             $table->string('mime')->nullable();

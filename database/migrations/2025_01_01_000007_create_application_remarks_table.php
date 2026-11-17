@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('application_remarks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->cascadeOnDelete()->index();
-            $table->foreignId('author_id')->constrained('users')->index();
+            $table->foreignId('application_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('author_id')->constrained('users');
             $table->string('type');
             $table->text('body');
             $table->timestamps();

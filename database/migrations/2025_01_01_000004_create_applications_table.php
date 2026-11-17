@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->index();
-            $table->foreignId('business_id')->nullable()->constrained()->index();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('business_id')->nullable()->constrained();
             $table->string('tracking_number')->unique()->nullable()->index();
             $table->string('status')->default('DRAFT')->index();
             $table->string('applicant_name');
