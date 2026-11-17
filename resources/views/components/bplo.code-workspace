@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "../bplo"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../errors"
+		},
+		{
+			"path": "../inspector"
+		},
+		{
+			"path": "../layouts"
+		},
+		{
+			"path": "../permits"
+		},
+		{
+			"path": "../public"
+		},
+		{
+			"path": "../treasurer"
+		}
+	]
+}
