@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AuditLogController as AdminAuditLogController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\FeeRateController as AdminFeeRateController;
+use App\Http\Controllers\Admin\FeeTypeController as AdminFeeTypeController;
+use App\Http\Controllers\Admin\RequirementTypeController as AdminRequirementTypeController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Applicant\ApplicationController as ApplicantApplicationController;
 use App\Http\Controllers\Applicant\DashboardController as ApplicantDashboardController;
 use App\Http\Controllers\Applicant\PaymentController as ApplicantPaymentController;
@@ -12,9 +19,13 @@ use App\Http\Controllers\Bplo\ApplicationController as BploApplicationController
 use App\Http\Controllers\Bplo\DashboardController as BploDashboardController;
 use App\Http\Controllers\Bplo\PaymentController as BploPaymentController;
 use App\Http\Controllers\Bplo\PermitController as BploPermitController;
+use App\Http\Controllers\Inspector\DashboardController as InspectorDashboardController;
+use App\Http\Controllers\Inspector\PermitController as InspectorPermitController;
 use App\Http\Controllers\PublicPages\LandingController;
 use App\Http\Controllers\PublicPages\TrackingController;
 use App\Http\Controllers\PublicPages\VerificationController;
+use App\Http\Controllers\Treasurer\DashboardController as TreasurerDashboardController;
+use App\Http\Controllers\Treasurer\PaymentController as TreasurerPaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -77,6 +88,31 @@ Route::middleware(['auth', 'role:bplo'])->prefix('bplo')->name('bplo.')->group(f
     Route::get('/payments/{payment}/receipt', [BploPaymentController::class, 'proof'])->name('payments.proof');
     Route::post('/applications/{application}/release', [BploPermitController::class, 'release'])->name('applications.release');
     Route::post('/permits/{permit}/regenerate', [BploPermitController::class, 'regenerate'])->name('permits.regenerate');
+});
+
+Route::middleware(['auth', 'role:treasurer'])->prefix('treasurer')->name('treasurer.')->group(function (): void {
+    Route::get('/dashboard', [TreasurerDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/payments', [TreasurerPaymentController::class, 'index'])->name('payments.index');
+    Route::get('/payments/{payment}', [TreasurerPaymentController::class, 'show'])->name('payments.show');
+    Route::post('/payments/{payment}/confirm', [TreasurerPaymentController::class, 'confirm'])->name('payments.confirm');
+    Route::post('/payments/{payment}/reject', [TreasurerPaymentController::class, 'reject'])->name('payments.reject');
+    Route::get('/payments/{payment}/proof', [TreasurerPaymentController::class, 'proof'])->name('payments.proof');
+});
+
+Route::middleware(['auth', 'role:inspector'])->prefix('inspector')->name('inspector.')->group(function (): void {
+    Route::get('/dashboard', [InspectorDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/permits', [InspectorPermitController::class, 'index'])->name('permits.index');
+    Route::get('/permits/{permit}', [InspectorPermitController::class, 'show'])->name('permits.show');
+});
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function (): void {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('users', AdminUserController::class)->except(['show', 'destroy']);
+    Route::resource('requirement-types', AdminRequirementTypeController::class)->except(['show', 'destroy']);
+    Route::resource('fee-types', AdminFeeTypeController::class)->except(['show', 'destroy']);
+    Route::resource('fee-rates', AdminFeeRateController::class)->except(['show', 'destroy']);
+    Route::get('/audit-logs', [AdminAuditLogController::class, 'index'])->name('audit-logs.index');
+    Route::get('/settings', [AdminSettingController::class, 'show'])->name('settings');
 });
 
 Route::get('/track', [TrackingController::class, 'show'])->name('track.show');
