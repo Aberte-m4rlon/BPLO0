@@ -4,11 +4,13 @@
 
 @section('content')
     <div style="max-width:560px;margin:0 auto">
-        <div class="page-header">
-            <h1>Verify a Permit</h1>
-        </div>
-
         <div class="card">
+            <div class="page-header" style="margin-bottom:12px;">
+                <div>
+                    <p class="bplo-eyebrow">PUBLIC VERIFICATION</p>
+                    <h1 style="margin-bottom:0;">Verify a Permit</h1>
+                </div>
+            </div>
             <p class="muted">
                 Scan the QR code on the Mayor's Permit with your phone camera. If you can't scan it,
                 type or paste the verification link or code printed at the bottom of the permit.

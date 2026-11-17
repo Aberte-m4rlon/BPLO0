@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Bplo;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
+use App\Models\AuditLog;
+use App\Models\Notification;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -39,11 +41,25 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
 
+        $recentActivities = AuditLog::with('actor')
+            ->latest('created_at')
+            ->limit(4)
+            ->get();
+
+        $notifications = auth()->check()
+            ? Notification::where('user_id', auth()->id())
+                ->latest('created_at')
+                ->limit(4)
+                ->get()
+            : collect();
+
         return view('bplo.dashboard', [
             'counts' => $counts,
             'recent' => $recent,
             'reviewQueue' => $reviewQueue,
             'releaseQueue' => $releaseQueue,
+            'recentActivities' => $recentActivities,
+            'notifications' => $notifications,
         ]);
     }
 }

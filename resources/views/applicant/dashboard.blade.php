@@ -3,9 +3,16 @@
 @section('title', 'My Dashboard')
 
 @section('content')
-    <div class="page-header">
-        <h1>My Applications</h1>
-        <a href="{{ url('/applications/create') }}" class="btn">New Application</a>
+    <div class="page-header bplo-page-header bplo-dashboard-hero">
+        <div class="bplo-hero-copy">
+            <span class="bplo-hero-pill">APPLICANT PORTAL</span>
+            <h1>Good day, <span class="bplo-hero-highlight">{{ auth()->user()->name }}</span>!</h1>
+            <p>Submit business permit applications, upload requirements, and track approvals.</p>
+        </div>
+        <div class="bplo-header-actions">
+            <a href="{{ url('/applications/create') }}" class="btn bplo-hero-secondary">New Application</a>
+            <a href="{{ url('/payments') }}" class="btn bplo-hero-primary">Payment History</a>
+        </div>
     </div>
 
     <div class="card">

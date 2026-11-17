@@ -2,16 +2,22 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Bplo\ApplicationController as BploApplicationController;
 use App\Http\Controllers\Bplo\DashboardController as BploDashboardController;
 use App\Http\Controllers\Bplo\PaymentController as BploPaymentController;
 use App\Http\Controllers\Bplo\PermitController as BploPermitController;
+use App\Http\Controllers\PublicPages\LandingController;
+use App\Http\Controllers\PublicPages\TrackingController;
 use App\Http\Controllers\PublicPages\VerificationController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/bplo/dashboard');
+Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 Route::middleware('guest')->group(function (): void {
+    Route::get('/register', [RegisterController::class, 'show'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
+
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate'])
         ->middleware('throttle:login');
@@ -43,6 +49,9 @@ Route::middleware(['auth', 'role:bplo'])->prefix('bplo')->name('bplo.')->group(f
     Route::post('/applications/{application}/release', [BploPermitController::class, 'release'])->name('applications.release');
     Route::post('/permits/{permit}/regenerate', [BploPermitController::class, 'regenerate'])->name('permits.regenerate');
 });
+
+Route::get('/track', [TrackingController::class, 'show'])->name('track.show');
+Route::post('/track', [TrackingController::class, 'lookup'])->name('track.lookup');
 
 Route::get('/verify', [VerificationController::class, 'lookup'])->name('verify.lookup');
 Route::get('/verify/{token}', [VerificationController::class, 'show'])
