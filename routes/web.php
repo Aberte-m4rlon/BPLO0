@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Applicant\ApplicationController as ApplicantApplicationController;
+use App\Http\Controllers\Applicant\DashboardController as ApplicantDashboardController;
+use App\Http\Controllers\Applicant\PaymentController as ApplicantPaymentController;
+use App\Http\Controllers\Applicant\PermitController as ApplicantPermitController;
+use App\Http\Controllers\Applicant\RequirementController as ApplicantRequirementController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -31,6 +36,30 @@ Route::middleware('guest')->group(function (): void {
 Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+Route::middleware(['auth', 'role:applicant'])->group(function (): void {
+    Route::get('/dashboard', [ApplicantDashboardController::class, 'index'])->name('applicant.dashboard');
+    Route::get('/applications/create', [ApplicantApplicationController::class, 'create'])->name('applications.create');
+    Route::post('/applications', [ApplicantApplicationController::class, 'store'])->name('applications.store');
+    Route::get('/applications/{application}', [ApplicantApplicationController::class, 'show'])->name('applications.show');
+    Route::get('/applications/{application}/edit', [ApplicantApplicationController::class, 'edit'])->name('applications.edit');
+    Route::put('/applications/{application}', [ApplicantApplicationController::class, 'update'])->name('applications.update');
+    Route::get('/applications/{application}/summary', [ApplicantApplicationController::class, 'summary'])->name('applications.summary');
+    Route::post('/applications/{application}/submit', [ApplicantApplicationController::class, 'submit'])->name('applications.submit');
+
+    Route::post('/applications/{application}/requirements/upload-many', [ApplicantRequirementController::class, 'uploadMany'])->name('applications.requirements.uploadMany');
+    Route::post('/applications/{application}/requirements/{type}', [ApplicantRequirementController::class, 'upload'])->name('applications.requirements.upload');
+    Route::delete('/applications/{application}/requirements/{type}', [ApplicantRequirementController::class, 'remove'])->name('applications.requirements.remove');
+    Route::get('/requirements/{applicationRequirement}/file', [ApplicantRequirementController::class, 'file'])->name('requirements.file');
+
+    Route::get('/applications/{application}/pay', [ApplicantPaymentController::class, 'show'])->name('applications.pay');
+    Route::post('/applications/{application}/pay', [ApplicantPaymentController::class, 'start'])->name('applications.pay.start');
+    Route::get('/applications/{application}/payments', [ApplicantPaymentController::class, 'history'])->name('applications.payments');
+    Route::get('/payments/{payment}/proof', [ApplicantPaymentController::class, 'proof'])->name('payments.proof');
+
+    Route::get('/applications/{application}/permit', [ApplicantPermitController::class, 'show'])->name('applications.permit');
+    Route::get('/applications/{application}/permit/download', [ApplicantPermitController::class, 'download'])->name('applications.permit.download');
+});
 
 Route::middleware(['auth', 'role:bplo'])->prefix('bplo')->name('bplo.')->group(function (): void {
     Route::get('/dashboard', [BploDashboardController::class, 'index'])->name('dashboard');

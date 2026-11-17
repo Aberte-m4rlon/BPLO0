@@ -11,7 +11,6 @@
         </div>
         <div class="bplo-header-actions">
             <a href="{{ url('/applications/create') }}" class="btn bplo-hero-secondary">New Application</a>
-            <a href="{{ url('/payments') }}" class="btn bplo-hero-primary">Payment History</a>
         </div>
     </div>
 

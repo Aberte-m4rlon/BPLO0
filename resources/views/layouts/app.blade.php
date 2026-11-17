@@ -20,7 +20,6 @@
             $nav = [
                 ['/dashboard', 'Dashboard'],
                 ['/applications/create', 'New Application'],
-                ['/payments', 'Payment History'],
             ];
         } elseif ($user?->isBplo()) {
             $nav = [

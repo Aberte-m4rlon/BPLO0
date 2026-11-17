@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         $user = User::where('email', $credentials['email'])->first();
 
-        if ($user === null || ! $user->is_active || ! $user->isBplo()) {
+        if ($user === null || ! $user->is_active) {
             $auditLogger->log('auth.login_failed', $user, ['email' => $credentials['email']], $user);
 
             throw ValidationException::withMessages([
