@@ -253,7 +253,7 @@
         <div class="card-head">
             <h2 class="section">Recent Applications</h2>
             <div class="bplo-header-actions">
-                <form method="GET" action="{{ route('bplo.applications.index') }}" style="display:flex;gap:8px;align-items:center;">
+                <form method="GET" action="{{ route('bplo.applications.index') }}" class="bplo-inline-search">
                     <input type="text" name="q" placeholder="Search applications..." aria-label="Search applications" style="min-height:36px;padding:6px 12px;font-size:0.8rem;">
                     <button type="submit" class="btn btn-sm btn-secondary">Filter</button>
                 </form>
