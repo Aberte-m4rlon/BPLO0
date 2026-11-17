@@ -2045,10 +2045,11 @@ body.has-sidebar.bplo-portal .layout {
     .bplo-portal .page-header { align-items: flex-start; flex-direction: column; gap: 12px; }
     .bplo-portal .page-header > .btn { align-self: flex-start; }
     .bplo-portal .bplo-dashboard-hero { display: block; min-height: 0; padding: 20px 16px; border-radius: 20px; background-position: center, 58% center; }
+    .bplo-portal .bplo-hero-copy { min-width: 0; width: 100%; }
     .bplo-portal .bplo-dashboard-hero .bplo-header-actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 16px; }
     .bplo-portal .bplo-dashboard-hero .bplo-header-actions .btn { width: 100%; justify-content: center; }
-    .bplo-portal .hero-actions { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .bplo-portal .hero-actions .btn { width: 100%; padding: 10px 12px; font-size: 0.8rem; text-align: center; }
+    .bplo-portal .hero-actions { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%; }
+    .bplo-portal .hero-actions .btn { width: 100%; min-width: 0; padding: 10px 8px; font-size: 0.78rem; text-align: center; white-space: normal; }
     .bplo-portal .steps { grid-template-columns: 1fr; gap: 12px; }
     .bplo-portal .card { padding: 16px 14px; border-radius: 18px; max-width: 100%; }
     .bplo-portal .card-head { flex-direction: column; align-items: stretch; gap: 10px; }
