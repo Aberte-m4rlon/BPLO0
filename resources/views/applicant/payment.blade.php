@@ -27,7 +27,7 @@
 
     <div class="card">
         <h2>Fee Breakdown</h2>
-        <div class="table-wrap">
+        <div class="table-wrap table-compact">
             <table class="data">
                 <thead>
                     <tr><th>Fee</th><th class="text-right">Amount</th></tr>

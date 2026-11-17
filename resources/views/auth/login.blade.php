@@ -20,9 +20,9 @@
         <div class="auth-card">
             <div class="bplo-auth-card-heading">
                 <span class="bplo-auth-lock" aria-hidden="true">BP</span>
-                <p class="bplo-eyebrow">STAFF ACCESS</p>
+                <p class="bplo-eyebrow">PORTAL ACCESS</p>
                 <h2>Welcome back</h2>
-                <p class="muted">Sign in with your active BPLO account.</p>
+                <p class="muted">Sign in with your registered account.</p>
             </div>
 
             <form method="POST" action="{{ url('/login') }}">

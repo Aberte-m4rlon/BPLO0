@@ -47,7 +47,7 @@
             <ul class="timeline">
                 @foreach ($application->statusHistories as $history)
                     <li>
-                        <strong>{{ $history->to_status }}</strong>
+                        <x-status-badge :status="$history->to_status" />
                         <div class="meta">{{ $history->created_at?->format('M d, Y g:i A') }}</div>
                     </li>
                 @endforeach

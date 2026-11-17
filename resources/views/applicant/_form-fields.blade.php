@@ -1,22 +1,23 @@
 @php($app = $application ?? null)
+@php($u = auth()->user())
 
 <fieldset>
     <legend>Applicant Information</legend>
     <div class="form-row">
         <div class="form-group">
             <label for="applicant_name">Applicant Name</label>
-            <input type="text" id="applicant_name" name="applicant_name" value="{{ old('applicant_name', $app?->applicant_name) }}" required>
+            <input type="text" id="applicant_name" name="applicant_name" value="{{ old('applicant_name', $app?->applicant_name ?? $u?->name) }}" required>
             @error('applicant_name') <div class="field-error">{{ $message }}</div> @enderror
         </div>
         <div class="form-group">
             <label for="contact_number">Contact Number</label>
-            <input type="text" id="contact_number" name="contact_number" value="{{ old('contact_number', $app?->contact_number) }}" placeholder="09171234567" required>
+            <input type="text" id="contact_number" name="contact_number" value="{{ old('contact_number', $app?->contact_number ?? $u?->contact_number) }}" placeholder="09171234567" required>
             @error('contact_number') <div class="field-error">{{ $message }}</div> @enderror
         </div>
     </div>
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email', $app?->email) }}" required>
+        <input type="email" id="email" name="email" value="{{ old('email', $app?->email ?? $u?->email) }}" required>
         @error('email') <div class="field-error">{{ $message }}</div> @enderror
     </div>
 </fieldset>

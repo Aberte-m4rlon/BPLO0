@@ -12,7 +12,7 @@
                 <a href="{{ url('/register') }}" class="btn bplo-hero-secondary">Apply Online</a>
                 <a href="{{ url('/track') }}" class="btn bplo-hero-primary">Track Application</a>
                 <a href="{{ route('verify.lookup') }}" class="btn bplo-hero-primary">Verify Permit</a>
-                <a href="{{ url('/login') }}" class="btn bplo-hero-primary">Staff Login</a>
+                <a href="{{ url('/login') }}" class="btn bplo-hero-primary">Login</a>
             </div>
         </div>
     </div>
