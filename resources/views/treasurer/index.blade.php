@@ -4,11 +4,25 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Payments</h1>
-        <a href="{{ url('/treasurer/dashboard') }}" class="btn btn-secondary">Dashboard</a>
+        <div class="page-header-copy bplo-page-header-copy">
+            <p class="bplo-eyebrow">Municipal Treasurer's Office</p>
+            <h1>Payments Queue</h1>
+            <p>Verify payment receipts and confirm municipal collections for approved permit applications.</p>
+        </div>
+        <div class="bplo-header-actions">
+            <a href="{{ url('/treasurer/dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
     </div>
 
     <div class="card">
+        <div class="bplo-card-intro">
+            <div>
+                <h2 class="section">Submitted Payments</h2>
+                <p class="muted mb-0">Filter submissions by tracking number, reference number, or payment status.</p>
+            </div>
+            <span class="bplo-result-count">{{ $payments->total() }} {{ \Illuminate\Support\Str::plural('payment', $payments->total()) }}</span>
+        </div>
+
         <form method="GET" action="{{ url('/treasurer/payments') }}" class="toolbar">
             <div class="form-group">
                 <label for="q">Search</label>
@@ -17,13 +31,13 @@
             <div class="form-group">
                 <label for="status">Status</label>
                 <select id="status" name="status">
-                    <option value="">All</option>
+                    <option value="">All Statuses</option>
                     @foreach ($statuses as $status)
-                        <option value="{{ $status }}" @selected(request('status') === $status)>{{ $status }}</option>
+                        <option value="{{ $status }}" @selected(request('status') === $status)>{{ ucwords(strtolower(str_replace('_', ' ', $status))) }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group bplo-filter-actions">
                 <button type="submit" class="btn">Apply</button>
                 <a href="{{ url('/treasurer/payments') }}" class="btn btn-secondary">Reset</a>
             </div>
@@ -32,7 +46,7 @@
         <div class="table-wrap">
             <table class="data">
                 <thead>
-                    <tr><th>Tracking No.</th><th>Business</th><th>Method</th><th>Reference No.</th><th class="text-right">Amount</th><th>Status</th><th>Submitted</th><th></th></tr>
+                    <tr><th>Tracking No.</th><th>Business</th><th>Method</th><th>Reference No.</th><th class="text-right">Amount</th><th>Status</th><th>Submitted</th><th>Action</th></tr>
                 </thead>
                 <tbody>
                     @forelse ($payments as $payment)
@@ -43,7 +57,9 @@
                             <td style="font-family:monospace">{{ $payment->reference_number ?? '—' }}</td>
                             <td class="text-right">&#8369;{{ number_format((float) $payment->amount, 2) }}</td>
                             <td>
-                                <span class="badge {{ $payment->status === 'PAID' ? 'badge-green' : ($payment->status === 'FAILED' ? 'badge-red' : 'badge-yellow') }}">{{ $payment->status }}</span>
+                                <span class="badge {{ $payment->status === 'PAID' ? 'badge-green' : ($payment->status === 'FAILED' ? 'badge-red' : 'badge-yellow') }}">
+                                    {{ ucfirst(strtolower($payment->status)) }}
+                                </span>
                             </td>
                             <td>{{ $payment->created_at?->format('M d, Y g:i A') }}</td>
                             <td><a href="{{ route('treasurer.payments.show', $payment) }}" class="btn btn-sm">View</a></td>

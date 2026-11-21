@@ -4,27 +4,37 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Edit User</h1>
-        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Back</a>
+        <div class="page-header-copy bplo-page-header-copy">
+            <p class="bplo-eyebrow">System Administration</p>
+            <h1>Edit User</h1>
+            <p>Update account details, permissions, or reset password for <strong>{{ $user->name }}</strong>.</p>
+        </div>
+        <div class="bplo-header-actions">
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Back to Users</a>
+        </div>
     </div>
 
     @if (auth()->id() === $user->id)
         <div class="alert alert-info">This is your own account. You cannot change your own role or deactivate yourself.</div>
     @endif
 
-    <div class="card">
+    <div class="card bplo-form-card bplo-form-card-narrow">
+        <h2 class="section">Account Details</h2>
+        <p class="bplo-form-intro">Modify profile fields below. Leave the password inputs blank to keep the existing password.</p>
         <form method="POST" action="{{ route('admin.users.update', $user) }}">
             @csrf
             @method('PUT')
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required>
-                @error('name') <div class="field-error">{{ $message }}</div> @enderror
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required>
-                @error('email') <div class="field-error">{{ $message }}</div> @enderror
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+                    @error('name') <div class="field-error">{{ $message }}</div> @enderror
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+                    @error('email') <div class="field-error">{{ $message }}</div> @enderror
+                </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
@@ -65,7 +75,10 @@
                     <input type="password" id="password_confirmation" name="password_confirmation">
                 </div>
             </div>
-            <button type="submit" class="btn">Save Changes</button>
+            <div class="bplo-form-actions">
+                <button type="submit" class="btn">Save Changes</button>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
     </div>
 @endsection

@@ -27,7 +27,7 @@
                 <select id="status" name="status">
                     <option value="">All</option>
                     @foreach ($statuses as $status)
-                        <option value="{{ $status }}" @selected(request('status') === $status)>{{ $status }}</option>
+                        <option value="{{ $status }}" @selected(request('status') === $status)>{{ ucwords(strtolower(str_replace('_', ' ', $status))) }}</option>
                     @endforeach
                 </select>
             </div>

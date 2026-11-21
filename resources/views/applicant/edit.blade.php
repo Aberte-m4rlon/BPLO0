@@ -4,8 +4,17 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Edit Application</h1>
-        <div>
+        <div class="page-header-copy bplo-page-header-copy">
+            <p class="bplo-eyebrow">Applicant Portal</p>
+            <h1>Edit Application</h1>
+            <p>
+                {{ $application->business_name ?? 'Draft Application' }}
+                @if ($application->tracking_number)
+                    · Tracking <strong>{{ $application->tracking_number }}</strong>
+                @endif
+            </p>
+        </div>
+        <div class="bplo-header-actions">
             <a href="{{ route('applications.show', $application) }}" class="btn btn-secondary">View Status</a>
             <a href="{{ route('applications.summary', $application) }}" class="btn">Review &amp; Submit</a>
         </div>
@@ -18,22 +27,30 @@
         </div>
     @endif
 
-    <div class="card">
-        <h2>Business Details</h2>
+    <div class="card bplo-form-card">
+        <h2 class="section">Business Details</h2>
+        <p class="bplo-form-intro">Keep your applicant and business profile accurate before proceeding to submission.</p>
         <form method="POST" action="{{ route('applications.update', $application) }}">
             @csrf
             @method('PUT')
             @include('applicant._form-fields', ['application' => $application])
-            <button type="submit" class="btn">Save Changes</button>
+            <div class="bplo-form-actions">
+                <button type="submit" class="btn">Save Changes</button>
+                <a href="{{ route('applications.summary', $application) }}" class="btn btn-secondary">Proceed to Review</a>
+            </div>
         </form>
     </div>
 
     <div class="card">
-        <h2>Requirements</h2>
-        <p class="muted">
-            Choose a file for each document, then click <strong>Upload All Requirements</strong> once.
-            Allowed: {{ implode(', ', (array) config('permit.uploads.mimes')) }}. Max {{ round(config('permit.uploads.max_kb') / 1024, 1) }} MB each.
-        </p>
+        <div class="bplo-card-intro">
+            <div>
+                <h2 class="section">Requirements Checklist &amp; Uploads</h2>
+                <p class="muted mb-0">
+                    Choose a file for each document, then click <strong>Upload All Requirements</strong> once.
+                    Allowed: {{ implode(', ', (array) config('permit.uploads.mimes')) }}. Max {{ round(config('permit.uploads.max_kb') / 1024, 1) }} MB each.
+                </p>
+            </div>
+        </div>
 
         {{-- One form for every document: pick files, upload them all together. --}}
         <form method="POST" action="{{ route('applications.requirements.uploadMany', $application) }}" enctype="multipart/form-data">
@@ -63,10 +80,10 @@
                                 <td>
                                     @if ($req)
                                         <span class="badge {{ $req->checklist_status === 'COMPLETE' ? 'badge-green' : ($req->checklist_status === 'FOR_CORRECTION' ? 'badge-yellow' : 'badge-gray') }}">
-                                            {{ $req->checklist_status }}
+                                            {{ ucwords(strtolower(str_replace('_', ' ', $req->checklist_status))) }}
                                         </span>
                                     @else
-                                        <span class="badge badge-gray">MISSING</span>
+                                        <span class="badge badge-gray">Missing</span>
                                     @endif
                                 </td>
                                 <td>
@@ -89,30 +106,28 @@
 
             @error('files') <div class="field-error" style="margin-top:10px">{{ $message }}</div> @enderror
 
-            <div style="margin-top:16px">
+            <div class="bplo-form-actions">
                 <button type="submit" class="btn btn-success">Upload All Requirements</button>
-                <span class="muted" style="margin-left:8px">You can upload now and add or replace files later.</span>
+                <span class="muted">You can upload now and add or replace files later.</span>
             </div>
         </form>
 
         {{-- Remove buttons are separate (a form can't nest inside the upload form). --}}
         @php($uploaded = $application->requirements->filter(fn ($r) => $r->stored_path))
         @if ($uploaded->isNotEmpty())
-            <div style="margin-top:18px">
-                <h3>Remove an uploaded file</h3>
-                <div style="display:flex;flex-wrap:wrap;gap:8px">
-                    @foreach ($requirementTypes as $type)
-                        @php($req = $application->requirements->firstWhere('requirement_type_id', $type->id))
-                        @if ($req && $req->stored_path)
-                            <form method="POST" action="{{ route('applications.requirements.remove', [$application, $type]) }}"
-                                  onsubmit="return confirm('Remove the uploaded {{ $type->name }}?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">Remove {{ $type->name }}</button>
-                            </form>
-                        @endif
-                    @endforeach
-                </div>
+            <h3 class="bplo-subcard-section-title">Remove an Uploaded File</h3>
+            <div class="bplo-chip-list">
+                @foreach ($requirementTypes as $type)
+                    @php($req = $application->requirements->firstWhere('requirement_type_id', $type->id))
+                    @if ($req && $req->stored_path)
+                        <form method="POST" action="{{ route('applications.requirements.remove', [$application, $type]) }}"
+                              onsubmit="return confirm('Remove the uploaded {{ $type->name }}?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">Remove {{ $type->name }}</button>
+                        </form>
+                    @endif
+                @endforeach
             </div>
         @endif
     </div>

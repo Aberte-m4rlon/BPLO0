@@ -4,12 +4,17 @@
 
 @section('content')
     <div class="page-header">
-        <div>
+        <div class="page-header-copy bplo-page-header-copy">
+            <p class="bplo-eyebrow">Applicant Portal</p>
             <h1>Application Status</h1>
-            <p class="muted mb-0">Tracking Number: <strong>{{ $application->tracking_number ?? '— (draft)' }}</strong></p>
+            <p>
+                {{ $application->business_name ?? 'Business Application' }}
+                · Tracking Number: <strong>{{ $application->tracking_number ?? '— (draft)' }}</strong>
+            </p>
         </div>
-        <div>
+        <div class="bplo-header-actions">
             <x-status-badge :status="$application->status" />
+            <a href="{{ url('/dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
         </div>
     </div>
 
@@ -58,17 +63,19 @@
     @endif
 
     <div class="card">
-        <h2>Status Timeline</h2>
+        <h2 class="section">Status Timeline</h2>
         @if ($application->statusHistories->isEmpty())
-            <p class="muted">No status changes recorded yet.</p>
+            <x-empty-state title="No status changes recorded yet" message="Application updates and milestone timestamps will appear here once submitted." />
         @else
             <ul class="timeline">
                 @foreach ($application->statusHistories as $history)
                     <li>
-                        <strong>{{ $history->to_status }}</strong>
-                        @if ($history->from_status)
-                            <span class="muted">(from {{ $history->from_status }})</span>
-                        @endif
+                        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+                            <x-status-badge :status="$history->to_status" />
+                            @if ($history->from_status)
+                                <span class="muted">from {{ ucwords(strtolower(str_replace('_', ' ', $history->from_status))) }}</span>
+                            @endif
+                        </div>
                         @if ($history->note)
                             <div>{{ $history->note }}</div>
                         @endif
@@ -81,11 +88,13 @@
 
     @if ($application->remarks->isNotEmpty())
         <div class="card">
-            <h2>Remarks</h2>
+            <h2 class="section">Remarks</h2>
             <ul class="timeline">
                 @foreach ($application->remarks->sortByDesc('created_at') as $remark)
                     <li>
-                        <span class="badge {{ $remark->type === 'REJECTION' ? 'badge-red' : 'badge-yellow' }}">{{ $remark->type }}</span>
+                        <div style="margin-bottom:4px">
+                            <span class="badge {{ $remark->type === 'REJECTION' ? 'badge-red' : 'badge-yellow' }}">{{ ucwords(strtolower(str_replace('_', ' ', $remark->type))) }}</span>
+                        </div>
                         <div>{{ $remark->body }}</div>
                         <div class="meta">{{ $remark->created_at?->format('M d, Y g:i A') }}</div>
                     </li>
@@ -95,9 +104,14 @@
     @endif
 
     <div class="card">
-        <h2>Payments</h2>
+        <div class="card-head">
+            <h2 class="section">Payments</h2>
+            @if ($application->payments->isNotEmpty())
+                <a href="{{ route('applications.payments', $application) }}" class="btn btn-sm btn-secondary">View Full History</a>
+            @endif
+        </div>
         @if ($application->payments->isEmpty())
-            <p class="muted">No payments recorded.</p>
+            <x-empty-state title="No payments recorded" message="Fee payments will appear here once fees are assessed and submitted." />
         @else
             <div class="table-wrap">
                 <table class="data">
@@ -110,15 +124,18 @@
                                 <td>{{ $payment->created_at?->format('M d, Y g:i A') }}</td>
                                 <td>{{ strtoupper($payment->method) }}</td>
                                 <td>&#8369;{{ number_format((float) $payment->amount, 2) }}</td>
-                                <td>{{ $payment->status }}</td>
-                                <td>{{ $payment->verification_status }}</td>
+                                <td>
+                                    <span class="badge {{ $payment->status === 'PAID' ? 'badge-green' : ($payment->status === 'FAILED' ? 'badge-red' : 'badge-yellow') }}">
+                                        {{ ucfirst(strtolower($payment->status)) }}
+                                    </span>
+                                </td>
+                                <td>{{ ucwords(strtolower(str_replace('_', ' ', $payment->verification_status))) }}</td>
                                 <td>{{ $payment->reference_number ?? '—' }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <p style="margin-top:12px"><a href="{{ route('applications.payments', $application) }}">View payment history</a></p>
         @endif
     </div>
 @endsection

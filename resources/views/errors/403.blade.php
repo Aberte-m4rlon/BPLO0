@@ -3,24 +3,28 @@
 @section('title', 'Access Not Allowed — '.config('permit.municipality'))
 
 @section('content')
-    <div class="card" style="max-width:560px;margin:40px auto;text-align:center">
+    <div class="card bplo-error-card">
+        <p class="bplo-eyebrow">Access Restricted</p>
         <h1>Access Not Allowed</h1>
         <p class="muted">
-            Your account doesn't have access to this page.
+            Your account doesn't have permission to open this page.
             @auth
-                You are signed in as <strong>{{ auth()->user()->email }}</strong>
+                You are currently signed in as <strong>{{ auth()->user()->email }}</strong>
                 ({{ strtoupper(auth()->user()->role) }}).
             @endauth
         </p>
 
-        @auth
-            <a href="{{ url(auth()->user()->homePath()) }}" class="btn">Go to My Dashboard</a>
-            <form method="POST" action="{{ route('logout') }}" style="display:inline">
-                @csrf
-                <button type="submit" class="btn btn-secondary">Log out and switch account</button>
-            </form>
-        @else
-            <a href="{{ url('/login') }}" class="btn">Login</a>
-        @endauth
+        <div class="bplo-error-actions">
+            @auth
+                <a href="{{ url(auth()->user()->homePath()) }}" class="btn">Go to My Dashboard</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">Log Out &amp; Switch Account</button>
+                </form>
+            @else
+                <a href="{{ url('/login') }}" class="btn">Sign In</a>
+                <a href="{{ url('/') }}" class="btn btn-secondary">Back to Home</a>
+            @endauth
+        </div>
     </div>
 @endsection

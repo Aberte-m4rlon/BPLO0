@@ -7,49 +7,61 @@
         $isExpired = $permit->valid_until !== null && $permit->valid_until->isPast();
         $isRevoked = $permit->status === \App\Models\Permit::STATUS_REVOKED;
         if ($isRevoked) {
-            $indicator = ['REVOKED', 'badge-red'];
+            $indicator = ['Revoked', 'badge-red'];
         } elseif ($isExpired) {
-            $indicator = ['EXPIRED', 'badge-yellow'];
+            $indicator = ['Expired', 'badge-yellow'];
         } else {
-            $indicator = ['ACTIVE', 'badge-green'];
+            $indicator = ['Active', 'badge-green'];
         }
     @endphp
 
     <div class="page-header">
-        <div>
+        <div class="page-header-copy bplo-page-header-copy">
+            <p class="bplo-eyebrow">Inspection &amp; Monitoring</p>
             <h1>Permit Details</h1>
-            <p class="muted mb-0">Permit Number: <strong>{{ $permit->permit_number }}</strong></p>
+            <p>{{ $permit->business_name }} · Permit No. <strong>{{ $permit->permit_number }}</strong></p>
         </div>
-        <span class="badge {{ $indicator[1] }}">{{ $indicator[0] }}</span>
+        <div class="bplo-header-actions">
+            <span class="badge {{ $indicator[1] }}">{{ $indicator[0] }}</span>
+            <a href="{{ url('/inspector/permits') }}" class="btn btn-secondary">Back to Permits</a>
+        </div>
+    </div>
+
+    <div class="bplo-detail-grid">
+        <div class="card">
+            <h2 class="section">Business Information</h2>
+            <dl class="kv">
+                <dt>Business Name</dt><dd>{{ $permit->business_name }}</dd>
+                <dt>Owner</dt><dd>{{ $permit->owner_name }}</dd>
+                <dt>Business Address</dt><dd>{{ $permit->business_address }}</dd>
+                <dt>Nature</dt><dd>{{ $permit->business_nature }}</dd>
+                <dt>Status</dt>
+                <dd><span class="badge {{ $indicator[1] }}">{{ ucfirst(strtolower($permit->status)) }}</span></dd>
+                <dt>Issued</dt><dd>{{ $permit->issued_at?->format('M d, Y') ?? '—' }}</dd>
+                <dt>Valid Until</dt><dd>{{ $permit->valid_until?->format('M d, Y') ?? '—' }}</dd>
+            </dl>
+        </div>
+
+        <div class="card">
+            <h2 class="section">Verification</h2>
+            <p class="muted">Open the public verification page for this permit (also what the printed QR code points to).</p>
+            <dl class="kv">
+                <dt>Verification Link</dt>
+                <dd style="word-break:break-all">{{ $permit->verifyUrl() }}</dd>
+            </dl>
+            <div class="bplo-btn-bar">
+                <a href="{{ $permit->verifyUrl() }}" class="btn" target="_blank" rel="noopener">Open Verification Page</a>
+            </div>
+        </div>
     </div>
 
     <div class="card">
-        <h2>Business Information</h2>
-        <dl class="kv">
-            <dt>Business Name</dt><dd>{{ $permit->business_name }}</dd>
-            <dt>Owner</dt><dd>{{ $permit->owner_name }}</dd>
-            <dt>Business Address</dt><dd>{{ $permit->business_address }}</dd>
-            <dt>Nature</dt><dd>{{ $permit->business_nature }}</dd>
-            <dt>Status</dt><dd>{{ $permit->status }}</dd>
-            <dt>Issued</dt><dd>{{ $permit->issued_at?->format('M d, Y') ?? '—' }}</dd>
-            <dt>Valid Until</dt><dd>{{ $permit->valid_until?->format('M d, Y') ?? '—' }}</dd>
-        </dl>
-    </div>
-
-    <div class="card">
-        <h2>Verification</h2>
-        <p class="muted">Open the public verification page for this permit (also what the QR code points to).</p>
-        <dl class="kv">
-            <dt>Verification Link</dt>
-            <dd style="word-break:break-all">{{ $permit->verifyUrl() }}</dd>
-        </dl>
-        <a href="{{ $permit->verifyUrl() }}" class="btn btn-mint" target="_blank" rel="noopener">Open Verification Page</a>
-    </div>
-
-    <div class="card">
-        <h2>Scan History</h2>
+        <div class="card-head">
+            <h2 class="section">Scan History</h2>
+            <span class="bplo-result-count">{{ $permit->qrVerifications->count() }} {{ \Illuminate\Support\Str::plural('scan', $permit->qrVerifications->count()) }}</span>
+        </div>
         @if ($permit->qrVerifications->isEmpty())
-            <p class="muted">No scans recorded for this permit yet.</p>
+            <x-empty-state title="No scans recorded yet" message="QR verification scan events will appear here whenever this permit is verified." />
         @else
             <div class="table-wrap">
                 <table class="data">
@@ -68,7 +80,7 @@
                             @endphp
                             <tr>
                                 <td>{{ $scan->created_at?->format('M d, Y g:i A') }}</td>
-                                <td><span class="badge {{ $badge }}">{{ $scan->result }}</span></td>
+                                <td><span class="badge {{ $badge }}">{{ ucwords(strtolower(str_replace('_', ' ', $scan->result))) }}</span></td>
                                 <td>{{ $scan->ip_address ?? '—' }}</td>
                             </tr>
                         @endforeach
@@ -78,5 +90,7 @@
         @endif
     </div>
 
-    <p><a href="{{ url('/inspector/permits') }}" class="btn btn-secondary">Back to Permits</a></p>
+    <div class="bplo-page-back-bar">
+        <a href="{{ url('/inspector/permits') }}" class="btn btn-secondary">Back to Permits</a>
+    </div>
 @endsection

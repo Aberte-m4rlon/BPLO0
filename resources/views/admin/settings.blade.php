@@ -4,58 +4,68 @@
 
 @section('content')
     <div class="page-header">
-        <h1>System Settings</h1>
+        <div class="page-header-copy bplo-page-header-copy">
+            <p class="bplo-eyebrow">System Administration</p>
+            <h1>System Settings</h1>
+            <p>Read-only municipal configuration values loaded from the deployment environment.</p>
+        </div>
     </div>
 
     <div class="alert alert-info">
-        These values are read-only. Environment-level settings are changed only by an operator editing
+        These values are read-only. Environment-level settings are changed only by an operator updating
         <code>.env</code> on the server. Requirement types, fee types, and fee rates are edited through their own screens.
     </div>
 
-    <div class="card">
-        <h2>Municipality Identity</h2>
-        <dl class="kv">
-            <dt>Municipality</dt><dd>{{ $permit['municipality'] }}</dd>
-            <dt>Province</dt><dd>{{ $permit['province'] }}</dd>
-        </dl>
+    <div class="bplo-detail-grid">
+        <div class="card">
+            <h2 class="section">Municipality Identity</h2>
+            <dl class="kv">
+                <dt>Municipality</dt><dd>{{ $permit['municipality'] }}</dd>
+                <dt>Province</dt><dd>{{ $permit['province'] }}</dd>
+            </dl>
+        </div>
+
+        <div class="card">
+            <h2 class="section">Numbering &amp; Validity</h2>
+            <dl class="kv">
+                <dt>Tracking Prefix</dt><dd>{{ $permit['tracking_prefix'] }}</dd>
+                <dt>Permit Prefix</dt><dd>{{ $permit['permit_prefix'] }}</dd>
+                <dt>Permit Validity</dt><dd>{{ $permit['valid_months'] }} {{ \Illuminate\Support\Str::plural('month', (int) $permit['valid_months']) }}</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="bplo-detail-grid">
+        <div class="card">
+            <h2 class="section">SMS Notifications</h2>
+            <dl class="kv">
+                <dt>Driver</dt><dd>{{ strtoupper($permit['sms']['driver']) }}</dd>
+                <dt>Sender ID</dt><dd>{{ $permit['sms']['sender_id'] }}</dd>
+            </dl>
+        </div>
+
+        <div class="card">
+            <h2 class="section">Document Uploads</h2>
+            <dl class="kv">
+                <dt>Allowed Mimes</dt><dd>{{ strtoupper(implode(', ', (array) $permit['uploads']['mimes'])) }}</dd>
+                <dt>Max File Size</dt><dd>{{ $permit['uploads']['max_kb'] }} KB ({{ round((int) $permit['uploads']['max_kb'] / 1024, 1) }} MB)</dd>
+            </dl>
+        </div>
     </div>
 
     <div class="card">
-        <h2>Numbering &amp; Validity</h2>
+        <h2 class="section">Payment Configuration</h2>
         <dl class="kv">
-            <dt>Tracking Prefix</dt><dd>{{ $permit['tracking_prefix'] }}</dd>
-            <dt>Permit Prefix</dt><dd>{{ $permit['permit_prefix'] }}</dd>
-            <dt>Permit Validity (months)</dt><dd>{{ $permit['valid_months'] }}</dd>
-        </dl>
-    </div>
-
-    <div class="card">
-        <h2>SMS</h2>
-        <dl class="kv">
-            <dt>Driver</dt><dd>{{ $permit['sms']['driver'] }}</dd>
-            <dt>Sender ID</dt><dd>{{ $permit['sms']['sender_id'] }}</dd>
-        </dl>
-    </div>
-
-    <div class="card">
-        <h2>Payment</h2>
-        <dl class="kv">
-            <dt>Mode</dt><dd>{{ $permit['payment']['mode'] }}</dd>
+            <dt>Mode</dt><dd>{{ ucfirst($permit['payment']['mode']) }}</dd>
             <dt>Enabled Methods</dt>
             <dd>
-                @foreach ($permit['payment']['methods'] as $method => $enabled)
-                    <span class="badge {{ $enabled ? 'badge-green' : 'badge-gray' }}">{{ strtoupper($method) }}</span>
-                @endforeach
+                <div class="bplo-chip-list">
+                    @foreach ($permit['payment']['methods'] as $method => $enabled)
+                        <span class="badge {{ $enabled ? 'badge-green' : 'badge-gray' }}">{{ strtoupper($method) }}</span>
+                    @endforeach
+                </div>
             </dd>
-            <dt>Webhook Secret</dt><dd>{{ $permit['payment']['webhook_secret'] ? '•••••• (set)' : 'not set' }}</dd>
-        </dl>
-    </div>
-
-    <div class="card">
-        <h2>Uploads</h2>
-        <dl class="kv">
-            <dt>Allowed Mimes</dt><dd>{{ implode(', ', (array) $permit['uploads']['mimes']) }}</dd>
-            <dt>Max Size (KB)</dt><dd>{{ $permit['uploads']['max_kb'] }}</dd>
+            <dt>Webhook Secret</dt><dd>{{ $permit['payment']['webhook_secret'] ? '•••••• (configured)' : 'Not configured' }}</dd>
         </dl>
     </div>
 @endsection

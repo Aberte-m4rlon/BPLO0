@@ -6,12 +6,14 @@
 
 @section('content')
     <div class="page-header bplo-page-header">
-        <div>
-            <p class="bplo-eyebrow">PERMIT MANAGEMENT</p>
+        <div class="page-header-copy bplo-page-header-copy">
+            <p class="bplo-eyebrow">Permit Management</p>
             <h1>Permit Release Desk</h1>
-            <p class="muted mb-0">Release permits after Treasury confirms payment, or review permits already issued.</p>
+            <p>Release permits after Treasury confirms payment, or review permits already issued.</p>
         </div>
-        <a href="{{ route('bplo.dashboard') }}" class="btn btn-secondary">← BPLO dashboard</a>
+        <div class="bplo-header-actions">
+            <a href="{{ route('bplo.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
     </div>
 
     <div class="stat-grid bplo-release-stats">
@@ -25,8 +27,13 @@
 
     <div class="card">
         <div class="card-head">
-            <h2 class="section">Payment-verified applications and issued permits</h2>
-            <a href="{{ route('bplo.applications.index') }}" class="btn btn-sm btn-secondary">Application review</a>
+            <div>
+                <h2 class="section">Payment-Verified Applications &amp; Issued Permits</h2>
+            </div>
+            <div class="bplo-header-actions">
+                <span class="bplo-result-count">{{ $applications->total() }} {{ \Illuminate\Support\Str::plural('record', $applications->total()) }}</span>
+                <a href="{{ route('bplo.applications.index') }}" class="btn btn-sm btn-secondary">Application Review</a>
+            </div>
         </div>
 
         <form method="GET" action="{{ route('bplo.permits.index') }}" class="toolbar">
