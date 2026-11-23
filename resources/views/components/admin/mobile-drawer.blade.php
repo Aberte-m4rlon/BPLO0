@@ -4,6 +4,7 @@
     'user' => null,
     'roleLabel' => '',
     'current' => '/',
+    'badges' => [],
 ])
 
 <div id="mobile-drawer-backdrop" class="adm-drawer-backdrop" hidden></div>
@@ -33,14 +34,27 @@
     <nav class="adm-drawer-nav" aria-label="Mobile workspace links">
         <p class="sidebar-section-label">WORKSPACE</p>
         @foreach ($nav as [$url, $label, $icon])
-            @php $active = $current === $url || str_starts_with($current, rtrim($url, '/').'/'); @endphp
+            @php
+                $active = $current === $url || str_starts_with($current, rtrim($url, '/').'/');
+                $badge = $badges[$url] ?? null;
+                $badgeCount = (int) ($badge['count'] ?? 0);
+                $hasDot = ! empty($badge['dot']);
+                $tone = $badge['tone'] ?? 'info';
+            @endphp
             <a href="{{ url($url) }}"
                class="sidebar-link adm-drawer-link {{ $active ? 'is-active' : '' }}"
                @if ($active) aria-current="page" @endif>
-                <svg class="sidebar-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="{{ $icon }}" />
-                </svg>
-                <span>{{ $label }}</span>
+                <span class="nav-icon-wrap">
+                    <svg class="sidebar-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="{{ $icon }}" />
+                    </svg>
+                </span>
+                <span class="sidebar-link-label">{{ $label }}</span>
+                @if ($badge && $badgeCount > 0)
+                    <span class="nav-badge tone-{{ $tone }}">{{ $badgeCount > 99 ? '99+' : $badgeCount }}</span>
+                @elseif ($badge && $hasDot)
+                    <span class="nav-dot tone-{{ $tone }}"></span>
+                @endif
             </a>
         @endforeach
     </nav>

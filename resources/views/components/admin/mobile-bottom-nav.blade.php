@@ -2,6 +2,7 @@
     'current' => '/',
     'items' => null,
     'ariaLabel' => 'Quick mobile navigation',
+    'badges' => [],
 ])
 
 @php
@@ -29,12 +30,23 @@
 
 <nav class="adm-mobile-bottom-nav no-print" aria-label="{{ $ariaLabel }}">
     @foreach ($navItems as $item)
+        @php
+            $b = $badges[$item['url']] ?? null;
+            $bCount = (int) ($b['count'] ?? 0);
+            $bDot = ! empty($b['dot']);
+            $bTone = $b['tone'] ?? 'info';
+        @endphp
         <a href="{{ url($item['url']) }}"
            class="adm-bottom-nav-link {{ $item['active'] ? 'is-active' : '' }}"
            @if ($item['active']) aria-current="page" @endif>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="{{ $item['icon'] }}" />
-            </svg>
+            <span class="nav-icon-wrap">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="{{ $item['icon'] }}" />
+                </svg>
+                @if ($b && ($bCount > 0 || $bDot))
+                    <span class="nav-bottom-badge {{ $bCount > 0 ? 'has-num' : 'is-dot' }} tone-{{ $bTone }}" aria-hidden="true">{{ $bCount > 0 ? ($bCount > 99 ? '99+' : $bCount) : '' }}</span>
+                @endif
+            </span>
             <span>{{ $item['label'] }}</span>
         </a>
     @endforeach

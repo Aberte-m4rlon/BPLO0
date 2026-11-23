@@ -9,7 +9,13 @@
         $lines = $breakdown['lines'] ?? [];
     @endphp
 
-    <div class="page-header">
+    <x-print-header
+        office="Office of the Municipal Treasurer"
+        title="Official Payment Verification Receipt"
+        :meta-ref="$payment->tracking_number"
+    />
+
+    <div class="page-header no-print">
         <div class="page-header-copy bplo-page-header-copy">
             <p class="bplo-eyebrow">Municipal Treasurer's Office</p>
             <h1>Verify Payment</h1>
@@ -21,6 +27,7 @@
         <div class="bplo-header-actions">
             <span class="badge {{ $payment->status === 'PAID' ? 'badge-green' : ($payment->status === 'FAILED' ? 'badge-red' : 'badge-yellow') }}">{{ ucfirst(strtolower($payment->status)) }}</span>
             <span class="badge {{ $payment->verification_status === 'VERIFIED' ? 'badge-green' : 'badge-gray' }}">{{ ucwords(strtolower(str_replace('_', ' ', $payment->verification_status))) }}</span>
+            <button type="button" onclick="window.print()" class="btn btn-sm btn-secondary">Print Receipt</button>
             <a href="{{ url('/treasurer/payments') }}" class="btn btn-secondary">Back to Payments</a>
         </div>
     </div>
@@ -88,7 +95,7 @@
         </div>
     @endif
 
-    <div class="card">
+    <div class="card no-print">
         <h2 class="section">Verification Actions</h2>
         @if ($payment->isAwaitingVerification())
             <div class="bplo-action-stack">
@@ -132,7 +139,14 @@
         @endif
     </div>
 
-    <div class="bplo-page-back-bar">
+    <div class="bplo-page-back-bar no-print">
         <a href="{{ url('/treasurer/payments') }}" class="btn btn-secondary">Back to Payments</a>
     </div>
+
+    <x-print-footer
+        left-title="Verified By"
+        left-role="Municipal Treasury Office"
+        right-title="Acknowledged / Noted By"
+        right-role="Municipal Treasurer"
+    />
 @endsection

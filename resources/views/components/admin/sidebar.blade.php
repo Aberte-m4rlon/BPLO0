@@ -4,6 +4,7 @@
     'user' => null,
     'roleLabel' => '',
     'current' => '/',
+    'badges' => [],
 ])
 
 <aside class="sidebar adm-sidebar" id="desktop-sidebar" aria-label="Primary sidebar">
@@ -31,16 +32,33 @@
     <nav id="primary-navigation" class="sidebar-nav" aria-label="Primary navigation">
         <p class="sidebar-section-label">WORKSPACE</p>
         @foreach ($nav as [$url, $label, $icon])
-            @php $active = $current === $url || str_starts_with($current, rtrim($url, '/').'/'); @endphp
+            @php
+                $active = $current === $url || str_starts_with($current, rtrim($url, '/').'/');
+                $badge = $badges[$url] ?? null;
+                $badgeCount = (int) ($badge['count'] ?? 0);
+                $hasDot = ! empty($badge['dot']);
+                $tone = $badge['tone'] ?? 'info';
+                $badgeTitle = $badge['title'] ?? $label;
+            @endphp
             <a href="{{ url($url) }}"
                class="sidebar-link {{ $active ? 'is-active' : '' }}"
                data-tooltip="{{ $label }}"
-               title="{{ $label }}"
+               title="{{ $badge ? $label.' — '.$badgeTitle : $label }}"
                @if ($active) aria-current="page" @endif>
-                <svg class="sidebar-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="{{ $icon }}" />
-                </svg>
+                <span class="nav-icon-wrap">
+                    <svg class="sidebar-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="{{ $icon }}" />
+                    </svg>
+                    @if ($badge && ($badgeCount > 0 || $hasDot))
+                        <span class="nav-icon-badge {{ $badgeCount > 0 ? 'has-num' : 'is-dot' }} tone-{{ $tone }}" aria-hidden="true">{{ $badgeCount > 0 ? ($badgeCount > 99 ? '99+' : $badgeCount) : '' }}</span>
+                    @endif
+                </span>
                 <span class="sidebar-link-label">{{ $label }}</span>
+                @if ($badge && $badgeCount > 0)
+                    <span class="nav-badge tone-{{ $tone }}" title="{{ $badgeTitle }}">{{ $badgeCount > 99 ? '99+' : $badgeCount }}</span>
+                @elseif ($badge && $hasDot)
+                    <span class="nav-dot tone-{{ $tone }}" title="{{ $badgeTitle }}"></span>
+                @endif
             </a>
         @endforeach
     </nav>

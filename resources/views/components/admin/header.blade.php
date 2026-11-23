@@ -3,6 +3,8 @@
     'title' => 'Dashboard',
     'homeUrl' => '/',
     'unread' => 0,
+    'notifItems' => [],
+    'unreadDbCount' => 0,
     'user' => null,
     'roleLabel' => '',
 ])
@@ -30,7 +32,7 @@
     </div>
 
     <div class="topbar-right">
-        <x-notification-bell :count="$unread" />
+        <x-notification-bell :count="$unread" :items="$notifItems" :unread-db-count="$unreadDbCount" />
         @if ($user)
             <div class="topbar-user">
                 <span class="topbar-avatar-wrap">

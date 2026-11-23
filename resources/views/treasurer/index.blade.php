@@ -3,13 +3,20 @@
 @section('title', 'Payments')
 
 @section('content')
-    <div class="page-header adm-panel">
+    <x-print-header
+        office="Office of the Municipal Treasurer"
+        title="Municipal Payments & Collections Ledger"
+        :subtitle="request('status') ? 'Filtered Status: '.request('status') : 'All Recorded Payments'"
+    />
+
+    <div class="page-header adm-panel no-print">
         <div class="page-header-copy bplo-page-header-copy">
             <p class="bplo-eyebrow">Municipal Treasurer's Office · {{ config('permit.municipality') }}</p>
             <h1>Payments Queue</h1>
             <p>Verify payment receipts and confirm municipal collections for approved permit applications.</p>
         </div>
         <div class="bplo-header-actions">
+            <button type="button" onclick="window.print()" class="btn btn-sm btn-secondary">Print Ledger</button>
             <a href="{{ route('treasurer.payments.export', request()->only('q', 'status')) }}" class="btn btn-sm adm-pill-btn">Export CSV ↓</a>
             <a href="{{ route('treasurer.analytics') }}" class="btn btn-sm btn-secondary">Analytics</a>
             <a href="{{ url('/treasurer/dashboard') }}" class="btn btn-secondary">Dashboard</a>
@@ -42,7 +49,7 @@
             <span class="bplo-result-count">{{ $payments->total() }} {{ \Illuminate\Support\Str::plural('payment', $payments->total()) }}</span>
         </div>
 
-        <form method="GET" action="{{ url('/treasurer/payments') }}" class="toolbar">
+        <form method="GET" action="{{ url('/treasurer/payments') }}" class="toolbar no-print">
             <div class="form-group">
                 <label for="q">Search</label>
                 <input type="text" id="q" name="q" value="{{ request('q') }}" placeholder="Tracking / reference no.">
@@ -65,7 +72,7 @@
         <div class="table-wrap adm-activity-table-wrap">
             <table class="data adm-activity-table">
                 <thead>
-                    <tr><th>Tracking No.</th><th>Business</th><th>Method</th><th>Reference No.</th><th class="text-right">Amount</th><th>Status</th><th>Submitted</th><th>Action</th></tr>
+                    <tr><th>Tracking No.</th><th>Business</th><th>Method</th><th>Reference No.</th><th class="text-right">Amount</th><th>Status</th><th>Submitted</th><th class="no-print">Action</th></tr>
                 </thead>
                 <tbody>
                     @forelse ($payments as $payment)
@@ -81,7 +88,7 @@
                                 </span>
                             </td>
                             <td>{{ $payment->created_at?->format('M d, Y g:i A') }}</td>
-                            <td><a href="{{ route('treasurer.payments.show', $payment) }}" class="btn btn-sm">View</a></td>
+                            <td class="no-print"><a href="{{ route('treasurer.payments.show', $payment) }}" class="btn btn-sm">View</a></td>
                         </tr>
                     @empty
                         <tr><td colspan="8" class="muted">No payments match your filters.</td></tr>
@@ -113,6 +120,10 @@
             @endforelse
         </div>
 
-        <x-pagination :paginator="$payments" />
+        <div class="no-print">
+            <x-pagination :paginator="$payments" />
+        </div>
     </div>
+
+    <x-print-footer left-role="Treasury Staff / Collector" right-role="Office of the Municipal Treasurer" />
 @endsection

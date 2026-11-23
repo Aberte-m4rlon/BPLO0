@@ -48,6 +48,10 @@ Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
+Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllRead'])
+    ->middleware('auth')
+    ->name('notifications.readAll');
+
 Route::middleware(['auth', 'role:applicant'])->group(function (): void {
     Route::get('/dashboard', [ApplicantDashboardController::class, 'index'])->name('applicant.dashboard');
     Route::get('/applications/create', [ApplicantApplicationController::class, 'create'])->name('applications.create');

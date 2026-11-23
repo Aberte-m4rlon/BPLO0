@@ -18,7 +18,7 @@
                 </span>
                 <h2 class="adm-panel-title">Revenue by Fee Category</h2>
             </div>
-            <a href="{{ route('treasurer.fee-rates.index') }}" class="btn btn-sm adm-pill-btn">Fee Schedules →</a>
+            <a href="{{ route('treasurer.fee-rates.index') }}" class="btn btn-sm adm-pill-btn no-print">Fee Schedules →</a>
         </div>
 
         @if (empty($categories))

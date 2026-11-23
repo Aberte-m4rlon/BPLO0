@@ -1,4 +1,9 @@
 <x-treasurer.layout title="Treasurer Dashboard">
+    <x-print-header
+        office="Office of the Municipal Treasurer"
+        title="Treasury Dashboard Executive Summary"
+    />
+
     <x-admin.welcome-banner
         :user-name="auth()->user()->name"
         kicker="TREASURY & REVENUE WORKSPACE"
@@ -28,7 +33,7 @@
                     </span>
                     <h2 class="adm-panel-title">Payments Awaiting Verification</h2>
                 </div>
-                <a href="{{ route('treasurer.payments.index') }}" class="btn btn-sm adm-pill-btn">All Payments →</a>
+                <a href="{{ route('treasurer.payments.index') }}" class="btn btn-sm adm-pill-btn no-print">All Payments →</a>
             </div>
 
             @if ($pending->isEmpty())
@@ -43,7 +48,7 @@
                                 <th>BUSINESS</th>
                                 <th>METHOD</th>
                                 <th class="text-right">AMOUNT</th>
-                                <th>ACTION</th>
+                                <th class="no-print">ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,7 +58,7 @@
                                     <td>{{ $payment->application?->business_name ?? '—' }}</td>
                                     <td><span class="badge adm-action-badge">{{ \App\Support\PaymentMethods::label($payment->method) }}</span></td>
                                     <td class="text-right"><strong>&#8369;{{ number_format((float) $payment->amount, 2) }}</strong></td>
-                                    <td><a href="{{ route('treasurer.payments.show', $payment) }}" class="btn btn-sm">Verify</a></td>
+                                    <td class="no-print"><a href="{{ route('treasurer.payments.show', $payment) }}" class="btn btn-sm">Verify</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -77,7 +82,7 @@
             @endif
         </section>
 
-        <section class="card adm-panel adm-quick-panel bplo-sticky-card" aria-label="Treasury Management">
+        <section class="card adm-panel adm-quick-panel bplo-sticky-card no-print" aria-label="Treasury Management">
             <div class="card-head adm-panel-head">
                 <div class="adm-panel-title-wrap">
                     <span class="adm-panel-icon adm-panel-icon-zap" aria-hidden="true">
@@ -87,7 +92,10 @@
                     </span>
                     <h2 class="adm-panel-title">Treasury Controls</h2>
                 </div>
-                <a href="{{ route('treasurer.payments.export') }}" class="btn btn-sm adm-pill-btn">Export CSV ↓</a>
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <button type="button" onclick="window.print()" class="btn btn-sm adm-pill-btn">Print Summary</button>
+                    <a href="{{ route('treasurer.payments.export') }}" class="btn btn-sm adm-pill-btn">Export CSV ↓</a>
+                </div>
             </div>
 
             <div class="adm-quick-grid">
@@ -118,4 +126,6 @@
             </div>
         </section>
     </div>
+
+    <x-print-footer left-role="Treasury Staff" right-role="Office of the Municipal Treasurer" />
 </x-treasurer.layout>

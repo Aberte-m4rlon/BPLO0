@@ -12,7 +12,11 @@
 <body class="has-sidebar bplo-portal {{ auth()->user()?->isAdmin() ? 'is-glass-portal is-admin-portal' : (auth()->user()?->isTreasurer() ? 'is-glass-portal is-treasurer-portal' : '') }}">
     @php
         $user = auth()->user();
-        $unread = $user ? \App\Models\Notification::where('user_id', $user->id)->whereNull('read_at')->count() : 0;
+        $alertData = app(\App\Support\NavigationAlertService::class)->forUser($user);
+        $unread = $alertData['bell_count'];
+        $navBadges = $alertData['badges'];
+        $notifItems = $alertData['bell_items'];
+        $unreadDbCount = $alertData['unread_db_count'];
 
         // Role-aware navigation links: [url, label].
         $nav = [];
@@ -129,6 +133,7 @@
             :user="$user"
             :role-label="$admRoleLabel"
             :current="$admCurrent"
+            :badges="$navBadges"
         />
 
         <div class="layout adm-layout">
@@ -138,6 +143,7 @@
                 :user="$user"
                 :role-label="$admRoleLabel"
                 :current="$admCurrent"
+                :badges="$navBadges"
             />
 
             <div class="main-area adm-main-area">
@@ -146,6 +152,8 @@
                     :title="$admPageTitle"
                     :home-url="$admHomeUrl"
                     :unread="$unread"
+                    :notif-items="$notifItems"
+                    :unread-db-count="$unreadDbCount"
                     :user="$user"
                     :role-label="$admRoleLabel"
                 />
@@ -161,7 +169,7 @@
             </div>
         </div>
 
-        <x-admin.mobile-bottom-nav :current="$admCurrent" :items="$glassBottomItems" />
+        <x-admin.mobile-bottom-nav :current="$admCurrent" :items="$glassBottomItems" :badges="$navBadges" />
 
         <script>
             (function () {
@@ -287,7 +295,14 @@
             <nav id="primary-navigation" class="sidebar-nav" aria-label="Primary navigation">
                 <p class="sidebar-section-label">WORKSPACE</p>
                 @foreach ($nav as [$url, $label])
-                    @php $active = $current === $url || str_starts_with($current, rtrim($url, '/').'/'); @endphp
+                    @php
+                        $active = $current === $url || str_starts_with($current, rtrim($url, '/').'/');
+                        $badge = $navBadges[$url] ?? null;
+                        $badgeCount = (int) ($badge['count'] ?? 0);
+                        $hasDot = ! empty($badge['dot']);
+                        $tone = $badge['tone'] ?? 'info';
+                        $badgeTitle = $badge['title'] ?? $label;
+                    @endphp
                     @php
                         $iconPath = match (true) {
                             str_contains($url, 'dashboard') => 'M3 3.75h7.5v7.5H3z M13.5 3.75H21v4.5h-7.5z M13.5 10.5H21V21h-7.5z M3 13.5h7.5V21H3z',
@@ -303,11 +318,18 @@
                             default => 'M5 6h14 M5 12h14 M5 18h14',
                         };
                     @endphp
-                    <a href="{{ url($url) }}" class="sidebar-link {{ $active ? 'is-active' : '' }}" @if ($active) aria-current="page" @endif>
-                        <svg class="sidebar-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="{{ $iconPath }}" />
-                        </svg>
-                        <span>{{ $label }}</span>
+                    <a href="{{ url($url) }}" class="sidebar-link {{ $active ? 'is-active' : '' }}" title="{{ $badge ? $label.' — '.$badgeTitle : $label }}" @if ($active) aria-current="page" @endif>
+                        <span class="nav-icon-wrap">
+                            <svg class="sidebar-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="{{ $iconPath }}" />
+                            </svg>
+                        </span>
+                        <span class="sidebar-link-label">{{ $label }}</span>
+                        @if ($badge && $badgeCount > 0)
+                            <span class="nav-badge tone-{{ $tone }}" title="{{ $badgeTitle }}">{{ $badgeCount > 99 ? '99+' : $badgeCount }}</span>
+                        @elseif ($badge && $hasDot)
+                            <span class="nav-dot tone-{{ $tone }}" title="{{ $badgeTitle }}"></span>
+                        @endif
                     </a>
                 @endforeach
             </nav>
@@ -350,7 +372,7 @@
                     <span class="topbar-title">@yield('title', 'Dashboard')</span>
                 </div>
                 <div class="topbar-right">
-                    <x-notification-bell :count="$unread" />
+                    <x-notification-bell :count="$unread" :items="$notifItems" :unread-db-count="$unreadDbCount" />
                     @if ($user)
                         <div class="topbar-user">
                             <span class="topbar-avatar-wrap">
@@ -425,5 +447,62 @@
         })();
     </script>
     @endif
+
+    <script>
+        (function () {
+            document.querySelectorAll('[data-notif-wrap]').forEach(function (wrap) {
+                var btn = wrap.querySelector('[data-notif-toggle]');
+                var popover = wrap.querySelector('[data-notif-popover]');
+                if (!btn || !popover) return;
+
+                function setOpen(open) {
+                    popover.hidden = !open;
+                    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    wrap.classList.toggle('is-open', open);
+                }
+
+                btn.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    var willOpen = popover.hidden;
+                    document.querySelectorAll('[data-notif-wrap]').forEach(function (other) {
+                        if (other !== wrap) {
+                            var p = other.querySelector('[data-notif-popover]');
+                            var b = other.querySelector('[data-notif-toggle]');
+                            if (p) p.hidden = true;
+                            if (b) b.setAttribute('aria-expanded', 'false');
+                            other.classList.remove('is-open');
+                        }
+                    });
+                    setOpen(willOpen);
+                });
+
+                popover.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            });
+
+            document.addEventListener('click', function () {
+                document.querySelectorAll('[data-notif-wrap]').forEach(function (wrap) {
+                    var p = wrap.querySelector('[data-notif-popover]');
+                    var b = wrap.querySelector('[data-notif-toggle]');
+                    if (p) p.hidden = true;
+                    if (b) b.setAttribute('aria-expanded', 'false');
+                    wrap.classList.remove('is-open');
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    document.querySelectorAll('[data-notif-wrap]').forEach(function (wrap) {
+                        var p = wrap.querySelector('[data-notif-popover]');
+                        var b = wrap.querySelector('[data-notif-toggle]');
+                        if (p) p.hidden = true;
+                        if (b) b.setAttribute('aria-expanded', 'false');
+                        wrap.classList.remove('is-open');
+                    });
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

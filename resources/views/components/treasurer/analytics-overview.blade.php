@@ -20,7 +20,7 @@
                 </span>
                 <h2 class="adm-panel-title">Monthly Collection Trend (6 Months)</h2>
             </div>
-            <a href="{{ route('treasurer.analytics') }}" class="btn btn-sm adm-pill-btn">Full Report →</a>
+            <a href="{{ route('treasurer.analytics') }}" class="btn btn-sm adm-pill-btn no-print">Full Report →</a>
         </div>
 
         <div class="trs-summary-strip">

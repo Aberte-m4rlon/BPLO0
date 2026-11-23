@@ -18,13 +18,15 @@
 
     <div class="card permit-certificate">
         <div class="permit-cert-frame">
+            <div class="permit-cert-corners" aria-hidden="true"></div>
+
             <div class="permit-cert-header">
                 <div class="permit-cert-brand">
                     <span class="permit-cert-seal" aria-hidden="true">BP</span>
                     <div>
                         <p class="permit-cert-republic">Republic of the Philippines · Province of {{ config('permit.province') }}</p>
                         <h2>{{ config('permit.municipality') }}</h2>
-                        <p class="permit-cert-office">Business Permits and Licensing Office</p>
+                        <p class="permit-cert-office">Office of the Municipal Mayor · Business Permits &amp; Licensing Office</p>
                     </div>
                 </div>
                 <span class="badge {{ strtoupper((string) $permit->status) === 'ACTIVE' ? 'badge-green' : 'badge-red' }} permit-cert-status">
@@ -44,17 +46,30 @@
                         <strong>{{ $permit->permit_number }}</strong>
                     </div>
 
+                    <div class="permit-cert-grant-box">
+                        <span class="permit-cert-grant-kicker">THIS PERMIT IS HEREBY GRANTED TO</span>
+                        <div class="permit-cert-biz">{{ $permit->business_name }}</div>
+                    </div>
+
                     <dl class="kv permit-cert-kv">
-                        <dt>Business Name</dt><dd class="permit-cert-biz">{{ $permit->business_name }}</dd>
                         <dt>Proprietor / Owner</dt><dd>{{ $permit->owner_name }}</dd>
                         <dt>Business Address</dt><dd>{{ $permit->business_address }}</dd>
                         <dt>Nature of Business</dt><dd>{{ $permit->business_nature }}</dd>
-                        <dt>Date Issued</dt><dd>{{ $permit->issued_at?->format('F d, Y') }}</dd>
-                        <dt>Valid Until</dt><dd><strong>{{ $permit->valid_until?->format('F d, Y') }}</strong></dd>
                     </dl>
 
+                    <div class="permit-cert-validity-grid">
+                        <div class="permit-validity-cell">
+                            <span>Date Issued</span>
+                            <strong>{{ $permit->issued_at?->format('F d, Y') }}</strong>
+                        </div>
+                        <div class="permit-validity-cell is-highlight">
+                            <span>Valid Until</span>
+                            <strong>{{ $permit->valid_until?->format('F d, Y') }}</strong>
+                        </div>
+                    </div>
+
                     <div class="permit-cert-notice">
-                        This permit certifies that the establishment above has complied with municipal requirements and paid the prescribed fees. Must be displayed conspicuously at the business premises.
+                        This certifies that the business establishment above has complied with municipal requirements and paid the prescribed fees. Display conspicuously at the business premises.
                     </div>
                 </div>
 
@@ -63,7 +78,7 @@
                         {!! $qrSvg !!}
                     </a>
                     <strong>Official QR Verification</strong>
-                    <p class="muted mb-0">Scan with a phone camera or click the QR code to verify authenticity.</p>
+                    <p class="muted mb-0">Scan with a phone camera or click the QR code to verify authenticity online.</p>
                 </div>
             </div>
 

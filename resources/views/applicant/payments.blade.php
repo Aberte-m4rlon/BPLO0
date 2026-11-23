@@ -3,7 +3,13 @@
 @section('title', 'Payment History')
 
 @section('content')
-    <div class="page-header">
+    <x-print-header
+        office="Business Permits and Licensing Office"
+        title="Applicant Payment History Receipt"
+        :meta-ref="$application->tracking_number"
+    />
+
+    <div class="page-header no-print">
         <div class="page-header-copy bplo-page-header-copy">
             <p class="bplo-eyebrow">Applicant Portal</p>
             <h1>Payment History</h1>
@@ -15,6 +21,7 @@
             </p>
         </div>
         <div class="bplo-header-actions">
+            <button type="button" onclick="window.print()" class="btn btn-sm btn-secondary">Print Receipt</button>
             <a href="{{ route('applications.show', $application) }}" class="btn btn-secondary">Back to Status</a>
         </div>
     </div>
@@ -62,4 +69,11 @@
             </div>
         @endif
     </div>
+
+    <x-print-footer
+        left-title="Applicant"
+        :left-role="$application->applicant_name"
+        right-title="Municipal Treasury"
+        right-role="Office of the Municipal Treasurer"
+    />
 @endsection
