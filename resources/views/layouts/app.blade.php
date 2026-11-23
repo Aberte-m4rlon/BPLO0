@@ -9,13 +9,14 @@
     <link rel="preload" as="image" href="{{ asset('images/bplo-blue-background.png') }}" fetchpriority="high">
     <link href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}" rel="stylesheet">
 </head>
-<body class="has-sidebar bplo-portal">
+<body class="has-sidebar bplo-portal {{ auth()->user()?->isAdmin() ? 'is-admin-portal' : '' }}">
     @php
         $user = auth()->user();
         $unread = $user ? \App\Models\Notification::where('user_id', $user->id)->whereNull('read_at')->count() : 0;
 
         // Role-aware navigation links: [url, label].
         $nav = [];
+        $adminNav = [];
         if ($user?->isApplicant()) {
             $nav = [
                 ['/dashboard', 'Dashboard'],
@@ -48,6 +49,15 @@
                 ['/admin/audit-logs', 'Audit Logs'],
                 ['/admin/settings', 'Settings'],
             ];
+            $adminNav = [
+                ['/admin/dashboard', 'Dashboard', 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z'],
+                ['/admin/users', 'Users', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75'],
+                ['/admin/requirement-types', 'Requirements', 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M9 15l2 2 4-4'],
+                ['/admin/fee-types', 'Fee Types', 'M12 2v20 M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'],
+                ['/admin/fee-rates', 'Fee Rates', 'M4 2h16v20H4z M8 6h8 M8 10h2 M12 10h2 M16 10h0 M8 14h2 M12 14h2 M16 14h0 M8 18h6'],
+                ['/admin/audit-logs', 'Audit Logs', 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M8 13h8 M8 17h8 M8 9h2'],
+                ['/admin/settings', 'Settings', 'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z'],
+            ];
         }
 
         $roleLabel = $user ? match ($user->role) {
@@ -70,9 +80,171 @@
         $current = '/'.ltrim(request()->path(), '/');
     @endphp
 
-    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle-cb" hidden>
+    @if ($user?->isAdmin())
+        @php
+            $admCurrent = '/'.ltrim(request()->path(), '/');
+            $admHomeUrl = $user->homePath();
+            $admRoleLabel = 'System Administrator';
+            $admWorkspaceKicker = 'ADMINISTRATION WORKSPACE';
+            $admPageTitle = trim($__env->yieldContent('title', 'Admin Dashboard')) ?: 'Admin Dashboard';
+        @endphp
 
-    <div class="layout">
+        <script>
+            if (localStorage.getItem('bplo_sidebar_collapsed') === '1') {
+                document.body.classList.add('is-sidebar-collapsed');
+            }
+        </script>
+
+        <x-admin.mobile-drawer
+            :nav="$adminNav"
+            :home-url="$admHomeUrl"
+            :user="$user"
+            :role-label="$admRoleLabel"
+            :current="$admCurrent"
+        />
+
+        <div class="layout adm-layout">
+            <x-admin.sidebar
+                :nav="$adminNav"
+                :home-url="$admHomeUrl"
+                :user="$user"
+                :role-label="$admRoleLabel"
+                :current="$admCurrent"
+            />
+
+            <div class="main-area adm-main-area">
+                <x-admin.header
+                    :workspace-kicker="$admWorkspaceKicker"
+                    :title="$admPageTitle"
+                    :home-url="$admHomeUrl"
+                    :unread="$unread"
+                    :user="$user"
+                    :role-label="$admRoleLabel"
+                />
+
+                <main class="page adm-page">
+                    <div class="container-fluid adm-container">
+                        <x-flash-messages />
+                        @yield('content')
+                    </div>
+                </main>
+
+                <x-admin.footer />
+            </div>
+        </div>
+
+        <x-admin.mobile-bottom-nav :current="$admCurrent" />
+
+        <script>
+            (function () {
+                var collapseBtn = document.getElementById('sidebar-collapse-btn');
+                var drawerOpenBtn = document.getElementById('mobile-drawer-open');
+                var drawerCloseBtn = document.getElementById('mobile-drawer-close');
+                var drawerBackdrop = document.getElementById('mobile-drawer-backdrop');
+                var drawer = document.getElementById('mobile-navigation-drawer');
+                var clockEl = document.getElementById('adm-live-clock');
+
+                function syncCollapseButton() {
+                    if (!collapseBtn) return;
+                    var collapsed = document.body.classList.contains('is-sidebar-collapsed');
+                    collapseBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                    collapseBtn.setAttribute('title', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+                }
+
+                if (collapseBtn) {
+                    syncCollapseButton();
+                    collapseBtn.addEventListener('click', function () {
+                        var collapsed = document.body.classList.toggle('is-sidebar-collapsed');
+                        localStorage.setItem('bplo_sidebar_collapsed', collapsed ? '1' : '0');
+                        syncCollapseButton();
+                    });
+                }
+
+                function setDrawerOpen(open) {
+                    if (!drawer || !drawerBackdrop) return;
+                    drawer.classList.toggle('is-open', open);
+                    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+                    drawerBackdrop.hidden = !open;
+                    drawerBackdrop.classList.toggle('is-open', open);
+                    document.documentElement.classList.toggle('drawer-open', open);
+                    document.body.classList.toggle('drawer-open', open);
+                    if (drawerOpenBtn) {
+                        drawerOpenBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    }
+                    if (open && drawerCloseBtn) {
+                        drawerCloseBtn.focus();
+                    }
+                }
+
+                if (drawerBackdrop) {
+                    drawerBackdrop.addEventListener('wheel', function (event) {
+                        event.preventDefault();
+                    }, { passive: false });
+                    drawerBackdrop.addEventListener('touchmove', function (event) {
+                        event.preventDefault();
+                    }, { passive: false });
+                }
+
+                if (drawerOpenBtn) {
+                    drawerOpenBtn.addEventListener('click', function () {
+                        setDrawerOpen(true);
+                    });
+                }
+
+                if (drawerCloseBtn) {
+                    drawerCloseBtn.addEventListener('click', function () {
+                        setDrawerOpen(false);
+                    });
+                }
+
+                if (drawerBackdrop) {
+                    drawerBackdrop.addEventListener('click', function () {
+                        setDrawerOpen(false);
+                    });
+                }
+
+                if (drawer) {
+                    drawer.querySelectorAll('.adm-drawer-link').forEach(function (link) {
+                        link.addEventListener('click', function () {
+                            setDrawerOpen(false);
+                        });
+                    });
+                }
+
+                document.addEventListener('keydown', function (event) {
+                    if (event.key === 'Escape' && drawer && drawer.classList.contains('is-open')) {
+                        setDrawerOpen(false);
+                    }
+                });
+
+                window.addEventListener('resize', function () {
+                    if (window.innerWidth > 767 && drawer && drawer.classList.contains('is-open')) {
+                        setDrawerOpen(false);
+                    }
+                });
+
+                if (clockEl) {
+                    var updateClock = function () {
+                        var now = new Date();
+                        clockEl.dateTime = now.toISOString();
+                        clockEl.textContent = now.toLocaleString('en-US', {
+                            month: 'short',
+                            day: '2-digit',
+                            year: 'numeric',
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: true
+                        });
+                    };
+                    updateClock();
+                    setInterval(updateClock, 30000);
+                }
+            })();
+        </script>
+    @else
+        <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle-cb" hidden>
+
+        <div class="layout">
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <a href="{{ url($homeUrl) }}">
@@ -224,5 +396,6 @@
             });
         })();
     </script>
+    @endif
 </body>
 </html>

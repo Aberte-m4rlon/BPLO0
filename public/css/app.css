@@ -2679,6 +2679,1752 @@ body.has-sidebar.bplo-portal .layout {
 }
 
 /* =========================================================================
+   Admin Dashboard Glassmorphism Redesign (Desktop, Tablet & Mobile)
+   ========================================================================= */
+
+body.is-admin-portal {
+    --adm-navy: #0B3765;
+    --adm-navy-2: #164F80;
+    --adm-blue: #168BFA;
+    --adm-cyan: #21C5F2;
+    --adm-teal: #00CDAA;
+    --adm-light-blue: #E8F5FF;
+    --adm-glass-white: rgba(255, 255, 255, 0.60);
+    --adm-glass-strong: rgba(255, 255, 255, 0.74);
+    --adm-glass-border: rgba(255, 255, 255, 0.75);
+    --adm-text-primary: #103966;
+    --adm-text-secondary: #547493;
+    --adm-success: #12B981;
+    --adm-warning: #F5A623;
+    --adm-danger: #EF4444;
+    --adm-radius: 22px;
+    --adm-shadow: 0 18px 40px rgba(11, 55, 101, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    color: var(--adm-text-primary);
+    background-color: #d7ecff;
+    background-image:
+        radial-gradient(circle at 14% 12%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 42%),
+        radial-gradient(circle at 86% 18%, rgba(33, 197, 242, 0.24) 0%, rgba(33, 197, 242, 0) 44%),
+        radial-gradient(circle at 12% 88%, rgba(0, 205, 170, 0.16) 0%, rgba(0, 205, 170, 0) 36%),
+        radial-gradient(circle at 90% 85%, rgba(0, 205, 170, 0.18) 0%, rgba(0, 205, 170, 0) 38%),
+        linear-gradient(150deg, rgba(226, 243, 255, 0.84) 0%, rgba(232, 245, 255, 0.78) 50%, rgba(204, 232, 255, 0.82) 100%),
+        url('/images/bplo-blue-background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+html.drawer-open,
+html.drawer-open body.is-admin-portal {
+    overflow: hidden !important;
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+body.is-admin-portal.has-sidebar.bplo-portal .adm-layout {
+    display: flex;
+    align-items: stretch;
+    gap: 18px;
+    padding: 16px;
+    min-height: 100vh;
+    max-width: 1680px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    margin-left: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: transparent;
+    min-height: calc(100vh - 32px);
+}
+
+.is-admin-portal .adm-page {
+    flex: 1 1 auto;
+    padding: 0;
+    margin: 0;
+}
+
+.is-admin-portal .adm-container {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* --- Left Floating Glass Sidebar (Desktop/Tablet >= 768px) --- */
+body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
+    position: sticky;
+    top: 16px;
+    height: calc(100vh - 32px);
+    width: 290px;
+    flex: 0 0 290px;
+    margin: 0;
+    padding: 20px 14px 16px;
+    border-radius: 24px;
+    background: linear-gradient(172deg, rgba(16, 63, 114, 0.90) 0%, rgba(11, 55, 101, 0.84) 52%, rgba(22, 79, 128, 0.76) 100%);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.44);
+    box-shadow: 0 22px 48px rgba(11, 55, 101, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.36);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 0.24s cubic-bezier(0.22, 1, 0.36, 1), flex-basis 0.24s cubic-bezier(0.22, 1, 0.36, 1), padding 0.24s ease;
+    z-index: 30;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    overflow: visible;
+}
+
+.is-admin-portal .adm-sidebar .sidebar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 4px 6px 18px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.is-admin-portal .adm-sidebar-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #fff;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.is-admin-portal .sidebar-brand-mark {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    color: #fff;
+    background: linear-gradient(135deg, var(--adm-blue) 0%, var(--adm-cyan) 56%, var(--adm-teal) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.72);
+    box-shadow: 0 0 22px rgba(33, 197, 242, 0.48), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.is-admin-portal .sidebar-brand-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.22;
+    color: #ffffff;
+    min-width: 0;
+}
+
+.is-admin-portal .sidebar-brand-text small {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgba(226, 242, 255, 0.85);
+    margin-top: 2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.is-admin-portal .sidebar-brand-text small::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--adm-teal);
+    box-shadow: 0 0 8px var(--adm-teal);
+    flex-shrink: 0;
+}
+
+.is-admin-portal .adm-sidebar-collapse-btn {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.24s ease;
+}
+
+.is-admin-portal .adm-sidebar-collapse-btn:hover {
+    background: rgba(255, 255, 255, 0.26);
+}
+
+.is-admin-portal .adm-sidebar .sidebar-nav {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px 2px;
+    overflow-y: auto;
+    overflow-x: visible;
+}
+
+.is-admin-portal .sidebar-section-label {
+    margin: 2px 10px 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(214, 236, 255, 0.72);
+    text-transform: uppercase;
+}
+
+.is-admin-portal .adm-sidebar .sidebar-link,
+.is-admin-portal .adm-mobile-drawer .sidebar-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 14px;
+    color: rgba(242, 248, 255, 0.92);
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
+}
+
+.is-admin-portal .adm-sidebar .sidebar-link:hover,
+.is-admin-portal .adm-mobile-drawer .sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.is-admin-portal .adm-sidebar .sidebar-link.is-active,
+.is-admin-portal .adm-mobile-drawer .sidebar-link.is-active {
+    background: linear-gradient(96deg, rgba(245, 250, 255, 0.96) 0%, rgba(190, 227, 255, 0.92) 60%, rgba(128, 200, 255, 0.85) 100%);
+    color: var(--adm-navy);
+    font-weight: 700;
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 24px rgba(10, 44, 82, 0.28), 0 0 18px rgba(33, 197, 242, 0.34);
+}
+
+.is-admin-portal .adm-sidebar .sidebar-link.is-active .sidebar-link-icon,
+.is-admin-portal .adm-mobile-drawer .sidebar-link.is-active .sidebar-link-icon {
+    color: var(--adm-blue);
+    stroke-width: 2.15;
+}
+
+.is-admin-portal .sidebar-link-icon {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+}
+
+.is-admin-portal .adm-sidebar .sidebar-footer {
+    padding-top: 12px;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.is-admin-portal .adm-sidebar .sidebar-user,
+.is-admin-portal .adm-drawer-footer .sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.is-admin-portal .adm-avatar-status-wrap {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
+.is-admin-portal .sidebar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--adm-blue), var(--adm-cyan));
+    border: 1.5px solid rgba(255, 255, 255, 0.72);
+}
+
+.is-admin-portal .sidebar-user-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.is-admin-portal .sidebar-user-meta strong {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.is-admin-portal .sidebar-user-meta small {
+    color: rgba(221, 240, 255, 0.82);
+    font-size: 0.72rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.is-admin-portal .adm-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.is-admin-portal .adm-logout-btn:hover {
+    background: rgba(239, 68, 68, 0.28);
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* --- Collapsed Sidebar State (88px Icon Rail + Tooltips) --- */
+body.is-admin-portal.has-sidebar.bplo-portal.is-sidebar-collapsed .adm-sidebar {
+    width: 88px;
+    flex: 0 0 88px;
+    padding: 18px 10px 14px;
+}
+
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand {
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 14px;
+}
+
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand-mark {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+}
+
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand-text,
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-section-label,
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link-label,
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-user-meta,
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .adm-logout-label {
+    display: none;
+}
+
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .adm-sidebar-collapse-btn svg {
+    transform: rotate(180deg);
+}
+
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link,
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-user,
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .adm-logout-btn {
+    justify-content: center;
+    padding-inline: 0;
+}
+
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link:hover {
+    transform: none;
+}
+
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:hover::after,
+body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visible::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(11, 55, 101, 0.94);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 11px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(11, 55, 101, 0.24);
+    z-index: 90;
+    pointer-events: none;
+}
+
+/* --- Top Header --- */
+.is-admin-portal .adm-topbar {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 68px;
+    padding: 10px 18px;
+    border-radius: 20px;
+    background: var(--adm-glass-white);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid var(--adm-glass-border);
+    box-shadow: var(--adm-shadow);
+    margin: 0;
+}
+
+.is-admin-portal .adm-mobile-brand,
+.is-admin-portal .adm-mobile-menu-btn {
+    display: none;
+}
+
+.is-admin-portal .adm-topbar .topbar-brand-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(22, 139, 250, 0.24);
+    color: var(--adm-blue);
+    box-shadow: 0 6px 16px rgba(22, 139, 250, 0.12);
+}
+
+.is-admin-portal .adm-topbar .topbar-brand-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.is-admin-portal .adm-topbar .topbar-heading {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.is-admin-portal .adm-topbar .topbar-kicker {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    color: var(--adm-text-secondary);
+    text-transform: uppercase;
+}
+
+.is-admin-portal .adm-topbar .topbar-title {
+    font-size: 1.24rem;
+    font-weight: 800;
+    color: var(--adm-text-primary);
+    line-height: 1.18;
+}
+
+.is-admin-portal .adm-topbar .topbar-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.is-admin-portal .adm-topbar .notif-bell {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    color: var(--adm-navy);
+    box-shadow: 0 6px 14px rgba(16, 57, 102, 0.09);
+    transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.is-admin-portal .adm-topbar .notif-bell:hover {
+    background: rgba(255, 255, 255, 0.92);
+    transform: translateY(-1px);
+}
+
+.is-admin-portal .adm-topbar .topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 12px 5px 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.56);
+    border: 1px solid rgba(255, 255, 255, 0.82);
+}
+
+.is-admin-portal .adm-topbar .topbar-avatar-wrap {
+    position: relative;
+    display: inline-flex;
+}
+
+.is-admin-portal .adm-topbar .topbar-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, var(--adm-blue), var(--adm-cyan));
+    box-shadow: 0 6px 14px rgba(22, 139, 250, 0.25);
+}
+
+.is-admin-portal .topbar-avatar-status {
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--adm-success);
+    border: 2px solid #ffffff;
+}
+
+.is-admin-portal .adm-topbar .topbar-user-meta {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.is-admin-portal .adm-topbar .topbar-user-meta strong {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--adm-text-primary);
+}
+
+.is-admin-portal .adm-topbar .topbar-user-meta small {
+    font-size: 0.72rem;
+    color: var(--adm-text-secondary);
+}
+
+.is-admin-portal .adm-user-chevron {
+    color: var(--adm-text-secondary);
+}
+
+/* --- Hero Welcome Banner --- */
+.is-admin-portal .adm-hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px 32px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.52);
+    background-color: var(--adm-navy);
+    background-image:
+        linear-gradient(104deg, rgba(11, 55, 101, 0.94) 0%, rgba(16, 70, 122, 0.84) 40%, rgba(22, 128, 184, 0.56) 68%, rgba(0, 178, 152, 0.42) 100%),
+        url('/images/bplo-blue-background.png');
+    background-size: cover;
+    background-position: right center;
+    box-shadow: 0 20px 44px rgba(11, 55, 101, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    color: #ffffff;
+    margin: 0;
+}
+
+.is-admin-portal .adm-hero::before {
+    content: "";
+    position: absolute;
+    left: 44%;
+    top: -40%;
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 70%);
+    pointer-events: none;
+}
+
+.is-admin-portal .adm-hero-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 660px;
+}
+
+.is-admin-portal .adm-hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px 5px 8px;
+    border-radius: 999px;
+    background: rgba(9, 44, 82, 0.52);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    color: #e6f5ff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.is-admin-portal .adm-hero-pill-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--adm-success), var(--adm-teal));
+    color: #ffffff;
+}
+
+.is-admin-portal .adm-hero h1 {
+    margin: 0 0 8px;
+    font-size: clamp(1.65rem, 3vw, 2.55rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.is-admin-portal .adm-hero-highlight {
+    background: linear-gradient(92deg, #43d6ff 0%, var(--adm-cyan) 45%, var(--adm-teal) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.is-admin-portal .adm-hero-copy p {
+    margin: 0 0 18px;
+    font-size: 0.96rem;
+    color: rgba(232, 245, 255, 0.90);
+    line-height: 1.5;
+}
+
+.is-admin-portal .adm-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.is-admin-portal .adm-hero-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--adm-blue) 0%, #249dfc 100%);
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    box-shadow: 0 10px 22px rgba(22, 139, 250, 0.42);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.is-admin-portal .adm-hero-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(22, 139, 250, 0.52);
+    color: #ffffff;
+}
+
+.is-admin-portal .adm-hero-btn-glass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.46);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.is-admin-portal .adm-hero-btn-glass:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+.is-admin-portal .adm-hero-watermark {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    flex-shrink: 0;
+    user-select: none;
+    text-shadow: 0 4px 16px rgba(11, 55, 101, 0.55);
+}
+
+.is-admin-portal .adm-watermark-title {
+    font-size: 2.15rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 0.98;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: -0.02em;
+}
+
+.is-admin-portal .adm-watermark-sub {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(232, 245, 255, 0.92);
+    margin-top: 2px;
+}
+
+/* --- 5 KPI Stat Cards --- */
+.is-admin-portal .adm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.is-admin-portal .adm-stat-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 18px 16px 26px;
+    border-radius: 20px;
+    background: var(--adm-glass-white);
+    backdrop-filter: blur(20px) saturate(155%);
+    -webkit-backdrop-filter: blur(20px) saturate(155%);
+    border: 1px solid var(--adm-glass-border);
+    box-shadow: var(--adm-shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    min-width: 0;
+}
+
+.is-admin-portal .adm-stat-card::before {
+    content: "";
+    position: absolute;
+    left: -12%;
+    right: -12%;
+    bottom: -26px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.48), rgba(232, 245, 255, 0.72));
+    pointer-events: none;
+}
+
+.is-admin-portal .adm-stat-card:hover {
+    transform: translateY(-3px);
+    background: var(--adm-glass-strong);
+    box-shadow: 0 22px 44px rgba(11, 55, 101, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.is-admin-portal .adm-stat-icon {
+    position: relative;
+    z-index: 1;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+}
+
+.is-admin-portal .adm-stat-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.is-admin-portal .adm-stat-card.tone-blue .adm-stat-icon {
+    background: linear-gradient(135deg, #1b8bfa, #46b6ff);
+    box-shadow: 0 8px 18px rgba(22, 139, 250, 0.34);
+}
+
+.is-admin-portal .adm-stat-card.tone-purple .adm-stat-icon {
+    background: linear-gradient(135deg, #6258f6, #8f87ff);
+    box-shadow: 0 8px 18px rgba(98, 88, 246, 0.34);
+}
+
+.is-admin-portal .adm-stat-card.tone-green .adm-stat-icon {
+    background: linear-gradient(135deg, #16b978, #46df9e);
+    box-shadow: 0 8px 18px rgba(18, 185, 129, 0.34);
+}
+
+.is-admin-portal .adm-stat-card.tone-amber .adm-stat-icon {
+    background: linear-gradient(135deg, #f29d12, #ffc14d);
+    box-shadow: 0 8px 18px rgba(245, 166, 35, 0.34);
+}
+
+.is-admin-portal .adm-stat-card.tone-teal .adm-stat-icon {
+    background: linear-gradient(135deg, #00b89c, #17dfc0);
+    box-shadow: 0 8px 18px rgba(0, 205, 170, 0.34);
+}
+
+.is-admin-portal .adm-stat-content {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+}
+
+.is-admin-portal .adm-stat-value {
+    font-size: 1.72rem;
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--adm-text-primary);
+}
+
+.is-admin-portal .adm-stat-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--adm-text-secondary);
+    line-height: 1.22;
+    margin-top: 3px;
+}
+
+.is-admin-portal .adm-stat-trend {
+    position: absolute;
+    right: 12px;
+    bottom: 9px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(18, 185, 129, 0.15);
+    color: #087f58;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+/* --- Two-Column Main Area: Recent Activities & Quick Administration --- */
+.is-admin-portal .adm-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.is-admin-portal .adm-panel,
+.is-admin-portal .card {
+    background: var(--adm-glass-white);
+    backdrop-filter: blur(22px) saturate(155%);
+    -webkit-backdrop-filter: blur(22px) saturate(155%);
+    border: 1px solid var(--adm-glass-border);
+    border-radius: 24px;
+    box-shadow: var(--adm-shadow);
+    padding: 20px 22px;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.is-admin-portal .adm-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 0 14px;
+    margin: 0 0 14px;
+    border-bottom: 1px solid rgba(16, 57, 102, 0.08);
+}
+
+.is-admin-portal .adm-panel-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.is-admin-portal .adm-panel-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(22, 139, 250, 0.12);
+    color: var(--adm-blue);
+}
+
+.is-admin-portal .adm-panel-icon-zap {
+    background: rgba(33, 197, 242, 0.15);
+    color: var(--adm-blue);
+}
+
+.is-admin-portal .adm-panel-title {
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: var(--adm-text-primary);
+}
+
+.is-admin-portal .adm-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(16, 57, 102, 0.12);
+    color: var(--adm-text-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.is-admin-portal .adm-pill-btn:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* --- Recent Activities Table --- */
+.is-admin-portal .adm-activity-table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+}
+
+.is-admin-portal .adm-activity-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+}
+
+.is-admin-portal .adm-activity-table thead tr {
+    background: rgba(212, 234, 255, 0.72);
+}
+
+.is-admin-portal .adm-activity-table th {
+    padding: 11px 12px;
+    text-align: left;
+    font-size: 0.73rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--adm-text-secondary);
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(16, 57, 102, 0.08);
+    white-space: nowrap;
+}
+
+.is-admin-portal .adm-activity-table th:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+.is-admin-portal .adm-activity-table th:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+
+.is-admin-portal .adm-activity-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(16, 57, 102, 0.08);
+    color: var(--adm-text-primary);
+    vertical-align: middle;
+}
+
+.is-admin-portal .adm-activity-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.is-admin-portal .adm-activity-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.is-admin-portal .adm-activity-when {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.is-admin-portal .adm-actor-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.is-admin-portal .adm-actor-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    flex: 0 0 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(22, 139, 250, 0.14);
+    border: 1px solid rgba(22, 139, 250, 0.24);
+    color: var(--adm-navy);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.is-admin-portal .adm-action-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(214, 236, 255, 0.85);
+    border: 1px solid rgba(22, 139, 250, 0.28);
+    color: #0e4a87;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+}
+
+.is-admin-portal .adm-activity-subject {
+    color: var(--adm-text-secondary);
+    font-weight: 600;
+}
+
+.is-admin-portal .adm-activity-mobile-list {
+    display: none;
+}
+
+/* --- Quick Administration Cards --- */
+.is-admin-portal .adm-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.is-admin-portal .adm-quick-card {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    box-shadow: 0 8px 20px rgba(16, 57, 102, 0.06);
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    min-width: 0;
+}
+
+.is-admin-portal .adm-quick-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(22, 139, 250, 0.42);
+    box-shadow: 0 14px 28px rgba(22, 139, 250, 0.14);
+}
+
+.is-admin-portal .adm-quick-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.is-admin-portal .adm-quick-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(22, 139, 250, 0.14), rgba(33, 197, 242, 0.16));
+    color: var(--adm-blue);
+}
+
+.is-admin-portal .adm-quick-arrow {
+    color: var(--adm-text-secondary);
+    font-size: 0.96rem;
+    font-weight: 700;
+    transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.is-admin-portal .adm-quick-card:hover .adm-quick-arrow {
+    transform: translateX(3px);
+    color: var(--adm-blue);
+}
+
+.is-admin-portal .adm-quick-title {
+    font-size: 0.94rem;
+    font-weight: 800;
+    color: var(--adm-text-primary);
+    line-height: 1.22;
+}
+
+.is-admin-portal .adm-quick-desc {
+    font-size: 0.78rem;
+    color: var(--adm-text-secondary);
+    margin-top: 3px;
+    line-height: 1.35;
+}
+
+/* --- Footer --- */
+.is-admin-portal .adm-footer {
+    margin-top: auto;
+    padding: 12px 20px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(16, 56, 98, 0.80) 0%, rgba(22, 79, 128, 0.72) 100%);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow: 0 12px 28px rgba(11, 55, 101, 0.16);
+    color: #eef6ff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+}
+
+.is-admin-portal .adm-footer-left,
+.is-admin-portal .adm-footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.is-admin-portal .adm-footer-shield {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(18, 185, 129, 0.22);
+    color: #6ee7b7;
+}
+
+.is-admin-portal .adm-footer-brand {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.is-admin-portal .adm-footer-tagline {
+    color: rgba(218, 238, 255, 0.82);
+}
+
+.is-admin-portal .adm-footer-clock {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(232, 245, 255, 0.92);
+}
+
+.is-admin-portal .adm-footer-online {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    color: #b7f7de;
+}
+
+.is-admin-portal .adm-online-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--adm-success);
+    box-shadow: 0 0 10px var(--adm-success);
+}
+
+/* --- Mobile Navigation Drawer & Bottom Bar (default hidden on desktop/tablet) --- */
+.is-admin-portal .adm-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 55, 101, 0.44);
+    backdrop-filter: blur(6px);
+    z-index: 55;
+    opacity: 0;
+    transition: opacity 0.22s ease;
+}
+
+.is-admin-portal .adm-drawer-backdrop.is-open {
+    opacity: 1;
+}
+
+.is-admin-portal .adm-mobile-drawer {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+    width: min(300px, calc(100vw - 32px));
+    padding: 18px 14px;
+    border-radius: 24px;
+    background: linear-gradient(170deg, rgba(16, 63, 114, 0.95) 0%, rgba(11, 55, 101, 0.94) 100%);
+    backdrop-filter: blur(24px) saturate(165%);
+    -webkit-backdrop-filter: blur(24px) saturate(165%);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    box-shadow: 0 24px 60px rgba(11, 55, 101, 0.42);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: translateX(calc(-100% - 24px));
+    visibility: hidden;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.25s ease;
+}
+
+.is-admin-portal .adm-mobile-drawer.is-open {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.is-admin-portal .adm-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.is-admin-portal .adm-drawer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #fff;
+    min-width: 0;
+}
+
+.is-admin-portal .adm-drawer-close {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.is-admin-portal .adm-drawer-nav {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 0;
+}
+
+.is-admin-portal .adm-drawer-footer {
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.is-admin-portal .adm-drawer-footer .btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.is-admin-portal .adm-mobile-bottom-nav {
+    display: none;
+}
+
+/* --- Shared Glass Styling for Other Admin Pages --- */
+.is-admin-portal .page-header:not(.adm-hero) {
+    background: var(--adm-glass-white);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--adm-glass-border);
+    border-radius: 22px;
+    box-shadow: var(--adm-shadow);
+    padding: 20px 24px;
+    margin-bottom: 0;
+}
+
+.is-admin-portal .card table.data thead tr {
+    background: rgba(214, 236, 255, 0.65);
+}
+
+.is-admin-portal .adm-skeleton {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.45) 25%, rgba(232, 245, 255, 0.78) 50%, rgba(255, 255, 255, 0.45) 75%);
+    background-size: 200% 100%;
+    animation: adm-shimmer 1.5s infinite linear;
+    border-radius: 12px;
+}
+
+@keyframes adm-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* --- Responsive Breakpoints (Tablet & Small Desktop) --- */
+@media (max-width: 1380px) and (min-width: 1200px) {
+    .is-admin-portal .adm-stats-grid {
+        gap: 10px;
+    }
+    .is-admin-portal .adm-stats-grid .adm-stat-card {
+        padding: 15px 12px 30px;
+        gap: 10px;
+    }
+    .is-admin-portal .adm-stat-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+    }
+    .is-admin-portal .adm-stat-label {
+        font-size: 0.77rem;
+    }
+}
+
+@media (max-width: 1199px) {
+    .is-admin-portal .adm-stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 1120px) {
+    .is-admin-portal .adm-main-grid {
+        grid-template-columns: 1fr;
+    }
+    .is-admin-portal .adm-hero {
+        padding: 24px;
+    }
+    .is-admin-portal .adm-hero-watermark {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+    body.is-admin-portal.has-sidebar.bplo-portal .adm-layout {
+        display: flex;
+        gap: 14px;
+        padding: 12px;
+    }
+    body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
+        position: sticky;
+        top: 12px;
+        left: auto;
+        bottom: auto;
+        height: calc(100vh - 24px);
+        width: 232px;
+        flex: 0 0 232px;
+        transform: none;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    body.is-admin-portal.has-sidebar.bplo-portal.is-sidebar-collapsed .adm-sidebar {
+        width: 88px;
+        flex: 0 0 88px;
+    }
+    body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
+        min-height: calc(100vh - 24px);
+        margin-left: 0;
+        width: auto;
+    }
+    .is-admin-portal .adm-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .is-admin-portal .adm-stats-grid .adm-stat-card {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        column-gap: 12px;
+        row-gap: 8px;
+        padding: 16px 15px 14px;
+    }
+    .is-admin-portal .adm-stat-icon {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .is-admin-portal .adm-stat-content {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    .is-admin-portal .adm-stat-trend {
+        position: static;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: end;
+    }
+    .is-admin-portal .adm-stats-grid .adm-stat-card:last-child {
+        grid-column: 1 / -1;
+    }
+    .is-admin-portal .adm-activity-table-wrap {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+}
+
+/* --- Mobile Layout (320px - 767px) --- */
+@media (max-width: 767px) {
+    body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
+        display: none;
+    }
+
+    body.is-admin-portal.has-sidebar.bplo-portal .adm-layout {
+        display: block;
+        padding: 10px 10px calc(102px + env(safe-area-inset-bottom, 0px));
+        min-height: 100vh;
+    }
+
+    body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
+        gap: 12px;
+        min-height: auto;
+        margin-left: 0;
+    }
+
+    .is-admin-portal .adm-container {
+        gap: 12px;
+    }
+
+    .is-admin-portal .adm-topbar {
+        min-height: 58px;
+        padding: 8px 12px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(16, 63, 114, 0.92) 0%, rgba(22, 86, 146, 0.84) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        box-shadow: 0 12px 28px rgba(11, 55, 101, 0.22);
+        gap: 8px;
+    }
+
+    .is-admin-portal .adm-topbar .topbar-brand-icon,
+    .is-admin-portal .adm-topbar .topbar-heading,
+    .is-admin-portal .adm-topbar .topbar-user {
+        display: none;
+    }
+
+    .is-admin-portal .adm-mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+        color: #ffffff;
+        min-width: 0;
+    }
+
+    .is-admin-portal .adm-mobile-mark {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+        font-size: 0.85rem;
+    }
+
+    .is-admin-portal .adm-mobile-brand-name {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    body.is-admin-portal.has-sidebar.bplo-portal .adm-topbar .notif-bell {
+        width: 38px;
+        height: 38px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.36);
+        color: #ffffff;
+    }
+
+    .is-admin-portal .adm-mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.36);
+        color: #ffffff;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .is-admin-portal .adm-mobile-menu-btn svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        fill: none;
+    }
+
+    .is-admin-portal .adm-hero {
+        padding: 20px 18px;
+        border-radius: 22px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        background-image:
+            linear-gradient(155deg, rgba(11, 55, 101, 0.94) 0%, rgba(16, 70, 122, 0.88) 54%, rgba(18, 124, 168, 0.64) 100%),
+            url('/images/bplo-blue-background.png');
+    }
+
+    .is-admin-portal .adm-hero-highlight {
+        background: linear-gradient(92deg, #7be4ff 0%, #44dcff 48%, #4cf2cb 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 2px 10px rgba(11, 55, 101, 0.45));
+    }
+
+    .is-admin-portal .adm-panel-head {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 8px;
+    }
+
+    .is-admin-portal .adm-panel-title {
+        font-size: 0.98rem;
+    }
+
+    .is-admin-portal .adm-pill-btn {
+        flex-shrink: 0;
+        white-space: nowrap;
+        padding: 5px 11px;
+        font-size: 0.76rem;
+    }
+
+    .is-admin-portal .adm-hero h1 {
+        font-size: clamp(1.38rem, 6vw, 1.75rem);
+    }
+
+    .is-admin-portal .adm-hero-copy p {
+        font-size: 0.86rem;
+        margin-bottom: 14px;
+    }
+
+    .is-admin-portal .adm-hero-actions {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .is-admin-portal .adm-hero-btn-primary,
+    .is-admin-portal .adm-hero-btn-glass {
+        flex: 1 1 130px;
+        padding: 9px 12px;
+        font-size: 0.82rem;
+    }
+
+    .is-admin-portal .adm-stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .is-admin-portal .adm-stats-grid .adm-stat-card {
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        column-gap: 10px;
+        row-gap: 8px;
+        padding: 13px 12px 12px;
+        border-radius: 18px;
+    }
+
+    .is-admin-portal .adm-stats-grid .adm-stat-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .is-admin-portal .adm-stat-icon {
+        grid-column: 1;
+        grid-row: 1;
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+    }
+
+    .is-admin-portal .adm-stat-content {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+    }
+
+    .is-admin-portal .adm-stat-trend {
+        position: static;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: end;
+        margin-top: 0;
+    }
+
+    .is-admin-portal .adm-stat-value {
+        font-size: 1.38rem;
+    }
+
+    .is-admin-portal .adm-stat-label {
+        font-size: 0.76rem;
+    }
+
+    .is-admin-portal .adm-panel,
+    .is-admin-portal .card {
+        padding: 16px 14px;
+        border-radius: 20px;
+    }
+
+    .is-admin-portal .adm-activity-table-wrap {
+        display: none;
+    }
+
+    .is-admin-portal .adm-activity-mobile-list {
+        display: grid;
+        gap: 10px;
+    }
+
+    .is-admin-portal .adm-activity-mobile-card {
+        padding: 12px 13px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.88);
+        box-shadow: 0 6px 16px rgba(16, 57, 102, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .is-admin-portal .adm-activity-mobile-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .is-admin-portal .adm-actor-name {
+        font-size: 0.86rem;
+        font-weight: 700;
+        color: var(--adm-text-primary);
+    }
+
+    .is-admin-portal .adm-activity-mobile-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 0.76rem;
+        color: var(--adm-text-secondary);
+    }
+
+    .is-admin-portal .adm-activity-mobile-subject {
+        font-weight: 700;
+        color: var(--adm-navy-2);
+    }
+
+    .is-admin-portal .adm-quick-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .is-admin-portal .adm-quick-card {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .is-admin-portal .adm-footer {
+        padding: 12px 14px;
+        border-radius: 18px;
+        font-size: 0.76rem;
+    }
+
+    .is-admin-portal .adm-mobile-bottom-nav {
+        position: fixed;
+        left: 10px;
+        right: 10px;
+        bottom: max(10px, env(safe-area-inset-bottom, 10px));
+        z-index: 45;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        padding: 6px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(22px) saturate(165%);
+        -webkit-backdrop-filter: blur(22px) saturate(165%);
+        border: 1px solid rgba(255, 255, 255, 0.94);
+        box-shadow: 0 14px 32px rgba(11, 55, 101, 0.20);
+    }
+
+    .is-admin-portal .adm-bottom-nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 7px 6px;
+        border-radius: 16px;
+        text-decoration: none;
+        color: var(--adm-text-secondary);
+        font-size: 0.73rem;
+        font-weight: 600;
+        transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .is-admin-portal .adm-bottom-nav-link.is-active {
+        background: rgba(22, 139, 250, 0.14);
+        color: var(--adm-blue);
+        font-weight: 800;
+    }
+}
+
+@media (max-width: 374px) {
+    .is-admin-portal .adm-stats-grid,
+    .is-admin-portal .adm-quick-grid {
+        grid-template-columns: 1fr;
+    }
+    .is-admin-portal .adm-stats-grid .adm-stat-card:last-child {
+        grid-column: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .is-admin-portal *,
+    .is-admin-portal *::before,
+    .is-admin-portal *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media print {
+    .is-admin-portal .adm-mobile-bottom-nav,
+    .is-admin-portal .adm-mobile-drawer,
+    .is-admin-portal .adm-drawer-backdrop,
+    .is-admin-portal .adm-sidebar-collapse-btn,
+    .is-admin-portal .adm-mobile-menu-btn {
+        display: none !important;
+    }
+}
+
+/* =========================================================================
    Official Mayor's Permit Certificate & Print Styles
    ========================================================================= */
 

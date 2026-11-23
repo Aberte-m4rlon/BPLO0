@@ -34,9 +34,44 @@ class DashboardController extends Controller
             ->limit(20)
             ->get();
 
+        $trends = [
+            'users' => $this->dailyGrowthBadge(User::class, $counts['users']),
+            'applications' => $this->dailyGrowthBadge(Application::class, $counts['applications']),
+            'permits' => $this->dailyGrowthBadge(Permit::class, $counts['permits']),
+            'payments' => $this->dailyGrowthBadge(Payment::class, $counts['payments']),
+            'expired_permits' => $counts['permits'] > 0
+                ? '+'.(int) round(($counts['expired_permits'] / $counts['permits']) * 100).'%'
+                : '+0%',
+        ];
+
         return view('admin.dashboard', [
             'counts' => $counts,
+            'trends' => $trends,
             'recentActivities' => $recentActivities,
         ]);
+    }
+
+    /**
+     * Compute a real database-backed percentage delta for records added today vs prior records.
+     *
+     * @param  class-string<\Illuminate\Database\Eloquent\Model>  $modelClass
+     */
+    private function dailyGrowthBadge(string $modelClass, int $total): string
+    {
+        if ($total <= 0) {
+            return '+0%';
+        }
+
+        $todayCount = $modelClass::where('created_at', '>=', now()->startOfDay())->count();
+        if ($todayCount <= 0) {
+            return '+0%';
+        }
+
+        $prior = $total - $todayCount;
+        if ($prior <= 0) {
+            return '+100%';
+        }
+
+        return '+'.(int) min(999, round(($todayCount / $prior) * 100)).'%';
     }
 }
