@@ -9,27 +9,77 @@ use App\Models\ApplicationRequirement;
 use App\Models\RequirementType;
 use App\Services\ApplicationWorkflowService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ApplicationController extends Controller
 {
-    public function create(): View
+    public function create(Request $request): View
     {
+        $user = $request->user();
+        $previousApplication = $user?->applications()->latest('id')->first();
+
         return view('applicant.create', [
             'requirementTypes' => RequirementType::where('is_active', true)->orderBy('sort_order')->get(),
+            'previousApplication' => $previousApplication,
+            'suggestedBarangay' => $previousApplication?->barangay ?? $this->extractBarangay($user?->address),
         ]);
     }
 
     public function store(ApplicationRequest $request): RedirectResponse
     {
-        $application = new Application($request->validated());
-        $application->user()->associate($request->user());
+        $validated = $request->validated();
+        $user = $request->user();
+
+        $application = new Application($validated);
+        $application->user()->associate($user);
         $application->status = Application::STATUS_DRAFT;
         $application->save();
+
+        // Sync missing profile fields back onto the user so subsequent applications auto-fill cleanly.
+        $profileDirty = false;
+        if (blank($user->contact_number) && filled($validated['contact_number'] ?? null)) {
+            $user->contact_number = $validated['contact_number'];
+            $profileDirty = true;
+        }
+        if (blank($user->address) && filled($validated['business_address'] ?? null)) {
+            $user->address = $validated['business_address'];
+            $profileDirty = true;
+        }
+        if ($profileDirty) {
+            $user->save();
+        }
 
         return redirect()
             ->route('applications.edit', $application)
             ->with('success', 'Draft application created. Upload your requirements, then review and submit.');
+    }
+
+    private function extractBarangay(?string $address): ?string
+    {
+        if (blank($address)) {
+            return null;
+        }
+
+        if (preg_match('/(?:brgy\.?|barangay)\s+([^,]+)/i', $address, $matches)) {
+            return trim($matches[1]);
+        }
+
+        $parts = array_values(array_filter(array_map('trim', explode(',', $address))));
+        $municipality = trim((string) config('permit.municipality', 'Bansud'));
+        $shortMunicipality = trim(str_ireplace('Municipality of', '', $municipality));
+        $province = trim((string) config('permit.province', 'Oriental Mindoro'));
+
+        foreach (array_reverse($parts) as $part) {
+            $lower = strtolower($part);
+            if ($lower === '' || str_contains($lower, strtolower($shortMunicipality)) || str_contains($lower, strtolower($province))) {
+                continue;
+            }
+
+            return $part;
+        }
+
+        return null;
     }
 
     public function edit(Application $application): View

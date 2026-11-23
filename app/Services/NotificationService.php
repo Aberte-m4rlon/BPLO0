@@ -3,16 +3,18 @@
 namespace App\Services;
 
 use App\Contracts\SmsChannel;
+use App\Mail\ApplicationProgressMail;
 use App\Models\Application;
 use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class NotificationService
 {
     /**
-     * Create an in-app notification. If the user has a contact number and an SMS
-     * driver is configured, also send via the resolved SmsChannel inline.
+     * Create an in-app notification and automatically email the applicant's email(s).
+     * If the user also has a contact number and an SMS driver is configured, send SMS inline.
      */
     public function notify(User $user, string $type, string $title, string $body, ?Application $application = null): void
     {
@@ -26,6 +28,7 @@ class NotificationService
         ]);
 
         $driver = config('permit.sms.driver');
+        $dirty = false;
 
         if ($user->contact_number && $driver !== null) {
             try {
@@ -39,6 +42,39 @@ class NotificationService
                 $notification->sms_status = 'failed';
             }
 
+            $dirty = true;
+        }
+
+        $recipients = collect([$application?->email, $user->email])
+            ->filter(fn ($email): bool => filled($email) && filter_var($email, FILTER_VALIDATE_EMAIL) !== false)
+            ->unique(fn ($email): string => strtolower((string) $email))
+            ->values()
+            ->all();
+
+        if ($recipients !== []) {
+            if ($application !== null) {
+                if ($type === 'permit.released') {
+                    $application->load('permit');
+                }
+                $application->loadMissing(['permit', 'remarks']);
+            }
+
+            try {
+                Mail::to($recipients)->send(new ApplicationProgressMail($user, $type, $title, $body, $application));
+                $notification->email_status = 'sent';
+            } catch (\Throwable $e) {
+                Log::warning('Progress email send failed; in-app notification kept.', [
+                    'user_id' => $user->getKey(),
+                    'recipients' => $recipients,
+                    'error' => $e->getMessage(),
+                ]);
+                $notification->email_status = 'failed';
+            }
+
+            $dirty = true;
+        }
+
+        if ($dirty) {
             $notification->save();
         }
     }

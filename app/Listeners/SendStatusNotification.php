@@ -8,12 +8,13 @@ use App\Events\ApplicationReturnedForCorrection;
 use App\Events\ApplicationSubmitted;
 use App\Events\ApplicationUnderReview;
 use App\Events\PaymentConfirmed;
+use App\Events\PaymentSubmitted;
 use App\Events\PermitReleased;
 use App\Models\Payment;
 use App\Services\NotificationService;
 
 /**
- * Handles all seven domain events and routes a notification to the applicant.
+ * Handles all eight domain events and routes an in-app, SMS, and email notification to the applicant.
  *
  * Deliberately NOT ShouldQueue — runs synchronously inline with the request so
  * notifications fire with no queue worker (QUEUE_CONNECTION=database).
@@ -30,6 +31,7 @@ class SendStatusNotification
         ApplicationUnderReview::class => ['application.under_review', 'Application Under Review'],
         ApplicationReturnedForCorrection::class => ['application.for_correction', 'Application Returned for Correction'],
         ApplicationApprovedForPayment::class => ['application.approved_for_payment', 'Application Approved for Payment'],
+        PaymentSubmitted::class => ['payment.submitted', 'Payment Submitted for Verification'],
         PaymentConfirmed::class => ['payment.confirmed', 'Payment Confirmed'],
         PermitReleased::class => ['permit.released', 'Permit Released'],
         ApplicationRejected::class => ['application.rejected', 'Application Rejected'],
@@ -83,6 +85,7 @@ class SendStatusNotification
             ApplicationApprovedForPayment::class => ($rejected = $this->rejectedPayment($application))
                 ? "Your payment for {$tracking} (Ref No. {$rejected->reference_number}) was not accepted: {$rejected->rejection_reason}. Please pay again."
                 : "Your application {$tracking} has been approved. You may now pay the applicable fees.",
+            PaymentSubmitted::class => "Your payment details for application {$tracking} have been received and are awaiting verification by the Municipal Treasurer.",
             PaymentConfirmed::class => "Payment for application {$tracking} has been confirmed.",
             PermitReleased::class => "Your Mayor's Permit for application {$tracking} has been released and is ready to download.",
             ApplicationRejected::class => $this->remarkBody($application, 'REJECTION')

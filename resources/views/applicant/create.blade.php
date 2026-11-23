@@ -16,10 +16,14 @@
 
     <div class="card bplo-form-card">
         <h2 class="section">Application Details</h2>
-        <p class="bplo-form-intro">Fill in your business details below to create a draft. You'll upload required supporting documents on the next step.</p>
+        <p class="bplo-form-intro">Your registered account details have been auto-filled below. Complete or review your business details to save a draft and upload requirements on the next step.</p>
         <form method="POST" action="{{ url('/applications') }}">
             @csrf
-            @include('applicant._form-fields', ['application' => null])
+            @include('applicant._form-fields', [
+                'application' => null,
+                'previousApplication' => $previousApplication ?? null,
+                'suggestedBarangay' => $suggestedBarangay ?? null,
+            ])
             <div class="bplo-form-actions">
                 <button type="submit" class="btn">Save Draft &amp; Continue</button>
                 <a href="{{ url('/dashboard') }}" class="btn btn-secondary">Cancel</a>

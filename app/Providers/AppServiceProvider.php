@@ -10,6 +10,7 @@ use App\Events\ApplicationReturnedForCorrection;
 use App\Events\ApplicationSubmitted;
 use App\Events\ApplicationUnderReview;
 use App\Events\PaymentConfirmed;
+use App\Events\PaymentSubmitted;
 use App\Events\PermitReleased;
 use App\Listeners\SendStatusNotification;
 use App\Services\LogSmsChannel;
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         ApplicationUnderReview::class,
         ApplicationReturnedForCorrection::class,
         ApplicationApprovedForPayment::class,
+        PaymentSubmitted::class,
         PaymentConfirmed::class,
         PermitReleased::class,
         ApplicationRejected::class,

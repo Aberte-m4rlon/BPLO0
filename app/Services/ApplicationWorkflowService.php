@@ -8,6 +8,7 @@ use App\Events\ApplicationReturnedForCorrection;
 use App\Events\ApplicationSubmitted;
 use App\Events\ApplicationUnderReview;
 use App\Events\PaymentConfirmed;
+use App\Events\PaymentSubmitted;
 use App\Events\PermitReleased;
 use App\Exceptions\InvalidStatusTransitionException;
 use App\Models\Application;
@@ -65,6 +66,7 @@ class ApplicationWorkflowService
         Application::STATUS_UNDER_REVIEW => ApplicationUnderReview::class,
         Application::STATUS_FOR_CORRECTION => ApplicationReturnedForCorrection::class,
         Application::STATUS_APPROVED_FOR_PAYMENT => ApplicationApprovedForPayment::class,
+        Application::STATUS_PAYMENT_PENDING => PaymentSubmitted::class,
         Application::STATUS_PAYMENT_VERIFIED => PaymentConfirmed::class,
         Application::STATUS_PERMIT_RELEASED => PermitReleased::class,
         Application::STATUS_REJECTED => ApplicationRejected::class,

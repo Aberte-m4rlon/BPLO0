@@ -16,6 +16,11 @@ class SettingController extends Controller
     {
         return view('admin.settings', [
             'permit' => config('permit'),
+            'mail' => [
+                'driver' => config('mail.default'),
+                'from_address' => config('mail.from.address'),
+                'from_name' => config('mail.from.name'),
+            ],
         ]);
     }
 }

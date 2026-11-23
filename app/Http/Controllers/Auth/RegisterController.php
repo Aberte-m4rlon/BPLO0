@@ -39,6 +39,8 @@ class RegisterController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/dashboard');
+        return redirect()
+            ->intended('/dashboard')
+            ->with('success', 'Account created! Your profile details are saved and will auto-fill when you apply.');
     }
 }

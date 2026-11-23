@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Contracts\PaymentGateway;
-use App\Events\PaymentConfirmed;
 use App\Models\Application;
 use App\Models\Payment;
 use App\Models\PaymentTransaction;
@@ -122,8 +121,6 @@ class PaymentService
                 ['reference' => $payment->reference_number, 'status' => 'paid'],
                 $actor,
             );
-
-            event(new PaymentConfirmed($application, $actor));
         });
     }
 

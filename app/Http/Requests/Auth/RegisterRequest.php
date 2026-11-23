@@ -25,8 +25,18 @@ class RegisterRequest extends FormRequest
                 'confirmed',
                 Password::min(8)->mixedCase()->numbers(),
             ],
-            'contact_number' => ['nullable', 'string', 'max:32'],
-            'address' => ['nullable', 'string', 'max:255'],
+            'contact_number' => ['required', 'string', 'regex:/^(09|\+639)\d{9}$/'],
+            'address' => ['required', 'string', 'max:255'],
+        ];
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'contact_number.regex' => 'The contact number must be a valid PH mobile number (e.g. 09171234567).',
         ];
     }
 }

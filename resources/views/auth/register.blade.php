@@ -43,12 +43,12 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="contact_number">Contact Number</label>
-                        <input type="text" id="contact_number" name="contact_number" value="{{ old('contact_number') }}" placeholder="09XX-XXX-XXXX">
+                        <input type="text" id="contact_number" name="contact_number" value="{{ old('contact_number') }}" placeholder="09171234567" required>
                         @error('contact_number') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Barangay, Bansud">
+                        <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Sitio / Street, Barangay, Bansud" required>
                         @error('address') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
                 </div>

@@ -37,10 +37,12 @@
 
     <div class="bplo-detail-grid">
         <div class="card">
-            <h2 class="section">SMS Notifications</h2>
+            <h2 class="section">Email &amp; SMS Notifications</h2>
             <dl class="kv">
-                <dt>Driver</dt><dd>{{ strtoupper($permit['sms']['driver']) }}</dd>
-                <dt>Sender ID</dt><dd>{{ $permit['sms']['sender_id'] }}</dd>
+                <dt>Mail Driver</dt><dd>{{ strtoupper($mail['driver']) }}</dd>
+                <dt>Mail From</dt><dd>{{ $mail['from_name'] }} ({{ $mail['from_address'] }})</dd>
+                <dt>SMS Driver</dt><dd>{{ strtoupper($permit['sms']['driver']) }}</dd>
+                <dt>SMS Sender ID</dt><dd>{{ $permit['sms']['sender_id'] }}</dd>
             </dl>
         </div>
 

@@ -15,6 +15,7 @@ class Notification extends Model
         'body',
         'channel',
         'sms_status',
+        'email_status',
         'read_at',
     ];
 
