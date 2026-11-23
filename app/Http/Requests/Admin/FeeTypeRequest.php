@@ -19,7 +19,7 @@ class FeeTypeRequest extends FormRequest
     public function rules(): array
     {
         /** @var FeeType|null $feeType */
-        $feeType = $this->route('feeType');
+        $feeType = $this->route('fee_type') ?? $this->route('feeType');
 
         return [
             'name' => ['required', 'string', 'max:255'],

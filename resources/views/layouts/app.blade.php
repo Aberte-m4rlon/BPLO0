@@ -9,14 +9,15 @@
     <link rel="preload" as="image" href="{{ asset('images/bplo-blue-background.png') }}" fetchpriority="high">
     <link href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}" rel="stylesheet">
 </head>
-<body class="has-sidebar bplo-portal {{ auth()->user()?->isAdmin() ? 'is-admin-portal' : '' }}">
+<body class="has-sidebar bplo-portal {{ auth()->user()?->isAdmin() ? 'is-glass-portal is-admin-portal' : (auth()->user()?->isTreasurer() ? 'is-glass-portal is-treasurer-portal' : '') }}">
     @php
         $user = auth()->user();
         $unread = $user ? \App\Models\Notification::where('user_id', $user->id)->whereNull('read_at')->count() : 0;
 
         // Role-aware navigation links: [url, label].
         $nav = [];
-        $adminNav = [];
+        $glassNav = [];
+        $glassBottomItems = null;
         if ($user?->isApplicant()) {
             $nav = [
                 ['/dashboard', 'Dashboard'],
@@ -32,6 +33,37 @@
             $nav = [
                 ['/treasurer/dashboard', 'Dashboard'],
                 ['/treasurer/payments', 'Payments'],
+                ['/treasurer/analytics', 'Analytics'],
+                ['/treasurer/fee-types', 'Fee Types'],
+                ['/treasurer/fee-rates', 'Fee Rates'],
+            ];
+            $glassNav = [
+                ['/treasurer/dashboard', 'Dashboard', 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z'],
+                ['/treasurer/payments', 'Payments', 'M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1 M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4'],
+                ['/treasurer/analytics', 'Analytics', 'M3 3v18h18 M18 17V9 M13 17V5 M8 17v-3'],
+                ['/treasurer/fee-types', 'Fee Types', 'M12 2v20 M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'],
+                ['/treasurer/fee-rates', 'Fee Rates', 'M4 2h16v20H4z M8 6h8 M8 10h2 M12 10h2 M16 10h0 M8 14h2 M12 14h2 M16 14h0 M8 18h6'],
+            ];
+            $currentPath = '/'.ltrim(request()->path(), '/');
+            $glassBottomItems = [
+                [
+                    'url' => '/treasurer/dashboard',
+                    'label' => 'Dashboard',
+                    'active' => $currentPath === '/treasurer/dashboard',
+                    'icon' => 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z',
+                ],
+                [
+                    'url' => '/treasurer/payments',
+                    'label' => 'Payments',
+                    'active' => str_starts_with($currentPath, '/treasurer/payments'),
+                    'icon' => 'M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1 M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4',
+                ],
+                [
+                    'url' => '/treasurer/analytics',
+                    'label' => 'Analytics',
+                    'active' => str_starts_with($currentPath, '/treasurer/analytics'),
+                    'icon' => 'M3 3v18h18 M18 17V9 M13 17V5 M8 17v-3',
+                ],
             ];
         } elseif ($user?->isInspector()) {
             $nav = [
@@ -44,17 +76,13 @@
                 ['/admin/dashboard', 'Dashboard'],
                 ['/admin/users', 'Users'],
                 ['/admin/requirement-types', 'Requirements'],
-                ['/admin/fee-types', 'Fee Types'],
-                ['/admin/fee-rates', 'Fee Rates'],
                 ['/admin/audit-logs', 'Audit Logs'],
                 ['/admin/settings', 'Settings'],
             ];
-            $adminNav = [
+            $glassNav = [
                 ['/admin/dashboard', 'Dashboard', 'M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z'],
                 ['/admin/users', 'Users', 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75'],
                 ['/admin/requirement-types', 'Requirements', 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M9 15l2 2 4-4'],
-                ['/admin/fee-types', 'Fee Types', 'M12 2v20 M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'],
-                ['/admin/fee-rates', 'Fee Rates', 'M4 2h16v20H4z M8 6h8 M8 10h2 M12 10h2 M16 10h0 M8 14h2 M12 14h2 M16 14h0 M8 18h6'],
                 ['/admin/audit-logs', 'Audit Logs', 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M8 13h8 M8 17h8 M8 9h2'],
                 ['/admin/settings', 'Settings', 'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z'],
             ];
@@ -80,13 +108,13 @@
         $current = '/'.ltrim(request()->path(), '/');
     @endphp
 
-    @if ($user?->isAdmin())
+    @if ($user?->isAdmin() || $user?->isTreasurer())
         @php
             $admCurrent = '/'.ltrim(request()->path(), '/');
             $admHomeUrl = $user->homePath();
-            $admRoleLabel = 'System Administrator';
-            $admWorkspaceKicker = 'ADMINISTRATION WORKSPACE';
-            $admPageTitle = trim($__env->yieldContent('title', 'Admin Dashboard')) ?: 'Admin Dashboard';
+            $admRoleLabel = $roleLabel;
+            $admWorkspaceKicker = $workspaceKicker;
+            $admPageTitle = trim($__env->yieldContent('title', $user->isTreasurer() ? 'Treasurer Dashboard' : 'Admin Dashboard')) ?: ($user->isTreasurer() ? 'Treasurer Dashboard' : 'Admin Dashboard');
         @endphp
 
         <script>
@@ -96,7 +124,7 @@
         </script>
 
         <x-admin.mobile-drawer
-            :nav="$adminNav"
+            :nav="$glassNav"
             :home-url="$admHomeUrl"
             :user="$user"
             :role-label="$admRoleLabel"
@@ -105,7 +133,7 @@
 
         <div class="layout adm-layout">
             <x-admin.sidebar
-                :nav="$adminNav"
+                :nav="$glassNav"
                 :home-url="$admHomeUrl"
                 :user="$user"
                 :role-label="$admRoleLabel"
@@ -133,7 +161,7 @@
             </div>
         </div>
 
-        <x-admin.mobile-bottom-nav :current="$admCurrent" />
+        <x-admin.mobile-bottom-nav :current="$admCurrent" :items="$glassBottomItems" />
 
         <script>
             (function () {

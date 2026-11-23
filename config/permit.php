@@ -7,7 +7,7 @@ return [
     | Municipality Identity
     |--------------------------------------------------------------------------
     */
-    'municipality' => env('MUNICIPALITY_NAME', 'Municipality of Bansud'),
+    'municipality' => env('MUNICIPALITY_NAME', 'Municipality of Bongabong'),
     'province' => env('MUNICIPALITY_PROVINCE', 'Oriental Mindoro'),
 
     /*
@@ -15,7 +15,7 @@ return [
     | Tracking / Permit Numbering
     |--------------------------------------------------------------------------
     */
-    'tracking_prefix' => 'BANSUD',
+    'tracking_prefix' => 'BONGABONG',
     'permit_prefix' => 'BP',
 
     /*
@@ -48,7 +48,7 @@ return [
         'driver' => env('SMS_DRIVER', 'log'),
         'api_key' => env('SMS_API_KEY'),
         'api_secret' => env('SMS_API_SECRET'),
-        'sender_id' => env('SMS_SENDER_ID', 'BANSUD'),
+        'sender_id' => env('SMS_SENDER_ID', 'BONGABONG'),
         'base_url' => env('SMS_BASE_URL'),
     ],
 

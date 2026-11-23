@@ -5,12 +5,12 @@
 @section('content')
     <div class="page-header">
         <div class="page-header-copy bplo-page-header-copy">
-            <p class="bplo-eyebrow">System Administration</p>
+            <p class="bplo-eyebrow">Municipal Treasurer's Office</p>
             <h1>Fee Rates</h1>
             <p>Maintain effective peso amounts and schedules applied to permit fee assessments.</p>
         </div>
         <div class="bplo-header-actions">
-            <a href="{{ route('admin.fee-rates.create') }}" class="btn">New Fee Rate</a>
+            <a href="{{ route('treasurer.fee-rates.create') }}" class="btn">New Fee Rate</a>
         </div>
     </div>
 
@@ -39,7 +39,7 @@
                                 </span>
                             </td>
                             <td>{{ $rate->effective_from?->format('M d, Y') ?? '—' }}</td>
-                            <td><a href="{{ route('admin.fee-rates.edit', $rate) }}" class="btn btn-sm btn-secondary">Edit</a></td>
+                            <td><a href="{{ route('treasurer.fee-rates.edit', $rate) }}" class="btn btn-sm btn-secondary">Edit</a></td>
                         </tr>
                     @endforeach
                 </tbody>

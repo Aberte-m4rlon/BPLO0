@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\Admin\AuditLogController as AdminAuditLogController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\FeeRateController as AdminFeeRateController;
-use App\Http\Controllers\Admin\FeeTypeController as AdminFeeTypeController;
 use App\Http\Controllers\Admin\RequirementTypeController as AdminRequirementTypeController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -25,6 +23,8 @@ use App\Http\Controllers\PublicPages\LandingController;
 use App\Http\Controllers\PublicPages\TrackingController;
 use App\Http\Controllers\PublicPages\VerificationController;
 use App\Http\Controllers\Treasurer\DashboardController as TreasurerDashboardController;
+use App\Http\Controllers\Treasurer\FeeRateController as TreasurerFeeRateController;
+use App\Http\Controllers\Treasurer\FeeTypeController as TreasurerFeeTypeController;
 use App\Http\Controllers\Treasurer\PaymentController as TreasurerPaymentController;
 use Illuminate\Support\Facades\Route;
 
@@ -92,11 +92,15 @@ Route::middleware(['auth', 'role:bplo'])->prefix('bplo')->name('bplo.')->group(f
 
 Route::middleware(['auth', 'role:treasurer'])->prefix('treasurer')->name('treasurer.')->group(function (): void {
     Route::get('/dashboard', [TreasurerDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/analytics', [TreasurerDashboardController::class, 'analytics'])->name('analytics');
     Route::get('/payments', [TreasurerPaymentController::class, 'index'])->name('payments.index');
+    Route::get('/payments/export', [TreasurerPaymentController::class, 'export'])->name('payments.export');
     Route::get('/payments/{payment}', [TreasurerPaymentController::class, 'show'])->name('payments.show');
     Route::post('/payments/{payment}/confirm', [TreasurerPaymentController::class, 'confirm'])->name('payments.confirm');
     Route::post('/payments/{payment}/reject', [TreasurerPaymentController::class, 'reject'])->name('payments.reject');
     Route::get('/payments/{payment}/proof', [TreasurerPaymentController::class, 'proof'])->name('payments.proof');
+    Route::resource('fee-types', TreasurerFeeTypeController::class)->except(['show', 'destroy']);
+    Route::resource('fee-rates', TreasurerFeeRateController::class)->except(['show', 'destroy']);
 });
 
 Route::middleware(['auth', 'role:inspector'])->prefix('inspector')->name('inspector.')->group(function (): void {
@@ -109,8 +113,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', AdminUserController::class)->except(['show', 'destroy']);
     Route::resource('requirement-types', AdminRequirementTypeController::class)->except(['show', 'destroy']);
-    Route::resource('fee-types', AdminFeeTypeController::class)->except(['show', 'destroy']);
-    Route::resource('fee-rates', AdminFeeRateController::class)->except(['show', 'destroy']);
     Route::get('/audit-logs', [AdminAuditLogController::class, 'index'])->name('audit-logs.index');
     Route::get('/settings', [AdminSettingController::class, 'show'])->name('settings');
 });

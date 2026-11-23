@@ -26,11 +26,11 @@
         :trend="$trends['permits'] ?? '+0%'"
     />
     <x-admin.stat-card
-        :value="$counts['payments'] ?? 0"
-        label="Total Payments"
-        icon="credit-card"
+        :value="$counts['active_permits'] ?? 0"
+        label="Active Permits"
+        icon="shield-check"
         tone="amber"
-        :trend="$trends['payments'] ?? '+0%'"
+        :trend="$trends['active_permits'] ?? '+0%'"
     />
     <x-admin.stat-card
         :value="$counts['expired_permits'] ?? 0"

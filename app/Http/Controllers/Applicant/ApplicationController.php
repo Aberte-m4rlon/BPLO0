@@ -66,7 +66,7 @@ class ApplicationController extends Controller
         }
 
         $parts = array_values(array_filter(array_map('trim', explode(',', $address))));
-        $municipality = trim((string) config('permit.municipality', 'Bansud'));
+        $municipality = trim((string) config('permit.municipality', 'Bongabong'));
         $shortMunicipality = trim(str_ireplace('Municipality of', '', $municipality));
         $province = trim((string) config('permit.province', 'Oriental Mindoro'));
 

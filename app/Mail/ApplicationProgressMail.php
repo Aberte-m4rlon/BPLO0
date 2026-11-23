@@ -25,7 +25,7 @@ class ApplicationProgressMail extends Mailable
     public function envelope(): Envelope
     {
         $tracking = $this->application?->tracking_number;
-        $municipality = (string) config('permit.municipality', 'Municipality of Bansud');
+        $municipality = (string) config('permit.municipality', 'Municipality of Bongabong');
         $prefix = $tracking ? "[{$tracking}] " : '';
 
         return new Envelope(

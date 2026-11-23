@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Treasurer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FeeRateRequest;
@@ -13,14 +13,14 @@ class FeeRateController extends Controller
 {
     public function index(): View
     {
-        return view('admin.fee-rates.index', [
+        return view('treasurer.fee-rates.index', [
             'feeRates' => FeeRate::with('feeType')->orderBy('fee_type_id')->paginate(20),
         ]);
     }
 
     public function create(): View
     {
-        return view('admin.fee-rates.create', [
+        return view('treasurer.fee-rates.create', [
             'feeTypes' => FeeType::orderBy('sort_order')->get(),
         ]);
     }
@@ -29,12 +29,12 @@ class FeeRateController extends Controller
     {
         FeeRate::create($this->normalized($request));
 
-        return redirect()->route('admin.fee-rates.index')->with('success', 'Fee rate created.');
+        return redirect()->route('treasurer.fee-rates.index')->with('success', 'Fee rate created.');
     }
 
     public function edit(FeeRate $feeRate): View
     {
-        return view('admin.fee-rates.edit', [
+        return view('treasurer.fee-rates.edit', [
             'feeRate' => $feeRate,
             'feeTypes' => FeeType::orderBy('sort_order')->get(),
         ]);
@@ -44,7 +44,7 @@ class FeeRateController extends Controller
     {
         $feeRate->update($this->normalized($request));
 
-        return redirect()->route('admin.fee-rates.index')->with('success', 'Fee rate updated.');
+        return redirect()->route('treasurer.fee-rates.index')->with('success', 'Fee rate updated.');
     }
 
     /**

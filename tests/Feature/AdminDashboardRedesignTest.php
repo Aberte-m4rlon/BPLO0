@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Application;
 use App\Models\AuditLog;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,18 +25,18 @@ class AdminDashboardRedesignTest extends TestCase
         return $user;
     }
 
-    public function test_admin_dashboard_renders_redesigned_components_and_real_database_metrics(): void
+    public function test_admin_dashboard_renders_non_financial_bongabong_metrics(): void
     {
-        $admin = $this->createUser(User::ROLE_ADMIN, 'admin@bansud.test', 'Admin User');
-        $applicant = $this->createUser(User::ROLE_APPLICANT, 'applicant@bansud.test', 'Juan Dela Cruz');
+        $admin = $this->createUser(User::ROLE_ADMIN, 'admin@bongabong.test', 'Admin User');
+        $applicant = $this->createUser(User::ROLE_APPLICANT, 'applicant@bongabong.test', 'Juan Dela Cruz');
 
         $this->actingAs($applicant)
             ->post('/applications', [
                 'applicant_name' => $applicant->name,
                 'contact_number' => '09171234567',
                 'email' => $applicant->email,
-                'business_name' => 'Bansud Hardware',
-                'business_address' => 'Poblacion, Bansud',
+                'business_name' => 'Bongabong Hardware',
+                'business_address' => 'Poblacion, Bongabong',
                 'barangay' => 'Poblacion',
                 'business_nature' => 'Retail',
                 'ownership_type' => 'Sole Proprietorship',
@@ -58,6 +57,7 @@ class AdminDashboardRedesignTest extends TestCase
         $response = $this->actingAs($admin)->get('/admin/dashboard');
 
         $response->assertOk();
+        $response->assertSee('is-glass-portal', false);
         $response->assertSee('is-admin-portal', false);
         $response->assertSee('id="desktop-sidebar"', false);
         $response->assertSee('id="sidebar-collapse-btn"', false);
@@ -70,33 +70,35 @@ class AdminDashboardRedesignTest extends TestCase
         $response->assertSee('Total Users');
         $response->assertSee('Total Application');
         $response->assertSee('Total Permits');
-        $response->assertSee('Total Payments');
+        $response->assertSee('Active Permits');
         $response->assertSee('Expired Permits');
+        $response->assertDontSee('Total Payments');
+        $response->assertDontSee('/admin/fee-types', false);
+        $response->assertDontSee('/admin/fee-rates', false);
+        $response->assertDontSee('Bansud');
+        $response->assertSee('Bongabong Business Permits Office');
         $response->assertSee('Recent Activities');
         $response->assertSee('Quick Administration');
         $response->assertSee('Users &amp; Roles', false);
         $response->assertSee('Requirements');
-        $response->assertSee('Fee Types');
-        $response->assertSee('Fee Rates');
         $response->assertSee('Audit Logs');
         $response->assertSee('Settings');
-        $response->assertSee('Bansud Business Permits Office');
         $response->assertSee('adm-activity-mobile-card', false);
         $response->assertSee('AUTH LOGIN');
 
-        $response->assertViewHas('counts', fn (array $counts) => $counts['users'] === 2 && $counts['applications'] === 1);
+        $response->assertViewHas('counts', fn (array $counts) => $counts['users'] === 2
+            && $counts['applications'] === 1
+            && ! array_key_exists('payments', $counts));
     }
 
-    public function test_admin_subpages_share_admin_shell_and_non_admins_remain_isolated(): void
+    public function test_admin_subpages_share_admin_shell_and_roles_remain_isolated(): void
     {
-        $admin = $this->createUser(User::ROLE_ADMIN, 'admin2@bansud.test', 'Admin User');
-        $bplo = $this->createUser(User::ROLE_BPLO, 'bplo@bansud.test', 'BPLO Officer');
+        $admin = $this->createUser(User::ROLE_ADMIN, 'admin2@bongabong.test', 'Admin User');
+        $bplo = $this->createUser(User::ROLE_BPLO, 'bplo@bongabong.test', 'BPLO Officer');
 
         foreach ([
             '/admin/users',
             '/admin/requirement-types',
-            '/admin/fee-types',
-            '/admin/fee-rates',
             '/admin/audit-logs',
             '/admin/settings',
         ] as $route) {
@@ -105,9 +107,15 @@ class AdminDashboardRedesignTest extends TestCase
             $res->assertSee('is-admin-portal', false);
         }
 
+        // Financial management routes belong to the Treasurer portal, not Admin.
+        $this->actingAs($admin)->get('/treasurer/dashboard')->assertForbidden();
+        $this->actingAs($admin)->get('/treasurer/fee-types')->assertForbidden();
+        $this->actingAs($admin)->get('/treasurer/fee-rates')->assertForbidden();
+
         $this->actingAs($bplo)->get('/admin/dashboard')->assertForbidden();
         $bploDash = $this->actingAs($bplo)->get('/bplo/dashboard');
         $bploDash->assertOk();
         $bploDash->assertDontSee('is-admin-portal', false);
+        $bploDash->assertDontSee('is-glass-portal', false);
     }
 }

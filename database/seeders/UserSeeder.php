@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     {
         $admin = User::create([
             'name' => 'Admin User',
-            'email' => 'admin@bansud.gov.ph',
+            'email' => 'admin@bongabong.gov.ph',
             'password' => 'Password123!',
         ]);
         $admin->role = User::ROLE_ADMIN;
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 
         $bplo = User::create([
             'name' => 'BPLO Staff',
-            'email' => 'bplo@bansud.gov.ph',
+            'email' => 'bplo@bongabong.gov.ph',
             'password' => 'Password123!',
         ]);
         $bplo->role = User::ROLE_BPLO;
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
 
         $treasurer = User::create([
             'name' => 'Treasurer Staff',
-            'email' => 'treasurer@bansud.gov.ph',
+            'email' => 'treasurer@bongabong.gov.ph',
             'password' => 'Password123!',
         ]);
         $treasurer->role = User::ROLE_TREASURER;
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
 
         $inspector = User::create([
             'name' => 'Inspector Staff',
-            'email' => 'inspector@bansud.gov.ph',
+            'email' => 'inspector@bongabong.gov.ph',
             'password' => 'Password123!',
         ]);
         $inspector->role = User::ROLE_INSPECTOR;

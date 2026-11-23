@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\AuditLog;
-use App\Models\Payment;
 use App\Models\Permit;
 use App\Models\User;
 use Illuminate\View\View;
@@ -20,7 +19,6 @@ class DashboardController extends Controller
             'users' => User::count(),
             'applications' => Application::count(),
             'permits' => Permit::count(),
-            'payments' => Payment::count(),
             'active_permits' => Permit::where('status', Permit::STATUS_ACTIVE)
                 ->whereDate('valid_until', '>=', $today)
                 ->count(),
@@ -38,7 +36,9 @@ class DashboardController extends Controller
             'users' => $this->dailyGrowthBadge(User::class, $counts['users']),
             'applications' => $this->dailyGrowthBadge(Application::class, $counts['applications']),
             'permits' => $this->dailyGrowthBadge(Permit::class, $counts['permits']),
-            'payments' => $this->dailyGrowthBadge(Payment::class, $counts['payments']),
+            'active_permits' => $counts['permits'] > 0
+                ? '+'.(int) round(($counts['active_permits'] / $counts['permits']) * 100).'%'
+                : '+0%',
             'expired_permits' => $counts['permits'] > 0
                 ? '+'.(int) round(($counts['expired_permits'] / $counts['permits']) * 100).'%'
                 : '+0%',

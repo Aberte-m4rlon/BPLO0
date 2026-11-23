@@ -24,18 +24,6 @@
             icon="file-text"
         />
         <x-admin.quick-action-card
-            href="/admin/fee-types"
-            title="Fee Types"
-            description="Assessment categories"
-            icon="tag"
-        />
-        <x-admin.quick-action-card
-            href="/admin/fee-rates"
-            title="Fee Rates"
-            description="Active peso schedules"
-            icon="calculator"
-        />
-        <x-admin.quick-action-card
             href="/admin/audit-logs"
             title="Audit Logs"
             description="System activity records"

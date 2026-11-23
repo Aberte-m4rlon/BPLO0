@@ -10,7 +10,7 @@ class TrackingNumberService
     private const SCOPE = 'tracking';
 
     /**
-     * Generate the next per-year tracking number, e.g. BANSUD-2025-000001.
+     * Generate the next per-year tracking number, e.g. BONGABONG-2026-000001.
      *
      * Uses an atomic UPDATE on number_sequences inside a transaction. SQLite
      * ignores FOR UPDATE, so correctness rests on the atomic increment plus the

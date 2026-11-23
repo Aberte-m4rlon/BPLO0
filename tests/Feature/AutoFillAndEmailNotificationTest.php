@@ -26,7 +26,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
             'name' => 'Maria Clara Santos',
             'email' => 'maria@example.com',
             'contact_number' => '09171234567',
-            'address' => 'Sitio Mabuhay, Brgy. Poblacion, Bansud',
+            'address' => 'Sitio Mabuhay, Brgy. Poblacion, Bongabong',
             'password' => 'Password123!',
             'password_confirmation' => 'Password123!',
         ]);
@@ -36,7 +36,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'maria@example.com',
             'contact_number' => '09171234567',
-            'address' => 'Sitio Mabuhay, Brgy. Poblacion, Bansud',
+            'address' => 'Sitio Mabuhay, Brgy. Poblacion, Bongabong',
         ]);
 
         $formPage = $this->get('/applications/create');
@@ -44,7 +44,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
         $formPage->assertSee('value="Maria Clara Santos"', false);
         $formPage->assertSee('value="09171234567"', false);
         $formPage->assertSee('value="maria@example.com"', false);
-        $formPage->assertSee('value="Sitio Mabuhay, Brgy. Poblacion, Bansud"', false);
+        $formPage->assertSee('value="Sitio Mabuhay, Brgy. Poblacion, Bongabong"', false);
         $formPage->assertSee('value="Poblacion"', false);
     }
 
@@ -65,7 +65,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
                 'contact_number' => '09181112222',
                 'email' => 'juan.business@example.com',
                 'business_name' => 'Reyes General Store',
-                'business_address' => 'Zone 2, Pag-asa, Bansud',
+                'business_address' => 'Zone 2, Pag-asa, Bongabong',
                 'barangay' => 'Pag-asa',
                 'business_nature' => 'Retail',
                 'ownership_type' => 'Sole Proprietorship',
@@ -77,12 +77,12 @@ class AutoFillAndEmailNotificationTest extends TestCase
 
         $user->refresh();
         $this->assertSame('09181112222', $user->contact_number);
-        $this->assertSame('Zone 2, Pag-asa, Bansud', $user->address);
+        $this->assertSame('Zone 2, Pag-asa, Bongabong', $user->address);
 
         $secondCreate = $this->actingAs($user)->get('/applications/create');
         $secondCreate->assertOk();
         $secondCreate->assertSee('value="Reyes General Store"', false);
-        $secondCreate->assertSee('value="Zone 2, Pag-asa, Bansud"', false);
+        $secondCreate->assertSee('value="Zone 2, Pag-asa, Bongabong"', false);
         $secondCreate->assertSee('value="Pag-asa"', false);
         $secondCreate->assertSee('value="Retail"', false);
     }
@@ -95,7 +95,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
             'name' => 'Ana Bautista',
             'email' => 'ana.account@example.com',
             'contact_number' => '09175556666',
-            'address' => 'Rosacara, Bansud',
+            'address' => 'Rosacara, Bongabong',
             'password' => 'Password123!',
             'is_active' => true,
         ]);
@@ -148,7 +148,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
             'contact_number' => '09175556666',
             'email' => 'ana.business@example.com',
             'business_name' => 'Ana Bakery',
-            'business_address' => 'Rosacara, Bansud',
+            'business_address' => 'Rosacara, Bongabong',
             'barangay' => 'Rosacara',
             'business_nature' => 'Bakery',
             'ownership_type' => 'Sole Proprietorship',
@@ -245,7 +245,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
             'name' => 'Pedro Cruz',
             'email' => 'pedro@example.com',
             'contact_number' => '09179998888',
-            'address' => 'Poblacion, Bansud',
+            'address' => 'Poblacion, Bongabong',
             'password' => 'Password123!',
             'is_active' => true,
         ]);
@@ -257,7 +257,7 @@ class AutoFillAndEmailNotificationTest extends TestCase
             'contact_number' => '09179998888',
             'email' => 'pedro@example.com',
             'business_name' => 'Pedro Hardware',
-            'business_address' => 'Poblacion, Bansud',
+            'business_address' => 'Poblacion, Bongabong',
             'barangay' => 'Poblacion',
             'business_nature' => 'Hardware',
             'ownership_type' => 'Sole Proprietorship',

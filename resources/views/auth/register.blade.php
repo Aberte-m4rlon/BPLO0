@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Sitio / Street, Barangay, Bansud" required>
+                        <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Sitio / Street, Barangay, Bongabong" required>
                         @error('address') <div class="field-error">{{ $message }}</div> @enderror
                     </div>
                 </div>

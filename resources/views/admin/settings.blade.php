@@ -13,7 +13,7 @@
 
     <div class="alert alert-info">
         These values are read-only. Environment-level settings are changed only by an operator updating
-        <code>.env</code> on the server. Requirement types, fee types, and fee rates are edited through their own screens.
+        <code>.env</code> on the server. Requirement types are managed by Admin, while fee types, fee rates, payment collections, and revenue analytics are managed by the Municipal Treasurer.
     </div>
 
     <div class="bplo-detail-grid">

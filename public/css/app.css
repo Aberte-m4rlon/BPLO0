@@ -1,5 +1,5 @@
 /*
- | Municipality of Bansud — Business Permit System
+ | Municipality of Bongabong — Business Permit System
  | Shared static stylesheet. The glassmorphism palette and shared components
  | are defined in the municipal glass design system at the end of this file.
  */
@@ -2682,7 +2682,7 @@ body.has-sidebar.bplo-portal .layout {
    Admin Dashboard Glassmorphism Redesign (Desktop, Tablet & Mobile)
    ========================================================================= */
 
-body.is-admin-portal {
+body.is-glass-portal {
     --adm-navy: #0B3765;
     --adm-navy-2: #164F80;
     --adm-blue: #168BFA;
@@ -2715,13 +2715,13 @@ body.is-admin-portal {
 }
 
 html.drawer-open,
-html.drawer-open body.is-admin-portal {
+html.drawer-open body.is-glass-portal {
     overflow: hidden !important;
     height: 100%;
     overscroll-behavior: none;
 }
 
-body.is-admin-portal.has-sidebar.bplo-portal .adm-layout {
+body.is-glass-portal.has-sidebar.bplo-portal .adm-layout {
     display: flex;
     align-items: stretch;
     gap: 18px;
@@ -2733,7 +2733,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-layout {
     background: transparent;
 }
 
-body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
+body.is-glass-portal.has-sidebar.bplo-portal .adm-main-area {
     flex: 1 1 auto;
     min-width: 0;
     width: auto;
@@ -2746,13 +2746,13 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
     min-height: calc(100vh - 32px);
 }
 
-.is-admin-portal .adm-page {
+.is-glass-portal .adm-page {
     flex: 1 1 auto;
     padding: 0;
     margin: 0;
 }
 
-.is-admin-portal .adm-container {
+.is-glass-portal .adm-container {
     padding: 0;
     margin: 0;
     max-width: none;
@@ -2763,7 +2763,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
 }
 
 /* --- Left Floating Glass Sidebar (Desktop/Tablet >= 768px) --- */
-body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
+body.is-glass-portal.has-sidebar.bplo-portal .adm-sidebar {
     position: sticky;
     top: 16px;
     height: calc(100vh - 32px);
@@ -2788,7 +2788,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     overflow: visible;
 }
 
-.is-admin-portal .adm-sidebar .sidebar-brand {
+.is-glass-portal .adm-sidebar .sidebar-brand {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2798,7 +2798,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.is-admin-portal .adm-sidebar-brand-link {
+.is-glass-portal .adm-sidebar-brand-link {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -2808,7 +2808,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     flex: 1 1 auto;
 }
 
-.is-admin-portal .sidebar-brand-mark {
+.is-glass-portal .sidebar-brand-mark {
     width: 48px;
     height: 48px;
     flex: 0 0 48px;
@@ -2825,7 +2825,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     box-shadow: 0 0 22px rgba(33, 197, 242, 0.48), inset 0 2px 4px rgba(255, 255, 255, 0.4);
 }
 
-.is-admin-portal .sidebar-brand-text {
+.is-glass-portal .sidebar-brand-text {
     display: flex;
     flex-direction: column;
     font-size: 0.98rem;
@@ -2835,7 +2835,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     min-width: 0;
 }
 
-.is-admin-portal .sidebar-brand-text small {
+.is-glass-portal .sidebar-brand-text small {
     font-size: 0.72rem;
     font-weight: 500;
     color: rgba(226, 242, 255, 0.85);
@@ -2845,7 +2845,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     gap: 6px;
 }
 
-.is-admin-portal .sidebar-brand-text small::after {
+.is-glass-portal .sidebar-brand-text small::after {
     content: "";
     width: 6px;
     height: 6px;
@@ -2855,7 +2855,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     flex-shrink: 0;
 }
 
-.is-admin-portal .adm-sidebar-collapse-btn {
+.is-glass-portal .adm-sidebar-collapse-btn {
     width: 30px;
     height: 30px;
     flex: 0 0 30px;
@@ -2870,11 +2870,11 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     transition: background 0.18s ease, transform 0.24s ease;
 }
 
-.is-admin-portal .adm-sidebar-collapse-btn:hover {
+.is-glass-portal .adm-sidebar-collapse-btn:hover {
     background: rgba(255, 255, 255, 0.26);
 }
 
-.is-admin-portal .adm-sidebar .sidebar-nav {
+.is-glass-portal .adm-sidebar .sidebar-nav {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
@@ -2884,7 +2884,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     overflow-x: visible;
 }
 
-.is-admin-portal .sidebar-section-label {
+.is-glass-portal .sidebar-section-label {
     margin: 2px 10px 6px;
     font-size: 0.68rem;
     font-weight: 700;
@@ -2893,8 +2893,8 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     text-transform: uppercase;
 }
 
-.is-admin-portal .adm-sidebar .sidebar-link,
-.is-admin-portal .adm-mobile-drawer .sidebar-link {
+.is-glass-portal .adm-sidebar .sidebar-link,
+.is-glass-portal .adm-mobile-drawer .sidebar-link {
     position: relative;
     display: flex;
     align-items: center;
@@ -2909,16 +2909,16 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
 }
 
-.is-admin-portal .adm-sidebar .sidebar-link:hover,
-.is-admin-portal .adm-mobile-drawer .sidebar-link:hover {
+.is-glass-portal .adm-sidebar .sidebar-link:hover,
+.is-glass-portal .adm-mobile-drawer .sidebar-link:hover {
     background: rgba(255, 255, 255, 0.14);
     border-color: rgba(255, 255, 255, 0.24);
     color: #ffffff;
     transform: translateX(2px);
 }
 
-.is-admin-portal .adm-sidebar .sidebar-link.is-active,
-.is-admin-portal .adm-mobile-drawer .sidebar-link.is-active {
+.is-glass-portal .adm-sidebar .sidebar-link.is-active,
+.is-glass-portal .adm-mobile-drawer .sidebar-link.is-active {
     background: linear-gradient(96deg, rgba(245, 250, 255, 0.96) 0%, rgba(190, 227, 255, 0.92) 60%, rgba(128, 200, 255, 0.85) 100%);
     color: var(--adm-navy);
     font-weight: 700;
@@ -2926,19 +2926,19 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     box-shadow: 0 10px 24px rgba(10, 44, 82, 0.28), 0 0 18px rgba(33, 197, 242, 0.34);
 }
 
-.is-admin-portal .adm-sidebar .sidebar-link.is-active .sidebar-link-icon,
-.is-admin-portal .adm-mobile-drawer .sidebar-link.is-active .sidebar-link-icon {
+.is-glass-portal .adm-sidebar .sidebar-link.is-active .sidebar-link-icon,
+.is-glass-portal .adm-mobile-drawer .sidebar-link.is-active .sidebar-link-icon {
     color: var(--adm-blue);
     stroke-width: 2.15;
 }
 
-.is-admin-portal .sidebar-link-icon {
+.is-glass-portal .sidebar-link-icon {
     width: 19px;
     height: 19px;
     flex: 0 0 19px;
 }
 
-.is-admin-portal .adm-sidebar .sidebar-footer {
+.is-glass-portal .adm-sidebar .sidebar-footer {
     padding-top: 12px;
     margin-top: 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.16);
@@ -2947,8 +2947,8 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     gap: 10px;
 }
 
-.is-admin-portal .adm-sidebar .sidebar-user,
-.is-admin-portal .adm-drawer-footer .sidebar-user {
+.is-glass-portal .adm-sidebar .sidebar-user,
+.is-glass-portal .adm-drawer-footer .sidebar-user {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -2958,13 +2958,13 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.is-admin-portal .adm-avatar-status-wrap {
+.is-glass-portal .adm-avatar-status-wrap {
     position: relative;
     display: inline-flex;
     flex-shrink: 0;
 }
 
-.is-admin-portal .sidebar-avatar {
+.is-glass-portal .sidebar-avatar {
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -2978,13 +2978,13 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     border: 1.5px solid rgba(255, 255, 255, 0.72);
 }
 
-.is-admin-portal .sidebar-user-meta {
+.is-glass-portal .sidebar-user-meta {
     display: flex;
     flex-direction: column;
     min-width: 0;
 }
 
-.is-admin-portal .sidebar-user-meta strong {
+.is-glass-portal .sidebar-user-meta strong {
     color: #ffffff;
     font-size: 0.85rem;
     font-weight: 700;
@@ -2993,7 +2993,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     text-overflow: ellipsis;
 }
 
-.is-admin-portal .sidebar-user-meta small {
+.is-glass-portal .sidebar-user-meta small {
     color: rgba(221, 240, 255, 0.82);
     font-size: 0.72rem;
     white-space: nowrap;
@@ -3001,7 +3001,7 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     text-overflow: ellipsis;
 }
 
-.is-admin-portal .adm-logout-btn {
+.is-glass-portal .adm-logout-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -3017,55 +3017,55 @@ body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
     transition: background 0.18s ease, border-color 0.18s ease;
 }
 
-.is-admin-portal .adm-logout-btn:hover {
+.is-glass-portal .adm-logout-btn:hover {
     background: rgba(239, 68, 68, 0.28);
     border-color: rgba(255, 255, 255, 0.55);
 }
 
 /* --- Collapsed Sidebar State (88px Icon Rail + Tooltips) --- */
-body.is-admin-portal.has-sidebar.bplo-portal.is-sidebar-collapsed .adm-sidebar {
+body.is-glass-portal.has-sidebar.bplo-portal.is-sidebar-collapsed .adm-sidebar {
     width: 88px;
     flex: 0 0 88px;
     padding: 18px 10px 14px;
 }
 
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand {
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand {
     flex-direction: column;
     gap: 10px;
     padding-bottom: 14px;
 }
 
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand-mark {
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand-mark {
     width: 44px;
     height: 44px;
     flex-basis: 44px;
 }
 
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand-text,
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-section-label,
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link-label,
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-user-meta,
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .adm-logout-label {
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-brand-text,
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-section-label,
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link-label,
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-user-meta,
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .adm-logout-label {
     display: none;
 }
 
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .adm-sidebar-collapse-btn svg {
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .adm-sidebar-collapse-btn svg {
     transform: rotate(180deg);
 }
 
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link,
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-user,
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .adm-logout-btn {
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link,
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-user,
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .adm-logout-btn {
     justify-content: center;
     padding-inline: 0;
 }
 
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link:hover {
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar .sidebar-link:hover {
     transform: none;
 }
 
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:hover::after,
-body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visible::after {
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:hover::after,
+body.is-glass-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visible::after {
     content: attr(data-tooltip);
     position: absolute;
     left: calc(100% + 12px);
@@ -3085,7 +3085,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 }
 
 /* --- Top Header --- */
-.is-admin-portal .adm-topbar {
+.is-glass-portal .adm-topbar {
     position: static;
     display: flex;
     align-items: center;
@@ -3101,12 +3101,12 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     margin: 0;
 }
 
-.is-admin-portal .adm-mobile-brand,
-.is-admin-portal .adm-mobile-menu-btn {
+.is-glass-portal .adm-mobile-brand,
+.is-glass-portal .adm-mobile-menu-btn {
     display: none;
 }
 
-.is-admin-portal .adm-topbar .topbar-brand-icon {
+.is-glass-portal .adm-topbar .topbar-brand-icon {
     width: 42px;
     height: 42px;
     flex: 0 0 42px;
@@ -3120,18 +3120,18 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     box-shadow: 0 6px 16px rgba(22, 139, 250, 0.12);
 }
 
-.is-admin-portal .adm-topbar .topbar-brand-icon svg {
+.is-glass-portal .adm-topbar .topbar-brand-icon svg {
     width: 21px;
     height: 21px;
 }
 
-.is-admin-portal .adm-topbar .topbar-heading {
+.is-glass-portal .adm-topbar .topbar-heading {
     display: flex;
     flex-direction: column;
     min-width: 0;
 }
 
-.is-admin-portal .adm-topbar .topbar-kicker {
+.is-glass-portal .adm-topbar .topbar-kicker {
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.09em;
@@ -3139,21 +3139,21 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     text-transform: uppercase;
 }
 
-.is-admin-portal .adm-topbar .topbar-title {
+.is-glass-portal .adm-topbar .topbar-title {
     font-size: 1.24rem;
     font-weight: 800;
     color: var(--adm-text-primary);
     line-height: 1.18;
 }
 
-.is-admin-portal .adm-topbar .topbar-right {
+.is-glass-portal .adm-topbar .topbar-right {
     margin-left: auto;
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.is-admin-portal .adm-topbar .notif-bell {
+.is-glass-portal .adm-topbar .notif-bell {
     position: relative;
     width: 42px;
     height: 42px;
@@ -3168,12 +3168,12 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     transition: transform 0.18s ease, background 0.18s ease;
 }
 
-.is-admin-portal .adm-topbar .notif-bell:hover {
+.is-glass-portal .adm-topbar .notif-bell:hover {
     background: rgba(255, 255, 255, 0.92);
     transform: translateY(-1px);
 }
 
-.is-admin-portal .adm-topbar .topbar-user {
+.is-glass-portal .adm-topbar .topbar-user {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -3183,12 +3183,12 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     border: 1px solid rgba(255, 255, 255, 0.82);
 }
 
-.is-admin-portal .adm-topbar .topbar-avatar-wrap {
+.is-glass-portal .adm-topbar .topbar-avatar-wrap {
     position: relative;
     display: inline-flex;
 }
 
-.is-admin-portal .adm-topbar .topbar-avatar {
+.is-glass-portal .adm-topbar .topbar-avatar {
     width: 38px;
     height: 38px;
     border-radius: 50%;
@@ -3201,7 +3201,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     box-shadow: 0 6px 14px rgba(22, 139, 250, 0.25);
 }
 
-.is-admin-portal .topbar-avatar-status {
+.is-glass-portal .topbar-avatar-status {
     position: absolute;
     right: -1px;
     bottom: -1px;
@@ -3212,29 +3212,29 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     border: 2px solid #ffffff;
 }
 
-.is-admin-portal .adm-topbar .topbar-user-meta {
+.is-glass-portal .adm-topbar .topbar-user-meta {
     display: flex;
     flex-direction: column;
     line-height: 1.15;
 }
 
-.is-admin-portal .adm-topbar .topbar-user-meta strong {
+.is-glass-portal .adm-topbar .topbar-user-meta strong {
     font-size: 0.86rem;
     font-weight: 700;
     color: var(--adm-text-primary);
 }
 
-.is-admin-portal .adm-topbar .topbar-user-meta small {
+.is-glass-portal .adm-topbar .topbar-user-meta small {
     font-size: 0.72rem;
     color: var(--adm-text-secondary);
 }
 
-.is-admin-portal .adm-user-chevron {
+.is-glass-portal .adm-user-chevron {
     color: var(--adm-text-secondary);
 }
 
 /* --- Hero Welcome Banner --- */
-.is-admin-portal .adm-hero {
+.is-glass-portal .adm-hero {
     position: relative;
     overflow: hidden;
     display: flex;
@@ -3255,7 +3255,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     margin: 0;
 }
 
-.is-admin-portal .adm-hero::before {
+.is-glass-portal .adm-hero::before {
     content: "";
     position: absolute;
     left: 44%;
@@ -3268,13 +3268,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     pointer-events: none;
 }
 
-.is-admin-portal .adm-hero-copy {
+.is-glass-portal .adm-hero-copy {
     position: relative;
     z-index: 2;
     max-width: 660px;
 }
 
-.is-admin-portal .adm-hero-pill {
+.is-glass-portal .adm-hero-pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -3290,7 +3290,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     margin-bottom: 12px;
 }
 
-.is-admin-portal .adm-hero-pill-icon {
+.is-glass-portal .adm-hero-pill-icon {
     width: 22px;
     height: 22px;
     border-radius: 50%;
@@ -3301,7 +3301,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     color: #ffffff;
 }
 
-.is-admin-portal .adm-hero h1 {
+.is-glass-portal .adm-hero h1 {
     margin: 0 0 8px;
     font-size: clamp(1.65rem, 3vw, 2.55rem);
     font-weight: 800;
@@ -3310,27 +3310,27 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     color: #ffffff;
 }
 
-.is-admin-portal .adm-hero-highlight {
+.is-glass-portal .adm-hero-highlight {
     background: linear-gradient(92deg, #43d6ff 0%, var(--adm-cyan) 45%, var(--adm-teal) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-.is-admin-portal .adm-hero-copy p {
+.is-glass-portal .adm-hero-copy p {
     margin: 0 0 18px;
     font-size: 0.96rem;
     color: rgba(232, 245, 255, 0.90);
     line-height: 1.5;
 }
 
-.is-admin-portal .adm-hero-actions {
+.is-glass-portal .adm-hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
 
-.is-admin-portal .adm-hero-btn-primary {
+.is-glass-portal .adm-hero-btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -3347,13 +3347,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.is-admin-portal .adm-hero-btn-primary:hover {
+.is-glass-portal .adm-hero-btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 28px rgba(22, 139, 250, 0.52);
     color: #ffffff;
 }
 
-.is-admin-portal .adm-hero-btn-glass {
+.is-glass-portal .adm-hero-btn-glass {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -3370,13 +3370,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     transition: transform 0.18s ease, background 0.18s ease;
 }
 
-.is-admin-portal .adm-hero-btn-glass:hover {
+.is-glass-portal .adm-hero-btn-glass:hover {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.25);
     color: #ffffff;
 }
 
-.is-admin-portal .adm-hero-watermark {
+.is-glass-portal .adm-hero-watermark {
     position: relative;
     z-index: 2;
     display: flex;
@@ -3388,7 +3388,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     text-shadow: 0 4px 16px rgba(11, 55, 101, 0.55);
 }
 
-.is-admin-portal .adm-watermark-title {
+.is-glass-portal .adm-watermark-title {
     font-size: 2.15rem;
     font-weight: 800;
     font-style: italic;
@@ -3397,7 +3397,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     letter-spacing: -0.02em;
 }
 
-.is-admin-portal .adm-watermark-sub {
+.is-glass-portal .adm-watermark-sub {
     font-size: 0.85rem;
     font-weight: 600;
     color: rgba(232, 245, 255, 0.92);
@@ -3405,13 +3405,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 }
 
 /* --- 5 KPI Stat Cards --- */
-.is-admin-portal .adm-stats-grid {
+.is-glass-portal .adm-stats-grid {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 14px;
 }
 
-.is-admin-portal .adm-stat-card {
+.is-glass-portal .adm-stat-card {
     position: relative;
     overflow: hidden;
     display: flex;
@@ -3428,7 +3428,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     min-width: 0;
 }
 
-.is-admin-portal .adm-stat-card::before {
+.is-glass-portal .adm-stat-card::before {
     content: "";
     position: absolute;
     left: -12%;
@@ -3440,13 +3440,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     pointer-events: none;
 }
 
-.is-admin-portal .adm-stat-card:hover {
+.is-glass-portal .adm-stat-card:hover {
     transform: translateY(-3px);
     background: var(--adm-glass-strong);
     box-shadow: 0 22px 44px rgba(11, 55, 101, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
-.is-admin-portal .adm-stat-icon {
+.is-glass-portal .adm-stat-icon {
     position: relative;
     z-index: 1;
     width: 46px;
@@ -3460,50 +3460,50 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     border: 2px solid rgba(255, 255, 255, 0.75);
 }
 
-.is-admin-portal .adm-stat-icon svg {
+.is-glass-portal .adm-stat-icon svg {
     width: 21px;
     height: 21px;
 }
 
-.is-admin-portal .adm-stat-card.tone-blue .adm-stat-icon {
+.is-glass-portal .adm-stat-card.tone-blue .adm-stat-icon {
     background: linear-gradient(135deg, #1b8bfa, #46b6ff);
     box-shadow: 0 8px 18px rgba(22, 139, 250, 0.34);
 }
 
-.is-admin-portal .adm-stat-card.tone-purple .adm-stat-icon {
+.is-glass-portal .adm-stat-card.tone-purple .adm-stat-icon {
     background: linear-gradient(135deg, #6258f6, #8f87ff);
     box-shadow: 0 8px 18px rgba(98, 88, 246, 0.34);
 }
 
-.is-admin-portal .adm-stat-card.tone-green .adm-stat-icon {
+.is-glass-portal .adm-stat-card.tone-green .adm-stat-icon {
     background: linear-gradient(135deg, #16b978, #46df9e);
     box-shadow: 0 8px 18px rgba(18, 185, 129, 0.34);
 }
 
-.is-admin-portal .adm-stat-card.tone-amber .adm-stat-icon {
+.is-glass-portal .adm-stat-card.tone-amber .adm-stat-icon {
     background: linear-gradient(135deg, #f29d12, #ffc14d);
     box-shadow: 0 8px 18px rgba(245, 166, 35, 0.34);
 }
 
-.is-admin-portal .adm-stat-card.tone-teal .adm-stat-icon {
+.is-glass-portal .adm-stat-card.tone-teal .adm-stat-icon {
     background: linear-gradient(135deg, #00b89c, #17dfc0);
     box-shadow: 0 8px 18px rgba(0, 205, 170, 0.34);
 }
 
-.is-admin-portal .adm-stat-content {
+.is-glass-portal .adm-stat-content {
     position: relative;
     z-index: 1;
     min-width: 0;
 }
 
-.is-admin-portal .adm-stat-value {
+.is-glass-portal .adm-stat-value {
     font-size: 1.72rem;
     font-weight: 800;
     line-height: 1.05;
     color: var(--adm-text-primary);
 }
 
-.is-admin-portal .adm-stat-label {
+.is-glass-portal .adm-stat-label {
     font-size: 0.82rem;
     font-weight: 600;
     color: var(--adm-text-secondary);
@@ -3511,7 +3511,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     margin-top: 3px;
 }
 
-.is-admin-portal .adm-stat-trend {
+.is-glass-portal .adm-stat-trend {
     position: absolute;
     right: 12px;
     bottom: 9px;
@@ -3528,15 +3528,15 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 }
 
 /* --- Two-Column Main Area: Recent Activities & Quick Administration --- */
-.is-admin-portal .adm-main-grid {
+.is-glass-portal .adm-main-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr);
     gap: 16px;
     align-items: start;
 }
 
-.is-admin-portal .adm-panel,
-.is-admin-portal .card {
+.is-glass-portal .adm-panel,
+.is-glass-portal .card {
     background: var(--adm-glass-white);
     backdrop-filter: blur(22px) saturate(155%);
     -webkit-backdrop-filter: blur(22px) saturate(155%);
@@ -3549,7 +3549,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     overflow: hidden;
 }
 
-.is-admin-portal .adm-panel-head {
+.is-glass-portal .adm-panel-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3559,13 +3559,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     border-bottom: 1px solid rgba(16, 57, 102, 0.08);
 }
 
-.is-admin-portal .adm-panel-title-wrap {
+.is-glass-portal .adm-panel-title-wrap {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.is-admin-portal .adm-panel-icon {
+.is-glass-portal .adm-panel-icon {
     width: 34px;
     height: 34px;
     border-radius: 10px;
@@ -3576,54 +3576,58 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     color: var(--adm-blue);
 }
 
-.is-admin-portal .adm-panel-icon-zap {
+.is-glass-portal .adm-panel-icon-zap {
     background: rgba(33, 197, 242, 0.15);
     color: var(--adm-blue);
 }
 
-.is-admin-portal .adm-panel-title {
+.is-glass-portal .adm-panel-title {
     margin: 0;
     font-size: 1.08rem;
     font-weight: 800;
     color: var(--adm-text-primary);
 }
 
-.is-admin-portal .adm-pill-btn {
+.is-glass-portal .adm-pill-btn {
     display: inline-flex;
     align-items: center;
     padding: 6px 14px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.78);
-    border: 1px solid rgba(16, 57, 102, 0.12);
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(16, 57, 102, 0.14);
     color: var(--adm-text-primary);
     font-size: 0.8rem;
     font-weight: 700;
     text-decoration: none;
-    transition: background 0.18s ease, transform 0.18s ease;
+    transition: background 0.18s ease, transform 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
-.is-admin-portal .adm-pill-btn:hover {
+.is-glass-portal .adm-pill-btn:hover,
+.is-glass-portal .adm-pill-btn:focus,
+.is-glass-portal .adm-pill-btn:active {
     background: #ffffff;
+    color: var(--adm-navy);
+    border-color: rgba(22, 139, 250, 0.36);
     transform: translateY(-1px);
 }
 
 /* --- Recent Activities Table --- */
-.is-admin-portal .adm-activity-table-wrap {
+.is-glass-portal .adm-activity-table-wrap {
     overflow-x: auto;
     border-radius: 16px;
 }
 
-.is-admin-portal .adm-activity-table {
+.is-glass-portal .adm-activity-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.86rem;
 }
 
-.is-admin-portal .adm-activity-table thead tr {
+.is-glass-portal .adm-activity-table thead tr {
     background: rgba(212, 234, 255, 0.72);
 }
 
-.is-admin-portal .adm-activity-table th {
+.is-glass-portal .adm-activity-table th {
     padding: 11px 12px;
     text-align: left;
     font-size: 0.73rem;
@@ -3635,37 +3639,37 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     white-space: nowrap;
 }
 
-.is-admin-portal .adm-activity-table th:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
-.is-admin-portal .adm-activity-table th:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+.is-glass-portal .adm-activity-table th:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+.is-glass-portal .adm-activity-table th:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
 
-.is-admin-portal .adm-activity-table td {
+.is-glass-portal .adm-activity-table td {
     padding: 12px;
     border-bottom: 1px solid rgba(16, 57, 102, 0.08);
     color: var(--adm-text-primary);
     vertical-align: middle;
 }
 
-.is-admin-portal .adm-activity-table tbody tr:last-child td {
+.is-glass-portal .adm-activity-table tbody tr:last-child td {
     border-bottom: 0;
 }
 
-.is-admin-portal .adm-activity-table tbody tr:hover {
+.is-glass-portal .adm-activity-table tbody tr:hover {
     background: rgba(255, 255, 255, 0.45);
 }
 
-.is-admin-portal .adm-activity-when {
+.is-glass-portal .adm-activity-when {
     font-weight: 700;
     white-space: nowrap;
 }
 
-.is-admin-portal .adm-actor-cell {
+.is-glass-portal .adm-actor-cell {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-weight: 600;
 }
 
-.is-admin-portal .adm-actor-dot {
+.is-glass-portal .adm-actor-dot {
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -3680,7 +3684,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     font-weight: 800;
 }
 
-.is-admin-portal .adm-action-badge {
+.is-glass-portal .adm-action-badge {
     display: inline-flex;
     align-items: center;
     padding: 4px 10px;
@@ -3694,23 +3698,23 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     white-space: nowrap;
 }
 
-.is-admin-portal .adm-activity-subject {
+.is-glass-portal .adm-activity-subject {
     color: var(--adm-text-secondary);
     font-weight: 600;
 }
 
-.is-admin-portal .adm-activity-mobile-list {
+.is-glass-portal .adm-activity-mobile-list {
     display: none;
 }
 
 /* --- Quick Administration Cards --- */
-.is-admin-portal .adm-quick-grid {
+.is-glass-portal .adm-quick-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
 }
 
-.is-admin-portal .adm-quick-card {
+.is-glass-portal .adm-quick-card {
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -3723,21 +3727,21 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     min-width: 0;
 }
 
-.is-admin-portal .adm-quick-card:hover {
+.is-glass-portal .adm-quick-card:hover {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.92);
     border-color: rgba(22, 139, 250, 0.42);
     box-shadow: 0 14px 28px rgba(22, 139, 250, 0.14);
 }
 
-.is-admin-portal .adm-quick-card-top {
+.is-glass-portal .adm-quick-card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 12px;
 }
 
-.is-admin-portal .adm-quick-icon {
+.is-glass-portal .adm-quick-icon {
     width: 36px;
     height: 36px;
     border-radius: 11px;
@@ -3748,26 +3752,26 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     color: var(--adm-blue);
 }
 
-.is-admin-portal .adm-quick-arrow {
+.is-glass-portal .adm-quick-arrow {
     color: var(--adm-text-secondary);
     font-size: 0.96rem;
     font-weight: 700;
     transition: transform 0.18s ease, color 0.18s ease;
 }
 
-.is-admin-portal .adm-quick-card:hover .adm-quick-arrow {
+.is-glass-portal .adm-quick-card:hover .adm-quick-arrow {
     transform: translateX(3px);
     color: var(--adm-blue);
 }
 
-.is-admin-portal .adm-quick-title {
+.is-glass-portal .adm-quick-title {
     font-size: 0.94rem;
     font-weight: 800;
     color: var(--adm-text-primary);
     line-height: 1.22;
 }
 
-.is-admin-portal .adm-quick-desc {
+.is-glass-portal .adm-quick-desc {
     font-size: 0.78rem;
     color: var(--adm-text-secondary);
     margin-top: 3px;
@@ -3775,16 +3779,16 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 }
 
 /* --- Footer --- */
-.is-admin-portal .adm-footer {
+body.is-glass-portal.has-sidebar.bplo-portal .main-area .adm-footer {
     margin-top: auto;
     padding: 12px 20px;
     border-radius: 18px;
-    background: linear-gradient(135deg, rgba(16, 56, 98, 0.80) 0%, rgba(22, 79, 128, 0.72) 100%);
+    background: linear-gradient(135deg, rgba(11, 55, 101, 0.90) 0%, rgba(22, 79, 128, 0.84) 100%);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255, 255, 255, 0.34);
-    box-shadow: 0 12px 28px rgba(11, 55, 101, 0.16);
-    color: #eef6ff;
+    border: 1px solid rgba(255, 255, 255, 0.36);
+    box-shadow: 0 12px 28px rgba(11, 55, 101, 0.18);
+    color: #f4f9ff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3793,15 +3797,15 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     font-size: 0.82rem;
 }
 
-.is-admin-portal .adm-footer-left,
-.is-admin-portal .adm-footer-right {
+.is-glass-portal .adm-footer-left,
+.is-glass-portal .adm-footer-right {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
 }
 
-.is-admin-portal .adm-footer-shield {
+.is-glass-portal .adm-footer-shield {
     width: 26px;
     height: 26px;
     border-radius: 50%;
@@ -3812,23 +3816,23 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     color: #6ee7b7;
 }
 
-.is-admin-portal .adm-footer-brand {
+.is-glass-portal .adm-footer-brand {
     font-weight: 700;
     color: #ffffff;
 }
 
-.is-admin-portal .adm-footer-tagline {
+.is-glass-portal .adm-footer-tagline {
     color: rgba(218, 238, 255, 0.82);
 }
 
-.is-admin-portal .adm-footer-clock {
+.is-glass-portal .adm-footer-clock {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     color: rgba(232, 245, 255, 0.92);
 }
 
-.is-admin-portal .adm-footer-online {
+.is-glass-portal .adm-footer-online {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -3836,7 +3840,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     color: #b7f7de;
 }
 
-.is-admin-portal .adm-online-dot {
+.is-glass-portal .adm-online-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -3845,7 +3849,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 }
 
 /* --- Mobile Navigation Drawer & Bottom Bar (default hidden on desktop/tablet) --- */
-.is-admin-portal .adm-drawer-backdrop {
+.is-glass-portal .adm-drawer-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(11, 55, 101, 0.44);
@@ -3855,11 +3859,11 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     transition: opacity 0.22s ease;
 }
 
-.is-admin-portal .adm-drawer-backdrop.is-open {
+.is-glass-portal .adm-drawer-backdrop.is-open {
     opacity: 1;
 }
 
-.is-admin-portal .adm-mobile-drawer {
+.is-glass-portal .adm-mobile-drawer {
     position: fixed;
     top: 10px;
     left: 10px;
@@ -3881,12 +3885,12 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.25s ease;
 }
 
-.is-admin-portal .adm-mobile-drawer.is-open {
+.is-glass-portal .adm-mobile-drawer.is-open {
     transform: translateX(0);
     visibility: visible;
 }
 
-.is-admin-portal .adm-drawer-header {
+.is-glass-portal .adm-drawer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3895,7 +3899,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.is-admin-portal .adm-drawer-brand {
+.is-glass-portal .adm-drawer-brand {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -3904,7 +3908,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     min-width: 0;
 }
 
-.is-admin-portal .adm-drawer-close {
+.is-glass-portal .adm-drawer-close {
     width: 36px;
     height: 36px;
     flex: 0 0 36px;
@@ -3918,7 +3922,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     cursor: pointer;
 }
 
-.is-admin-portal .adm-drawer-nav {
+.is-glass-portal .adm-drawer-nav {
     flex: 1 1 auto;
     overflow-y: auto;
     display: flex;
@@ -3927,7 +3931,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     padding: 10px 0;
 }
 
-.is-admin-portal .adm-drawer-footer {
+.is-glass-portal .adm-drawer-footer {
     padding-top: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.16);
     display: flex;
@@ -3935,7 +3939,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     gap: 10px;
 }
 
-.is-admin-portal .adm-drawer-footer .btn {
+.is-glass-portal .adm-drawer-footer .btn {
     width: 100%;
     display: inline-flex;
     align-items: center;
@@ -3948,12 +3952,12 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     padding: 10px;
 }
 
-.is-admin-portal .adm-mobile-bottom-nav {
+.is-glass-portal .adm-mobile-bottom-nav {
     display: none;
 }
 
 /* --- Shared Glass Styling for Other Admin Pages --- */
-.is-admin-portal .page-header:not(.adm-hero) {
+.is-glass-portal .page-header:not(.adm-hero) {
     background: var(--adm-glass-white);
     backdrop-filter: blur(20px);
     border: 1px solid var(--adm-glass-border);
@@ -3963,11 +3967,11 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
     margin-bottom: 0;
 }
 
-.is-admin-portal .card table.data thead tr {
+.is-glass-portal .card table.data thead tr {
     background: rgba(214, 236, 255, 0.65);
 }
 
-.is-admin-portal .adm-skeleton {
+.is-glass-portal .adm-skeleton {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.45) 25%, rgba(232, 245, 255, 0.78) 50%, rgba(255, 255, 255, 0.45) 75%);
     background-size: 200% 100%;
     animation: adm-shimmer 1.5s infinite linear;
@@ -3981,48 +3985,48 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 
 /* --- Responsive Breakpoints (Tablet & Small Desktop) --- */
 @media (max-width: 1380px) and (min-width: 1200px) {
-    .is-admin-portal .adm-stats-grid {
+    .is-glass-portal .adm-stats-grid {
         gap: 10px;
     }
-    .is-admin-portal .adm-stats-grid .adm-stat-card {
+    .is-glass-portal .adm-stats-grid .adm-stat-card {
         padding: 15px 12px 30px;
         gap: 10px;
     }
-    .is-admin-portal .adm-stat-icon {
+    .is-glass-portal .adm-stat-icon {
         width: 40px;
         height: 40px;
         flex-basis: 40px;
     }
-    .is-admin-portal .adm-stat-label {
+    .is-glass-portal .adm-stat-label {
         font-size: 0.77rem;
     }
 }
 
 @media (max-width: 1199px) {
-    .is-admin-portal .adm-stats-grid {
+    .is-glass-portal .adm-stats-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 1120px) {
-    .is-admin-portal .adm-main-grid {
+    .is-glass-portal .adm-main-grid {
         grid-template-columns: 1fr;
     }
-    .is-admin-portal .adm-hero {
+    .is-glass-portal .adm-hero {
         padding: 24px;
     }
-    .is-admin-portal .adm-hero-watermark {
+    .is-glass-portal .adm-hero-watermark {
         display: none;
     }
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
-    body.is-admin-portal.has-sidebar.bplo-portal .adm-layout {
+    body.is-glass-portal.has-sidebar.bplo-portal .adm-layout {
         display: flex;
         gap: 14px;
         padding: 12px;
     }
-    body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
+    body.is-glass-portal.has-sidebar.bplo-portal .adm-sidebar {
         position: sticky;
         top: 12px;
         left: auto;
@@ -4035,19 +4039,19 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         opacity: 1;
         pointer-events: auto;
     }
-    body.is-admin-portal.has-sidebar.bplo-portal.is-sidebar-collapsed .adm-sidebar {
+    body.is-glass-portal.has-sidebar.bplo-portal.is-sidebar-collapsed .adm-sidebar {
         width: 88px;
         flex: 0 0 88px;
     }
-    body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
+    body.is-glass-portal.has-sidebar.bplo-portal .adm-main-area {
         min-height: calc(100vh - 24px);
         margin-left: 0;
         width: auto;
     }
-    .is-admin-portal .adm-stats-grid {
+    .is-glass-portal .adm-stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .is-admin-portal .adm-stats-grid .adm-stat-card {
+    .is-glass-portal .adm-stats-grid .adm-stat-card {
         display: grid;
         grid-template-columns: 44px minmax(0, 1fr);
         grid-template-rows: auto auto;
@@ -4056,24 +4060,24 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         row-gap: 8px;
         padding: 16px 15px 14px;
     }
-    .is-admin-portal .adm-stat-icon {
+    .is-glass-portal .adm-stat-icon {
         grid-column: 1;
         grid-row: 1;
     }
-    .is-admin-portal .adm-stat-content {
+    .is-glass-portal .adm-stat-content {
         grid-column: 2;
         grid-row: 1;
     }
-    .is-admin-portal .adm-stat-trend {
+    .is-glass-portal .adm-stat-trend {
         position: static;
         grid-column: 1 / -1;
         grid-row: 2;
         justify-self: end;
     }
-    .is-admin-portal .adm-stats-grid .adm-stat-card:last-child {
+    .is-glass-portal .adm-stats-grid .adm-stat-card:last-child {
         grid-column: 1 / -1;
     }
-    .is-admin-portal .adm-activity-table-wrap {
+    .is-glass-portal .adm-activity-table-wrap {
         width: 100%;
         max-width: 100%;
         overflow-x: auto;
@@ -4082,27 +4086,27 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 
 /* --- Mobile Layout (320px - 767px) --- */
 @media (max-width: 767px) {
-    body.is-admin-portal.has-sidebar.bplo-portal .adm-sidebar {
+    body.is-glass-portal.has-sidebar.bplo-portal .adm-sidebar {
         display: none;
     }
 
-    body.is-admin-portal.has-sidebar.bplo-portal .adm-layout {
+    body.is-glass-portal.has-sidebar.bplo-portal .adm-layout {
         display: block;
         padding: 10px 10px calc(102px + env(safe-area-inset-bottom, 0px));
         min-height: 100vh;
     }
 
-    body.is-admin-portal.has-sidebar.bplo-portal .adm-main-area {
+    body.is-glass-portal.has-sidebar.bplo-portal .adm-main-area {
         gap: 12px;
         min-height: auto;
         margin-left: 0;
     }
 
-    .is-admin-portal .adm-container {
+    .is-glass-portal .adm-container {
         gap: 12px;
     }
 
-    .is-admin-portal .adm-topbar {
+    .is-glass-portal .adm-topbar {
         min-height: 58px;
         padding: 8px 12px;
         border-radius: 18px;
@@ -4112,13 +4116,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         gap: 8px;
     }
 
-    .is-admin-portal .adm-topbar .topbar-brand-icon,
-    .is-admin-portal .adm-topbar .topbar-heading,
-    .is-admin-portal .adm-topbar .topbar-user {
+    .is-glass-portal .adm-topbar .topbar-brand-icon,
+    .is-glass-portal .adm-topbar .topbar-heading,
+    .is-glass-portal .adm-topbar .topbar-user {
         display: none;
     }
 
-    .is-admin-portal .adm-mobile-brand {
+    .is-glass-portal .adm-mobile-brand {
         display: flex;
         align-items: center;
         gap: 9px;
@@ -4127,14 +4131,14 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         min-width: 0;
     }
 
-    .is-admin-portal .adm-mobile-mark {
+    .is-glass-portal .adm-mobile-mark {
         width: 36px;
         height: 36px;
         flex: 0 0 36px;
         font-size: 0.85rem;
     }
 
-    .is-admin-portal .adm-mobile-brand-name {
+    .is-glass-portal .adm-mobile-brand-name {
         font-size: 0.88rem;
         font-weight: 700;
         color: #ffffff;
@@ -4144,7 +4148,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         text-overflow: ellipsis;
     }
 
-    body.is-admin-portal.has-sidebar.bplo-portal .adm-topbar .notif-bell {
+    body.is-glass-portal.has-sidebar.bplo-portal .adm-topbar .notif-bell {
         width: 38px;
         height: 38px;
         background: rgba(255, 255, 255, 0.16);
@@ -4152,7 +4156,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         color: #ffffff;
     }
 
-    .is-admin-portal .adm-mobile-menu-btn {
+    .is-glass-portal .adm-mobile-menu-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -4166,7 +4170,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         padding: 0;
     }
 
-    .is-admin-portal .adm-mobile-menu-btn svg {
+    .is-glass-portal .adm-mobile-menu-btn svg {
         width: 20px;
         height: 20px;
         stroke: currentColor;
@@ -4175,7 +4179,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         fill: none;
     }
 
-    .is-admin-portal .adm-hero {
+    .is-glass-portal .adm-hero {
         padding: 20px 18px;
         border-radius: 22px;
         flex-direction: column;
@@ -4186,7 +4190,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
             url('/images/bplo-blue-background.png');
     }
 
-    .is-admin-portal .adm-hero-highlight {
+    .is-glass-portal .adm-hero-highlight {
         background: linear-gradient(92deg, #7be4ff 0%, #44dcff 48%, #4cf2cb 100%);
         -webkit-background-clip: text;
         background-clip: text;
@@ -4194,7 +4198,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         filter: drop-shadow(0 2px 10px rgba(11, 55, 101, 0.45));
     }
 
-    .is-admin-portal .adm-panel-head {
+    .is-glass-portal .adm-panel-head {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
@@ -4202,44 +4206,44 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         gap: 8px;
     }
 
-    .is-admin-portal .adm-panel-title {
+    .is-glass-portal .adm-panel-title {
         font-size: 0.98rem;
     }
 
-    .is-admin-portal .adm-pill-btn {
+    .is-glass-portal .adm-pill-btn {
         flex-shrink: 0;
         white-space: nowrap;
         padding: 5px 11px;
         font-size: 0.76rem;
     }
 
-    .is-admin-portal .adm-hero h1 {
+    .is-glass-portal .adm-hero h1 {
         font-size: clamp(1.38rem, 6vw, 1.75rem);
     }
 
-    .is-admin-portal .adm-hero-copy p {
+    .is-glass-portal .adm-hero-copy p {
         font-size: 0.86rem;
         margin-bottom: 14px;
     }
 
-    .is-admin-portal .adm-hero-actions {
+    .is-glass-portal .adm-hero-actions {
         width: 100%;
         gap: 8px;
     }
 
-    .is-admin-portal .adm-hero-btn-primary,
-    .is-admin-portal .adm-hero-btn-glass {
+    .is-glass-portal .adm-hero-btn-primary,
+    .is-glass-portal .adm-hero-btn-glass {
         flex: 1 1 130px;
         padding: 9px 12px;
         font-size: 0.82rem;
     }
 
-    .is-admin-portal .adm-stats-grid {
+    .is-glass-portal .adm-stats-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
     }
 
-    .is-admin-portal .adm-stats-grid .adm-stat-card {
+    .is-glass-portal .adm-stats-grid .adm-stat-card {
         display: grid;
         grid-template-columns: 38px minmax(0, 1fr);
         grid-template-rows: auto auto;
@@ -4250,11 +4254,11 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         border-radius: 18px;
     }
 
-    .is-admin-portal .adm-stats-grid .adm-stat-card:last-child {
+    .is-glass-portal .adm-stats-grid .adm-stat-card:last-child {
         grid-column: 1 / -1;
     }
 
-    .is-admin-portal .adm-stat-icon {
+    .is-glass-portal .adm-stat-icon {
         grid-column: 1;
         grid-row: 1;
         width: 38px;
@@ -4262,13 +4266,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         flex-basis: 38px;
     }
 
-    .is-admin-portal .adm-stat-content {
+    .is-glass-portal .adm-stat-content {
         grid-column: 2;
         grid-row: 1;
         min-width: 0;
     }
 
-    .is-admin-portal .adm-stat-trend {
+    .is-glass-portal .adm-stat-trend {
         position: static;
         grid-column: 1 / -1;
         grid-row: 2;
@@ -4276,30 +4280,30 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         margin-top: 0;
     }
 
-    .is-admin-portal .adm-stat-value {
+    .is-glass-portal .adm-stat-value {
         font-size: 1.38rem;
     }
 
-    .is-admin-portal .adm-stat-label {
+    .is-glass-portal .adm-stat-label {
         font-size: 0.76rem;
     }
 
-    .is-admin-portal .adm-panel,
-    .is-admin-portal .card {
+    .is-glass-portal .adm-panel,
+    .is-glass-portal .card {
         padding: 16px 14px;
         border-radius: 20px;
     }
 
-    .is-admin-portal .adm-activity-table-wrap {
+    .is-glass-portal .adm-activity-table-wrap {
         display: none;
     }
 
-    .is-admin-portal .adm-activity-mobile-list {
+    .is-glass-portal .adm-activity-mobile-list {
         display: grid;
         gap: 10px;
     }
 
-    .is-admin-portal .adm-activity-mobile-card {
+    .is-glass-portal .adm-activity-mobile-card {
         padding: 12px 13px;
         border-radius: 16px;
         background: rgba(255, 255, 255, 0.72);
@@ -4310,7 +4314,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         gap: 8px;
     }
 
-    .is-admin-portal .adm-activity-mobile-top {
+    .is-glass-portal .adm-activity-mobile-top {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -4318,13 +4322,13 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         flex-wrap: wrap;
     }
 
-    .is-admin-portal .adm-actor-name {
+    .is-glass-portal .adm-actor-name {
         font-size: 0.86rem;
         font-weight: 700;
         color: var(--adm-text-primary);
     }
 
-    .is-admin-portal .adm-activity-mobile-meta {
+    .is-glass-portal .adm-activity-mobile-meta {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -4334,28 +4338,28 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         color: var(--adm-text-secondary);
     }
 
-    .is-admin-portal .adm-activity-mobile-subject {
+    .is-glass-portal .adm-activity-mobile-subject {
         font-weight: 700;
         color: var(--adm-navy-2);
     }
 
-    .is-admin-portal .adm-quick-grid {
+    .is-glass-portal .adm-quick-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
     }
 
-    .is-admin-portal .adm-quick-card {
+    .is-glass-portal .adm-quick-card {
         padding: 12px;
         border-radius: 16px;
     }
 
-    .is-admin-portal .adm-footer {
+    .is-glass-portal .adm-footer {
         padding: 12px 14px;
         border-radius: 18px;
         font-size: 0.76rem;
     }
 
-    .is-admin-portal .adm-mobile-bottom-nav {
+    .is-glass-portal .adm-mobile-bottom-nav {
         position: fixed;
         left: 10px;
         right: 10px;
@@ -4373,7 +4377,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         box-shadow: 0 14px 32px rgba(11, 55, 101, 0.20);
     }
 
-    .is-admin-portal .adm-bottom-nav-link {
+    .is-glass-portal .adm-bottom-nav-link {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -4388,7 +4392,7 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
         transition: background 0.18s ease, color 0.18s ease;
     }
 
-    .is-admin-portal .adm-bottom-nav-link.is-active {
+    .is-glass-portal .adm-bottom-nav-link.is-active {
         background: rgba(22, 139, 250, 0.14);
         color: var(--adm-blue);
         font-weight: 800;
@@ -4396,31 +4400,307 @@ body.is-admin-portal.is-sidebar-collapsed .adm-sidebar [data-tooltip]:focus-visi
 }
 
 @media (max-width: 374px) {
-    .is-admin-portal .adm-stats-grid,
-    .is-admin-portal .adm-quick-grid {
+    .is-glass-portal .adm-stats-grid,
+    .is-glass-portal .adm-quick-grid {
         grid-template-columns: 1fr;
     }
-    .is-admin-portal .adm-stats-grid .adm-stat-card:last-child {
+    .is-glass-portal .adm-stats-grid .adm-stat-card:last-child {
         grid-column: auto;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .is-admin-portal *,
-    .is-admin-portal *::before,
-    .is-admin-portal *::after {
+    .is-glass-portal *,
+    .is-glass-portal *::before,
+    .is-glass-portal *::after {
         transition: none !important;
         animation: none !important;
     }
 }
 
 @media print {
-    .is-admin-portal .adm-mobile-bottom-nav,
-    .is-admin-portal .adm-mobile-drawer,
-    .is-admin-portal .adm-drawer-backdrop,
-    .is-admin-portal .adm-sidebar-collapse-btn,
-    .is-admin-portal .adm-mobile-menu-btn {
+    .is-glass-portal .adm-mobile-bottom-nav,
+    .is-glass-portal .adm-mobile-drawer,
+    .is-glass-portal .adm-drawer-backdrop,
+    .is-glass-portal .adm-sidebar-collapse-btn,
+    .is-glass-portal .adm-mobile-menu-btn {
         display: none !important;
+    }
+}
+
+/* =========================================================================
+   Treasurer Financial Totals & Analytics Styles
+   ========================================================================= */
+
+.is-glass-portal .trs-stats-grid .adm-stat-value {
+    font-size: clamp(1.14rem, 1.5vw, 1.52rem);
+    line-height: 1.15;
+    word-break: break-word;
+}
+
+.is-glass-portal .trs-summary-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.is-glass-portal .trs-mini-metric {
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.is-glass-portal .trs-mini-metric span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--adm-text-secondary);
+}
+
+.is-glass-portal .trs-mini-metric strong {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--adm-text-primary);
+}
+
+.is-glass-portal .trs-mini-metric strong small {
+    font-weight: 600;
+    color: var(--adm-text-secondary);
+}
+
+.is-glass-portal .trs-bar-chart {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    align-items: end;
+    padding: 16px 12px 12px;
+    border-radius: 18px;
+    background: rgba(232, 245, 255, 0.56);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.is-glass-portal .trs-bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.is-glass-portal .trs-bar-val {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--adm-text-primary);
+    white-space: nowrap;
+}
+
+.is-glass-portal .trs-bar-track {
+    width: 100%;
+    max-width: 44px;
+    height: 126px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(22, 139, 250, 0.14);
+    display: flex;
+    align-items: flex-end;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.is-glass-portal .trs-bar-fill {
+    width: 100%;
+    border-radius: 8px;
+    background: rgba(84, 116, 147, 0.22);
+    transition: height 0.35s ease;
+}
+
+.is-glass-portal .trs-bar-fill.has-value {
+    background: linear-gradient(180deg, var(--adm-cyan) 0%, var(--adm-blue) 60%, var(--adm-navy-2) 100%);
+    box-shadow: 0 6px 16px rgba(22, 139, 250, 0.28);
+}
+
+.is-glass-portal .trs-bar-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--adm-text-primary);
+}
+
+.is-glass-portal .trs-bar-count {
+    font-size: 0.68rem;
+    color: var(--adm-text-secondary);
+}
+
+.is-glass-portal .trs-channel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.is-glass-portal .trs-progress-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.is-glass-portal .trs-progress-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 0.84rem;
+}
+
+.is-glass-portal .trs-progress-head strong {
+    color: var(--adm-text-primary);
+    font-weight: 700;
+}
+
+.is-glass-portal .trs-progress-head strong small {
+    color: var(--adm-text-secondary);
+    font-weight: 600;
+}
+
+.is-glass-portal .trs-progress-head span {
+    color: var(--adm-navy-2);
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.is-glass-portal .trs-progress-track {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(16, 57, 102, 0.08);
+    overflow: hidden;
+}
+
+.is-glass-portal .trs-progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--adm-blue) 0%, var(--adm-cyan) 100%);
+}
+
+.is-glass-portal .trs-progress-fill.trs-fill-teal {
+    background: linear-gradient(90deg, var(--adm-success) 0%, var(--adm-teal) 100%);
+}
+
+.is-glass-portal .trs-pipeline-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.is-glass-portal .trs-pipeline-tile {
+    padding: 11px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.90);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.is-glass-portal .trs-pipeline-tile.tone-green { border-left: 4px solid var(--adm-success); }
+.is-glass-portal .trs-pipeline-tile.tone-amber { border-left: 4px solid var(--adm-warning); }
+.is-glass-portal .trs-pipeline-tile.tone-blue { border-left: 4px solid var(--adm-blue); }
+.is-glass-portal .trs-pipeline-tile.tone-red { border-left: 4px solid var(--adm-danger); }
+
+.is-glass-portal .trs-pipeline-tile small {
+    font-size: 0.72rem;
+    color: var(--adm-text-secondary);
+    font-weight: 700;
+}
+
+.is-glass-portal .trs-pipeline-tile strong {
+    font-size: 0.96rem;
+    font-weight: 800;
+    color: var(--adm-text-primary);
+}
+
+.is-glass-portal .trs-pipeline-tile span {
+    font-size: 0.72rem;
+    color: var(--adm-text-secondary);
+}
+
+.is-glass-portal .trs-summary-bar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.is-glass-portal .trs-summary-chip {
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: var(--adm-glass-white);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--adm-glass-border);
+    box-shadow: var(--adm-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.is-glass-portal .trs-summary-chip > small {
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--adm-text-secondary);
+}
+
+.is-glass-portal .trs-summary-chip > strong {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--adm-text-primary);
+}
+
+.is-glass-portal .trs-summary-chip > strong small {
+    color: var(--adm-text-secondary);
+    font-weight: 600;
+}
+
+.is-glass-portal .trs-filter-actions,
+.is-glass-portal .trs-period-pills {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+    .is-glass-portal .trs-stats-grid .adm-stat-value {
+        font-size: clamp(1.06rem, 4.2vw, 1.3rem);
+    }
+    .is-glass-portal .trs-summary-strip,
+    .is-glass-portal .trs-summary-bar {
+        grid-template-columns: 1fr;
+    }
+    .is-glass-portal .trs-bar-chart {
+        gap: 6px;
+        padding: 12px 8px 10px;
+    }
+    .is-glass-portal .trs-bar-track {
+        height: 96px;
+    }
+    .is-glass-portal .trs-bar-val {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 374px) {
+    .is-glass-portal .trs-pipeline-grid {
+        grid-template-columns: 1fr;
     }
 }
 

@@ -25,10 +25,10 @@ class DatabaseSeeder extends Seeder
         $this->command->info('===========================================');
         $this->command->info('  Seeded Credentials');
         $this->command->info('===========================================');
-        $this->command->info('  Admin:     admin@bansud.gov.ph / Password123!');
-        $this->command->info('  BPLO:      bplo@bansud.gov.ph / Password123!');
-        $this->command->info('  Treasurer: treasurer@bansud.gov.ph / Password123!');
-        $this->command->info('  Inspector: inspector@bansud.gov.ph / Password123!');
+        $this->command->info('  Admin:     admin@bongabong.gov.ph / Password123!');
+        $this->command->info('  BPLO:      bplo@bongabong.gov.ph / Password123!');
+        $this->command->info('  Treasurer: treasurer@bongabong.gov.ph / Password123!');
+        $this->command->info('  Inspector: inspector@bongabong.gov.ph / Password123!');
         $this->command->info('  Applicant: applicant@example.com / Password123!');
         $this->command->info('===========================================');
         $this->command->info('');

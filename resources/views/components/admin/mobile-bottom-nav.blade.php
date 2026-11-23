@@ -1,9 +1,11 @@
 @props([
     'current' => '/',
+    'items' => null,
+    'ariaLabel' => 'Quick mobile navigation',
 ])
 
 @php
-    $items = [
+    $navItems = $items ?? [
         [
             'url' => '/admin/dashboard',
             'label' => 'Dashboard',
@@ -25,8 +27,8 @@
     ];
 @endphp
 
-<nav class="adm-mobile-bottom-nav no-print" aria-label="Quick mobile admin navigation">
-    @foreach ($items as $item)
+<nav class="adm-mobile-bottom-nav no-print" aria-label="{{ $ariaLabel }}">
+    @foreach ($navItems as $item)
         <a href="{{ url($item['url']) }}"
            class="adm-bottom-nav-link {{ $item['active'] ? 'is-active' : '' }}"
            @if ($item['active']) aria-current="page" @endif>

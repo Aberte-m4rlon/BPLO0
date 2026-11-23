@@ -5,7 +5,7 @@
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M9 12l2 2 4-4" />
             </svg>
         </span>
-        <span class="adm-footer-brand">Bansud Business Permits Office</span>
+        <span class="adm-footer-brand">{{ trim(str_ireplace('Municipality of ', '', config('permit.municipality', 'Bongabong'))) }} Business Permits Office</span>
         <span class="adm-footer-tagline">• Secure • Reliable • Efficient</span>
     </div>
     <div class="adm-footer-right">

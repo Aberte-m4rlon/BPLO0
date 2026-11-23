@@ -29,7 +29,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="email">Work email</label>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="name@bansud.gov.ph" autocomplete="username" required autofocus>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="name@bongabong.gov.ph" autocomplete="username" required autofocus>
                     @error('email') <div class="field-error">{{ $message }}</div> @enderror
                 </div>
                 <div class="form-group">
