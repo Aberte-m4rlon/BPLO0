@@ -3,15 +3,11 @@
 @section('title', 'Verify Permit — '.config('permit.municipality'))
 
 @section('content')
-    <div style="max-width:560px;margin:0 auto">
+    <div class="bplo-verify-wrap">
         <div class="card">
-            <div class="page-header" style="margin-bottom:12px;">
-                <div>
-                    <p class="bplo-eyebrow">PUBLIC VERIFICATION</p>
-                    <h1 style="margin-bottom:0;">Verify a Permit</h1>
-                </div>
-            </div>
-            <p class="muted">
+            <p class="bplo-eyebrow">Public Verification</p>
+            <h1>Verify a Permit</h1>
+            <p class="bplo-form-intro">
                 Scan the QR code on the Mayor's Permit with your phone camera. If you can't scan it,
                 type or paste the verification link or code printed at the bottom of the permit.
             </p>
@@ -27,10 +23,11 @@
                            placeholder="{{ url('/verify') }}/..." autocomplete="off" required>
                     @error('code') <div class="field-error">{{ $message }}</div> @enderror
                 </div>
-                <button type="submit" class="btn">Verify Permit</button>
+                <div class="bplo-form-actions">
+                    <button type="submit" class="btn">Verify Permit</button>
+                    <a href="{{ url('/') }}" class="btn btn-secondary">Back to {{ config('permit.municipality') }}</a>
+                </div>
             </form>
         </div>
-
-        <p class="text-center"><a href="{{ url('/') }}">{{ config('permit.municipality') }}</a></p>
     </div>
 @endsection

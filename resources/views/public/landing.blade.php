@@ -53,7 +53,7 @@
         <h2 style="margin-bottom:6px;">Ready to get started?</h2>
         <p class="muted" style="max-width:520px;margin:0 auto 18px;">Apply for your {{ config('permit.municipality') }} business permit online, or verify an existing one.</p>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-            <a href="{{ url('/register') }}" class="btn">Apply Online</a>
+            <a href="{{ url('/register') }}" class="btn btn-gold">Apply Online</a>
             <a href="{{ route('verify.lookup') }}" class="btn btn-secondary">Verify a Permit</a>
         </div>
     </section>

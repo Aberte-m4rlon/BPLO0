@@ -22,7 +22,7 @@
             background: #EFF8FF;
         }
         .certificate-inner {
-            border: 1.5px solid #64B5F6;
+            border: 1.5px solid #D99B26;
             background: #FFFFFF;
             padding: 24px 26px 20px;
         }
@@ -36,7 +36,7 @@
             height: 58px;
             border-radius: 29px;
             background: #155A9C;
-            border: 3px solid #64B5F6;
+            border: 3px solid #D99B26;
             color: #FFFFFF;
             text-align: center;
             line-height: 44px;
@@ -48,7 +48,7 @@
         .republic { font-size: 9px; text-transform: uppercase; letter-spacing: 1.4px; color: #526F89; margin: 0; }
         .province { font-size: 10px; color: #526F89; margin: 2px 0 0; }
         .municipality { font-size: 17px; font-weight: bold; color: #123B63; margin: 3px 0 2px; text-transform: uppercase; letter-spacing: 0.6px; }
-        .office { font-size: 10px; font-weight: bold; color: #2684D9; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
+        .office { font-size: 10px; font-weight: bold; color: #945D06; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
 
         .qr-cell { width: 110px; text-align: right; }
         .qr-frame {
@@ -67,7 +67,7 @@
             color: #FFFFFF;
             text-align: center;
             padding: 11px 14px;
-            border-bottom: 4px solid #2684D9;
+            border-bottom: 4px solid #D99B26;
             margin-bottom: 14px;
         }
         .title-banner h1 {
@@ -82,7 +82,7 @@
             font-size: 9px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: #D9EEFF;
+            color: #FCE49C;
         }
 
         /* Permit Number & Status Bar */
@@ -92,6 +92,7 @@
             margin-bottom: 16px;
             background: #EFF8FF;
             border: 1px solid #B8DCF8;
+            border-left: 4px solid #D99B26;
         }
         .meta-bar td { padding: 9px 12px; font-size: 11px; }
         .meta-label { font-size: 8.5px; text-transform: uppercase; letter-spacing: 1px; color: #526F89; display: block; margin-bottom: 2px; }
