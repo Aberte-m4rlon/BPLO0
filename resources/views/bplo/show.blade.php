@@ -189,117 +189,121 @@
         </div>
     </div>
 
-    @if ($breakdown)
-        <div class="card">
-            <h2 class="section">Fees to be Paid</h2>
-            <div class="table-wrap table-compact">
-                <table class="data">
-                    <thead><tr><th>Fee</th><th class="text-right">Amount</th></tr></thead>
-                    <tbody>
-                        @foreach ($breakdown->lines as $line)
+    <div class="bplo-detail-grid">
+        @if ($breakdown)
+            <div class="card">
+                <h2 class="section">Fees to be Paid</h2>
+                <div class="table-wrap table-compact">
+                    <table class="data">
+                        <thead><tr><th>Fee</th><th class="text-right">Amount</th></tr></thead>
+                        <tbody>
+                            @foreach ($breakdown->lines as $line)
+                                <tr>
+                                    <td>{{ $line['name'] }}</td>
+                                    <td class="text-right">&#8369;{{ number_format($line['amount'], 2) }}</td>
+                                </tr>
+                            @endforeach
                             <tr>
-                                <td>{{ $line['name'] }}</td>
-                                <td class="text-right">&#8369;{{ number_format($line['amount'], 2) }}</td>
+                                <th>TOTAL</th>
+                                <th class="text-right">&#8369;{{ number_format($breakdown->total, 2) }}</th>
                             </tr>
-                        @endforeach
-                        <tr>
-                            <th>TOTAL</th>
-                            <th class="text-right">&#8369;{{ number_format($breakdown->total, 2) }}</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    @endif
-
-    <div class="card">
-        <h2 class="section">Payments</h2>
-        @if ($application->payments->isEmpty())
-            <p class="muted mb-0">
-                No payments yet.
-                @if ($application->status === Application::STATUS_APPROVED_FOR_PAYMENT)
-                    Waiting for the applicant to pay online.
-                @endif
-            </p>
-        @else
-            <div class="bplo-subcard-list">
-                @foreach ($application->payments->sortByDesc('id') as $payment)
-                    @php $receiving = config('permit.payment.accounts.'.$payment->method); @endphp
-                    <div class="payment-entry {{ $payment->isAwaitingVerification() ? 'is-pending' : '' }}">
-                        <div class="bplo-subcard-head">
-                            <strong>{{ \App\Support\PaymentMethods::label($payment->method) }} · &#8369;{{ number_format((float) $payment->amount, 2) }}</strong>
-                            <div class="bplo-chip-list">
-                                <span class="badge {{ $payment->status === 'PAID' ? 'badge-green' : ($payment->status === 'FAILED' ? 'badge-red' : 'badge-yellow') }}">{{ ucfirst(strtolower($payment->status)) }}</span>
-                                <span class="badge {{ $payment->verification_status === 'VERIFIED' ? 'badge-green' : 'badge-gray' }}">{{ ucwords(strtolower(str_replace('_', ' ', $payment->verification_status))) }}</span>
-                            </div>
-                        </div>
-
-                        <dl class="kv">
-                            <dt>Submitted</dt><dd>{{ $payment->created_at?->format('M d, Y g:i A') }}</dd>
-                            <dt>Reference No.</dt><dd style="font-family:monospace;font-size:1rem;font-weight:700">{{ $payment->reference_number ?? '—' }}</dd>
-                            @if ($payment->payer_name || $payment->payer_number)
-                                <dt>Sender</dt><dd>{{ $payment->payer_name ?? '—' }} @if ($payment->payer_number) · {{ $payment->payer_number }} @endif</dd>
-                            @endif
-                            @if (! empty($receiving['number']))
-                                <dt>Paid to</dt><dd>{{ $receiving['number'] }} @if (! empty($receiving['name'])) ({{ $receiving['name'] }}) @endif</dd>
-                            @endif
-                            @if ($payment->proof_path)
-                                <dt>Receipt</dt>
-                                <dd><a href="{{ route('bplo.payments.proof', $payment) }}" target="_blank" rel="noopener">View receipt ({{ $payment->proof_original_name }})</a></dd>
-                            @endif
-                            @if ($payment->verified_at)
-                                <dt>Verified</dt><dd>{{ $payment->verified_at->format('M d, Y g:i A') }}</dd>
-                            @endif
-                            @if ($payment->rejection_reason)
-                                <dt>Not accepted</dt><dd style="color:var(--red-dark)">{{ $payment->rejection_reason }}</dd>
-                            @endif
-                        </dl>
-
-                        @if ($payment->isAwaitingVerification())
-                            <div class="alert alert-info" style="margin:14px 0 0">
-                                The Treasurer is verifying Ref No. <strong>{{ $payment->reference_number }}</strong>
-                                (&#8369;{{ number_format((float) $payment->amount, 2) }}). You can release the permit once it is confirmed.
-                            </div>
-                        @endif
-                    </div>
-                @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         @endif
+
+        <div class="card">
+            <h2 class="section">Payments</h2>
+            @if ($application->payments->isEmpty())
+                <p class="muted mb-0">
+                    No payments yet.
+                    @if ($application->status === Application::STATUS_APPROVED_FOR_PAYMENT)
+                        Waiting for the applicant to pay online.
+                    @endif
+                </p>
+            @else
+                <div class="bplo-subcard-list">
+                    @foreach ($application->payments->sortByDesc('id') as $payment)
+                        @php $receiving = config('permit.payment.accounts.'.$payment->method); @endphp
+                        <div class="payment-entry {{ $payment->isAwaitingVerification() ? 'is-pending' : '' }}">
+                            <div class="bplo-subcard-head">
+                                <strong>{{ \App\Support\PaymentMethods::label($payment->method) }} · &#8369;{{ number_format((float) $payment->amount, 2) }}</strong>
+                                <div class="bplo-chip-list">
+                                    <span class="badge {{ $payment->status === 'PAID' ? 'badge-green' : ($payment->status === 'FAILED' ? 'badge-red' : 'badge-yellow') }}">{{ ucfirst(strtolower($payment->status)) }}</span>
+                                    <span class="badge {{ $payment->verification_status === 'VERIFIED' ? 'badge-green' : 'badge-gray' }}">{{ ucwords(strtolower(str_replace('_', ' ', $payment->verification_status))) }}</span>
+                                </div>
+                            </div>
+
+                            <dl class="kv">
+                                <dt>Submitted</dt><dd>{{ $payment->created_at?->format('M d, Y g:i A') }}</dd>
+                                <dt>Reference No.</dt><dd style="font-family:monospace;font-size:1rem;font-weight:700">{{ $payment->reference_number ?? '—' }}</dd>
+                                @if ($payment->payer_name || $payment->payer_number)
+                                    <dt>Sender</dt><dd>{{ $payment->payer_name ?? '—' }} @if ($payment->payer_number) · {{ $payment->payer_number }} @endif</dd>
+                                @endif
+                                @if (! empty($receiving['number']))
+                                    <dt>Paid to</dt><dd>{{ $receiving['number'] }} @if (! empty($receiving['name'])) ({{ $receiving['name'] }}) @endif</dd>
+                                @endif
+                                @if ($payment->proof_path)
+                                    <dt>Receipt</dt>
+                                    <dd><a href="{{ route('bplo.payments.proof', $payment) }}" target="_blank" rel="noopener">View receipt ({{ $payment->proof_original_name }})</a></dd>
+                                @endif
+                                @if ($payment->verified_at)
+                                    <dt>Verified</dt><dd>{{ $payment->verified_at->format('M d, Y g:i A') }}</dd>
+                                @endif
+                                @if ($payment->rejection_reason)
+                                    <dt>Not accepted</dt><dd style="color:var(--red-dark)">{{ $payment->rejection_reason }}</dd>
+                                @endif
+                            </dl>
+
+                            @if ($payment->isAwaitingVerification())
+                                <div class="alert alert-info" style="margin:14px 0 0">
+                                    The Treasurer is verifying Ref No. <strong>{{ $payment->reference_number }}</strong>
+                                    (&#8369;{{ number_format((float) $payment->amount, 2) }}). You can release the permit once it is confirmed.
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
     </div>
 
-    @if ($application->permit)
-        <div class="card">
-            <h2 class="section">Permit</h2>
-            <dl class="kv">
-                <dt>Permit Number</dt><dd>{{ $application->permit->permit_number }}</dd>
-                <dt>Status</dt>
-                <dd><span class="badge {{ $application->permit->status === 'ACTIVE' ? 'badge-green' : 'badge-red' }}">{{ ucfirst(strtolower($application->permit->status)) }}</span></dd>
-                <dt>Valid Until</dt><dd>{{ $application->permit->valid_until?->format('M d, Y') }}</dd>
-            </dl>
-            <div class="bplo-btn-bar">
-                <form method="POST" action="{{ route('bplo.permits.regenerate', $application->permit) }}">
-                    @csrf <button type="submit" class="btn btn-secondary">Regenerate Token &amp; PDF</button>
-                </form>
+    <div class="bplo-detail-grid">
+        @if ($application->permit)
+            <div class="card">
+                <h2 class="section">Permit</h2>
+                <dl class="kv">
+                    <dt>Permit Number</dt><dd>{{ $application->permit->permit_number }}</dd>
+                    <dt>Status</dt>
+                    <dd><span class="badge {{ $application->permit->status === 'ACTIVE' ? 'badge-green' : 'badge-red' }}">{{ ucfirst(strtolower($application->permit->status)) }}</span></dd>
+                    <dt>Valid Until</dt><dd>{{ $application->permit->valid_until?->format('M d, Y') }}</dd>
+                </dl>
+                <div class="bplo-btn-bar">
+                    <form method="POST" action="{{ route('bplo.permits.regenerate', $application->permit) }}">
+                        @csrf <button type="submit" class="btn btn-secondary">Regenerate Token &amp; PDF</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
 
-    <div class="card">
-        <h2 class="section">Status History</h2>
-        <ul class="timeline">
-            @foreach ($application->statusHistories as $history)
-                <li>
-                    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
-                        <x-status-badge :status="$history->to_status" />
-                        @if ($history->from_status)
-                            <span class="muted">from {{ ucwords(strtolower(str_replace('_', ' ', $history->from_status))) }}</span>
-                        @endif
-                    </div>
-                    @if ($history->note)<div>{{ $history->note }}</div>@endif
-                    <div class="meta">{{ $history->created_at?->format('M d, Y g:i A') }} @if($history->actor_role) · {{ ucfirst($history->actor_role) }} @endif</div>
-                </li>
-            @endforeach
-        </ul>
+        <div class="card">
+            <h2 class="section">Status History</h2>
+            <ul class="timeline">
+                @foreach ($application->statusHistories as $history)
+                    <li>
+                        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+                            <x-status-badge :status="$history->to_status" />
+                            @if ($history->from_status)
+                                <span class="muted">from {{ ucwords(strtolower(str_replace('_', ' ', $history->from_status))) }}</span>
+                            @endif
+                        </div>
+                        @if ($history->note)<div>{{ $history->note }}</div>@endif
+                        <div class="meta">{{ $history->created_at?->format('M d, Y g:i A') }} @if($history->actor_role) · {{ ucfirst($history->actor_role) }} @endif</div>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 
     @if ($application->remarks->isNotEmpty())

@@ -1,18 +1,20 @@
 @php($r = $feeRate ?? null)
-<div class="form-group">
-    <label for="fee_type_id">Fee Type</label>
-    <select id="fee_type_id" name="fee_type_id" required>
-        <option value="">— Select —</option>
-        @foreach ($feeTypes as $ft)
-            <option value="{{ $ft->id }}" @selected((string) old('fee_type_id', $r?->fee_type_id) === (string) $ft->id)>{{ $ft->name }}</option>
-        @endforeach
-    </select>
-    @error('fee_type_id') <div class="field-error">{{ $message }}</div> @enderror
-</div>
-<div class="form-group">
-    <label for="label">Label</label>
-    <input type="text" id="label" name="label" value="{{ old('label', $r?->label) }}" required>
-    @error('label') <div class="field-error">{{ $message }}</div> @enderror
+<div class="form-row">
+    <div class="form-group">
+        <label for="fee_type_id">Fee Type</label>
+        <select id="fee_type_id" name="fee_type_id" required>
+            <option value="">— Select —</option>
+            @foreach ($feeTypes as $ft)
+                <option value="{{ $ft->id }}" @selected((string) old('fee_type_id', $r?->fee_type_id) === (string) $ft->id)>{{ $ft->name }}</option>
+            @endforeach
+        </select>
+        @error('fee_type_id') <div class="field-error">{{ $message }}</div> @enderror
+    </div>
+    <div class="form-group">
+        <label for="label">Label</label>
+        <input type="text" id="label" name="label" value="{{ old('label', $r?->label) }}" required>
+        @error('label') <div class="field-error">{{ $message }}</div> @enderror
+    </div>
 </div>
 <div class="form-row">
     <div class="form-group">

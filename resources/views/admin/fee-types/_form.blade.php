@@ -1,13 +1,15 @@
 @php($f = $feeType ?? null)
-<div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" value="{{ old('name', $f?->name) }}" required>
-    @error('name') <div class="field-error">{{ $message }}</div> @enderror
-</div>
-<div class="form-group">
-    <label for="code">Code (slug)</label>
-    <input type="text" id="code" name="code" value="{{ old('code', $f?->code) }}" required>
-    @error('code') <div class="field-error">{{ $message }}</div> @enderror
+<div class="form-row">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="{{ old('name', $f?->name) }}" required>
+        @error('name') <div class="field-error">{{ $message }}</div> @enderror
+    </div>
+    <div class="form-group">
+        <label for="code">Code (slug)</label>
+        <input type="text" id="code" name="code" value="{{ old('code', $f?->code) }}" required>
+        @error('code') <div class="field-error">{{ $message }}</div> @enderror
+    </div>
 </div>
 <div class="form-row">
     <div class="form-group">

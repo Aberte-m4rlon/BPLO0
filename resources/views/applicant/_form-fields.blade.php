@@ -3,7 +3,7 @@
 
 <fieldset>
     <legend>Applicant Information</legend>
-    <div class="form-row">
+    <div class="form-row-3">
         <div class="form-group">
             <label for="applicant_name">Applicant Name</label>
             <input type="text" id="applicant_name" name="applicant_name" value="{{ old('applicant_name', $app?->applicant_name ?? $u?->name) }}" required>
@@ -14,25 +14,27 @@
             <input type="text" id="contact_number" name="contact_number" value="{{ old('contact_number', $app?->contact_number ?? $u?->contact_number) }}" placeholder="09171234567" required>
             @error('contact_number') <div class="field-error">{{ $message }}</div> @enderror
         </div>
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email', $app?->email ?? $u?->email) }}" required>
-        @error('email') <div class="field-error">{{ $message }}</div> @enderror
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ old('email', $app?->email ?? $u?->email) }}" required>
+            @error('email') <div class="field-error">{{ $message }}</div> @enderror
+        </div>
     </div>
 </fieldset>
 
 <fieldset>
     <legend>Business Information</legend>
-    <div class="form-group">
-        <label for="business_name">Business Name</label>
-        <input type="text" id="business_name" name="business_name" value="{{ old('business_name', $app?->business_name) }}" required>
-        @error('business_name') <div class="field-error">{{ $message }}</div> @enderror
-    </div>
-    <div class="form-group">
-        <label for="business_address">Business Address</label>
-        <input type="text" id="business_address" name="business_address" value="{{ old('business_address', $app?->business_address) }}" required>
-        @error('business_address') <div class="field-error">{{ $message }}</div> @enderror
+    <div class="form-row">
+        <div class="form-group">
+            <label for="business_name">Business Name</label>
+            <input type="text" id="business_name" name="business_name" value="{{ old('business_name', $app?->business_name) }}" required>
+            @error('business_name') <div class="field-error">{{ $message }}</div> @enderror
+        </div>
+        <div class="form-group">
+            <label for="business_address">Business Address</label>
+            <input type="text" id="business_address" name="business_address" value="{{ old('business_address', $app?->business_address) }}" required>
+            @error('business_address') <div class="field-error">{{ $message }}</div> @enderror
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group">

@@ -1,15 +1,17 @@
 @php($t = $type ?? null)
-<div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" value="{{ old('name', $t?->name) }}" required>
-    @error('name') <div class="field-error">{{ $message }}</div> @enderror
-</div>
-<div class="form-group">
-    <label for="code">Code (slug)</label>
-    <input type="text" id="code" name="code" value="{{ old('code', $t?->code) }}" required>
-    @error('code') <div class="field-error">{{ $message }}</div> @enderror
-</div>
 <div class="form-row">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="{{ old('name', $t?->name) }}" required>
+        @error('name') <div class="field-error">{{ $message }}</div> @enderror
+    </div>
+    <div class="form-group">
+        <label for="code">Code (slug)</label>
+        <input type="text" id="code" name="code" value="{{ old('code', $t?->code) }}" required>
+        @error('code') <div class="field-error">{{ $message }}</div> @enderror
+    </div>
+</div>
+<div class="form-row-3">
     <div class="form-group">
         <label for="is_required">Required</label>
         <select id="is_required" name="is_required">

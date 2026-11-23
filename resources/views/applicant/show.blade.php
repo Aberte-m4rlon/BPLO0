@@ -62,46 +62,48 @@
         </div>
     @endif
 
-    <div class="card">
-        <h2 class="section">Status Timeline</h2>
-        @if ($application->statusHistories->isEmpty())
-            <x-empty-state title="No status changes recorded yet" message="Application updates and milestone timestamps will appear here once submitted." />
-        @else
-            <ul class="timeline">
-                @foreach ($application->statusHistories as $history)
-                    <li>
-                        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
-                            <x-status-badge :status="$history->to_status" />
-                            @if ($history->from_status)
-                                <span class="muted">from {{ ucwords(strtolower(str_replace('_', ' ', $history->from_status))) }}</span>
+    <div class="bplo-detail-grid">
+        <div class="card">
+            <h2 class="section">Status Timeline</h2>
+            @if ($application->statusHistories->isEmpty())
+                <x-empty-state title="No status changes recorded yet" message="Application updates and milestone timestamps will appear here once submitted." />
+            @else
+                <ul class="timeline">
+                    @foreach ($application->statusHistories as $history)
+                        <li>
+                            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+                                <x-status-badge :status="$history->to_status" />
+                                @if ($history->from_status)
+                                    <span class="muted">from {{ ucwords(strtolower(str_replace('_', ' ', $history->from_status))) }}</span>
+                                @endif
+                            </div>
+                            @if ($history->note)
+                                <div>{{ $history->note }}</div>
                             @endif
-                        </div>
-                        @if ($history->note)
-                            <div>{{ $history->note }}</div>
-                        @endif
-                        <div class="meta">{{ $history->created_at?->format('M d, Y g:i A') }} @if($history->actor_role) · {{ ucfirst($history->actor_role) }} @endif</div>
-                    </li>
-                @endforeach
-            </ul>
+                            <div class="meta">{{ $history->created_at?->format('M d, Y g:i A') }} @if($history->actor_role) · {{ ucfirst($history->actor_role) }} @endif</div>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+
+        @if ($application->remarks->isNotEmpty())
+            <div class="card">
+                <h2 class="section">Remarks</h2>
+                <ul class="timeline">
+                    @foreach ($application->remarks->sortByDesc('created_at') as $remark)
+                        <li>
+                            <div style="margin-bottom:4px">
+                                <span class="badge {{ $remark->type === 'REJECTION' ? 'badge-red' : 'badge-yellow' }}">{{ ucwords(strtolower(str_replace('_', ' ', $remark->type))) }}</span>
+                            </div>
+                            <div>{{ $remark->body }}</div>
+                            <div class="meta">{{ $remark->created_at?->format('M d, Y g:i A') }}</div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
     </div>
-
-    @if ($application->remarks->isNotEmpty())
-        <div class="card">
-            <h2 class="section">Remarks</h2>
-            <ul class="timeline">
-                @foreach ($application->remarks->sortByDesc('created_at') as $remark)
-                    <li>
-                        <div style="margin-bottom:4px">
-                            <span class="badge {{ $remark->type === 'REJECTION' ? 'badge-red' : 'badge-yellow' }}">{{ ucwords(strtolower(str_replace('_', ' ', $remark->type))) }}</span>
-                        </div>
-                        <div>{{ $remark->body }}</div>
-                        <div class="meta">{{ $remark->created_at?->format('M d, Y g:i A') }}</div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <div class="card">
         <div class="card-head">
